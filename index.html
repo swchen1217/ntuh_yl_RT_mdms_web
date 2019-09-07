@@ -13,11 +13,6 @@
     <script src="bootstrap/js/bootstrap.js"></script>
 
     <style>
-        .navbar-nav li > a {
-            text-transform: capitalize;
-            color: #333;
-            transition: background-color .2s, color .2s;
-        }
         .navbar-nav li > a:hover, #topheader .navbar-nav li > a:focus {
             background-color: #999;
             color: #fff;
@@ -25,6 +20,14 @@
 
         .navbar-nav li.active > a {
             background-color: #fff;
+        }
+
+        .navbar-dark .navbar-nav .nav-link{
+            color: #f2f2f2;
+        }
+
+        .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
+            color: #000000;
         }
 
     </style>
