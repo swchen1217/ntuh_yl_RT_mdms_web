@@ -1,0 +1,13 @@
+.navbar-nav li > a {
+    text-transform: capitalize;
+    color: #333;
+    transition: background-color .2s, color .2s;
+}
+.navbar-nav li > a:hover, #topheader .navbar-nav li > a:focus {
+    background-color: #999;
+    color: #fff;
+}
+
+.navbar-nav li.active > a {
+    background-color: #fff;
+}
