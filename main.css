@@ -1,16 +1,21 @@
 .navbar-nav li > a:hover, #topheader .navbar-nav li > a:focus {
     background-color: #999;
     color: #fff;
+    line-height: 40px;
 }
 
 .navbar-nav li.active > a {
     background-color: #fff;
+    line-height: 40px;
 }
 
 .navbar-dark .navbar-nav .nav-link{
     color: #f2f2f2;
+    line-height: 40px;
 }
 
 .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
     color: #000000;
+    line-height: 40px;
 }
+
