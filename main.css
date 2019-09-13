@@ -12,6 +12,8 @@
 .navbar-dark .navbar-nav .nav-link{
     color: #f2f2f2;
     line-height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
@@ -22,4 +24,3 @@
 .navbar-dark .navbar-brand{
     line-height: 40px;
 }
-
