@@ -74,21 +74,54 @@
 <div id="middle">
     <div class="container">
         <div class="alert alert-primary" role="alert" style="display: none;margin-top: 16px" id="alert-primary"></div>
-        <div class="alert alert-success" role="alert" style="display: none;margin-top: 16px" id="alert-success"></div>
-        <div class="alert alert-danger" role="alert" style="display: none;margin-top: 16px" id="alert-danger"></div>
+        <div class="alert alert-success" role="alert" style="display: none;margin-top: 16px" id="alert-success">
+            <div class="row">
+                <div class="col-0">
+                    <div class="row" style="margin: 0px">
+                        <i class="fa fa-check fa-2x" style="margin:0px 5px"></i><strong>成功：</strong>
+                    </div>
+                </div>
+                <div class="col" style="padding-left: 0px">
+                    <div id="alert-success-in"></div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" style="display: none;margin-top: 16px" id="alert-danger">
+            <div class="row">
+                <div class="col-0">
+                    <div class="row" style="margin: 0px">
+                        <i class="fa fa-times fa-2x" style="padding:0px 5px;margin:0px 5px"></i><strong>錯誤：</strong>
+                    </div>
+                </div>
+                <div class="col" style="padding-left: 0px">
+                    <div id="alert-danger-in"></div>
+                </div>
+            </div>
+        </div>
         <div class="alert alert-warning" role="alert" style="display: none;margin-top: 16px" id="alert-warning">
             <div class="row">
                 <div class="col-0">
                     <div class="row" style="margin: 0px">
-                        <i class="fa fa-exclamation-circle fa-2x" style="margin:0px 5px"></i><strong>Warning!</strong>
+                        <i class="fa fa-exclamation-circle fa-2x" style="margin:0px 5px"></i><strong>警告：</strong>
                     </div>
                 </div>
-                <div class="col" style="padding-left: 6px">
+                <div class="col" style="padding-left: 0px">
                     <div id="alert-warning-in"></div>
                 </div>
             </div>
         </div>
-        <div class="alert alert-info" role="alert" style="display: none;margin-top: 16px" id="alert-info"></div>
+        <div class="alert alert-info" role="alert" style="display: none;margin-top: 16px" id="alert-info">
+            <div class="row">
+                <div class="col-0">
+                    <div class="row" style="margin: 0px">
+                        <i class="fa fa-info fa-2x" style="padding:0px 10px;margin:0px 5px"></i><strong>資訊：</strong>
+                    </div>
+                </div>
+                <div class="col" style="padding-left: 0px">
+                    <div id="alert-info-in"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -108,6 +141,11 @@
         $('#alert-danger').hide();
         $('#alert-warning').hide();
         $('#alert-info').hide();
+
+        $('#alert-success-in').text('');
+        $('#alert-danger-in').text('');
+        $('#alert-warning-in').text('');
+        $('#alert-info-in').text('');
     }
 
     function OnHashchangeListener() {
@@ -143,7 +181,11 @@
 
         }
         if (hash == '#ChangePw') {
-
+            $('#alert-primary').show();
+            $('#alert-success').show();
+            $('#alert-danger').show();
+            $('#alert-warning').show();
+            $('#alert-info').show();
         }
     }
 
@@ -152,10 +194,11 @@
             return true;
         } else if (location.hash == '') {
             //$('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
-            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a><br>請先<a href='login.html' class='alert-link'>登入</a><br>請先<a href='login.html' class='alert-link'>登入</a>");
+            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
             $('#alert-warning').show();
         } else {
-            $('#alert-danger').text('錯誤：尚未登入!!').show();
+            $('#alert-danger-in').text('尚未登入!!');
+            $('#alert-danger').show();
             return false;
         }
     }
