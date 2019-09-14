@@ -79,15 +79,16 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         OnHashchangeListener();
-        $(".nav a").on("click", function(){
+        $(".nav a").on("click", function () {
             $(".nav").find(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
-        
-        window.addEventListener('hashchange',OnHashchangeListener);
+
+        window.addEventListener('hashchange', OnHashchangeListener);
     });
+
     function HideAlert() {
         $('#alert-primary').text('').hide();
         $('#alert-success').text('').hide();
@@ -95,48 +96,50 @@
         $('#alert-warning').text('').hide();
         $('#alert-info').text('').hide();
     }
-    function OnHashchangeListener(){
-        var hash=location.hash;
+
+    function OnHashchangeListener() {
+        var hash = location.hash;
         console.log(hash);
-        if(hash!=''){
+        if (hash != '') {
             $(".nav").find(".active").removeClass("active");
-            $("a[href='"+hash+"']").parent().addClass('active');
+            $("a[href='" + hash + "']").parent().addClass('active');
         }
         HideAlert();
-        if(hash=='' && login_check()){
+        if (hash == '' && login_check()) {
 
         }
-        if(hash=='#UpdateStatus' && login_check()){
+        if (hash == '#UpdateStatus' && login_check()) {
 
         }
-        if(hash=='#InquireStatus' && login_check()){
+        if (hash == '#InquireStatus' && login_check()) {
 
         }
-        if(hash=='#Log' && login_check()){
+        if (hash == '#Log' && login_check()) {
 
         }
-        if(hash=='#Repair' && login_check()){
+        if (hash == '#Repair' && login_check()) {
 
         }
-        if(hash=='#MaintenanceCheck' && login_check()){
+        if (hash == '#MaintenanceCheck' && login_check()) {
 
         }
-        if(hash=='#DeviceManage' && login_check()){
+        if (hash == '#DeviceManage' && login_check()) {
 
         }
-        if(hash=='#UserManage' && login_check()){
+        if (hash == '#UserManage' && login_check()) {
 
         }
-        if(hash=='#ChangePw'){
+        if (hash == '#ChangePw') {
 
         }
     }
+
     function login_check() {
-        if($.cookie('login')){
+        if ($.cookie('login')) {
             return true;
-        }else if(location.hash==''){
-            $('#alert-warning').text('請先登入').show();
-        }else{
+        } else if (location.hash == '') {
+            $('#alert-warning').html("請先<a href='login.html' class='alert-link'>登入</a>").show();
+        } else {
             $('#alert-danger').text('錯誤：尚未登入!!').show();
             return false;
         }
