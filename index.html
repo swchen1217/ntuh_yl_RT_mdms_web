@@ -69,18 +69,64 @@
         </ul>
     </div>
 </nav>
+<div id="middle">
+    <div class="container">
+        <div class="alert alert-danger" role="alert" style="display: none" id="alert-danger"></div>
+    </div>
+</div>
 <script>
     $(document).ready(function(){
         OnHashchangeListener();
-        function OnHashchangeListener(){
-            console.log(location.hash);
-        }
         $(".nav a").on("click", function(){
             $(".nav").find(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
         window.addEventListener('hashchange',OnHashchangeListener);
     });
+    function OnHashchangeListener(){
+        var hash=location.hash;
+        console.log(hash);
+        if(hash!=''){
+            $(".nav").find(".active").removeClass("active");
+            $("a[href='"+hash+"']").parent().addClass('active');
+        }
+        $('#alert-danger').text().hide();
+        if(hash==''){
+
+        }
+        if(hash=='#UpdateStatus' && login_check()){
+
+        }
+        if(hash=='#InquireStatus' && login_check()){
+
+        }
+        if(hash=='#Log' && login_check()){
+
+        }
+        if(hash=='#Repair' && login_check()){
+
+        }
+        if(hash=='#MaintenanceCheck' && login_check()){
+
+        }
+        if(hash=='#DeviceManage' && login_check(){
+
+        }
+        if(hash=='#UserManage' && login_check()){
+
+        }
+        if(hash=='#ChangePw'){
+
+        }
+    }
+    function login_check() {
+        if($.cookie('login')){
+            return true;
+        }else{
+            $('#alert-danger').text('錯誤：尚未登入!!').show();
+            return false;
+        }
+    }
 </script>
 </body>
 </html>
