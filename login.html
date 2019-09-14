@@ -72,47 +72,48 @@
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：此帳號尚未啟用,請聯繫管理員!!').hide();
+                        $('#alert_da').text('錯誤：此帳號尚未啟用,請聯繫管理員!!').show();
                     }
                     if (msg == 'tmppw_no_tmppw') {
                         console.log('tmppw_no_tmppw');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：此使用者無臨時密碼!!').hide();
+                        $('#alert_da').text('錯誤：此使用者無臨時密碼!!').show();
                     }
                     if (msg == 'tmppw_error') {
                         console.log('tmppw_error');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：臨時密碼錯誤!!').hide();
+                        $('#alert_da').text('錯誤：臨時密碼錯誤!!').show();
                     }
                     if (msg == 'tmppw_timeout') {
                         console.log('tmppw_timeout');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：臨時密碼超過有效期限!!').hide();
+                        $('#alert_da').text('錯誤：臨時密碼超過有效期限!!').show();
                     }
                     if (msg.substring(0, 2) == 'ok') {
                         console.log('ok');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_da').text('').hide();
-                        var split_OkData = msg.split;
+                        var split_OkData = msg.split(',');
                         if (split_OkData[0] == 'ok') {
+                            console.log('ok');
                             $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來').show();
-                            window.location.replace("http://swchen1217.ddns.net/ntuh_yl_RT_mdms_web/index.html")
-                            /*setTimeout(function () {
+                            setTimeout(function () {
                                 location.replace("./index.html")
-                            }, 3000);*/
+                            }, 3000);
                         } else if (split_OkData[0] == 'ok_tmppw') {
+                            console.log('ok_tmppw');
                             $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來(使用臨時密碼登入)').show();
-                            location.replace("index.html")
-                            /*setTimeout(function () {
+                            location.replace("index.html");
+                            setTimeout(function () {
                                 location.replace("./index.html")
-                            }, 3000);*/
+                            }, 3000);
                         }
 
                     }
@@ -121,14 +122,14 @@
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：員工編號錯誤!!,此員工編號尚未註冊').hide();
+                        $('#alert_da').text('錯誤：員工編號錯誤!!,此員工編號尚未註冊').show();
                     }
                     if (msg == 'pw_error') {
                         console.log('pw_error');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：密碼錯誤!!').hide();
+                        $('#alert_da').text('錯誤：密碼錯誤!!').show();
                     }
                     //return false;
                 },
