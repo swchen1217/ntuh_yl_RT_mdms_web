@@ -17,6 +17,8 @@
     <script src="jquery-confirm-v3.3.4/jquery-confirm.min.js"></script>
     <!-- jQuery-cookie -->
     <script src="jquery-cookie/jquery.cookie.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/45badeeb9a.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="main.css">
@@ -74,7 +76,16 @@
         <div class="alert alert-primary" role="alert" style="display: none;margin-top: 16px" id="alert-primary"></div>
         <div class="alert alert-success" role="alert" style="display: none;margin-top: 16px" id="alert-success"></div>
         <div class="alert alert-danger" role="alert" style="display: none;margin-top: 16px" id="alert-danger"></div>
-        <div class="alert alert-warning" role="alert" style="display: none;margin-top: 16px" id="alert-warning"></div>
+        <div class="alert alert-warning" role="alert" style="display: none;margin-top: 16px" id="alert-warning">
+            <div class="row">
+                <div class="col-0">
+                    <span class="fa fa-exclamation-circle"></span>
+                </div>
+                <div class="col" style="padding-left: 5px">
+                    <strong>Warning!</strong><span id="alert-warning-in"></span>
+                </div>
+            </div>
+        </div>
         <div class="alert alert-info" role="alert" style="display: none;margin-top: 16px" id="alert-info"></div>
     </div>
 </div>
@@ -90,11 +101,11 @@
     });
 
     function HideAlert() {
-        $('#alert-primary').text('').hide();
-        $('#alert-success').text('').hide();
-        $('#alert-danger').text('').hide();
-        $('#alert-warning').text('').hide();
-        $('#alert-info').text('').hide();
+        $('#alert-primary').hide();
+        $('#alert-success').hide();
+        $('#alert-danger').hide();
+        $('#alert-warning').hide();
+        $('#alert-info').hide();
     }
 
     function OnHashchangeListener() {
@@ -138,7 +149,8 @@
         if ($.cookie('login')) {
             return true;
         } else if (location.hash == '') {
-            $('#alert-warning').html("請先<a href='login.html' class='alert-link'>登入</a>").show();
+            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
+            $('#alert-warning').show();
         } else {
             $('#alert-danger').text('錯誤：尚未登入!!').show();
             return false;
