@@ -17,9 +17,15 @@
     <script src="jquery-confirm-v3.3.4/jquery-confirm.min.js"></script>
     <!-- jQuery-cookie -->
     <script src="jquery-cookie/jquery.cookie.js"></script>
+    <!-- FontAwesome -->
+    <link href="css/all.css" rel="stylesheet">
+    <!-- w3 -->
+    <script src="w3.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="login.css">
+    <!-- My js -->
+    <script src="alert.js"></script>
 </head>
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0;padding-top: 20px;padding-bottom: 20px;">
@@ -30,8 +36,9 @@
 </div>
 <div id="middle">
     <div class="container">
-        <div class="alert alert-success" role="alert" style="display: none" id="alert_su"></div>
-        <div class="alert alert-danger" role="alert" style="display: none" id="alert_da"></div>
+        <div w3-include-html="alert.html"></div>
+        <!--<div class="alert alert-success" role="alert" style="display: none" id="alert_su"></div>
+        <div class="alert alert-danger" role="alert" style="display: none" id="alert_da"></div>-->
         <form role="form" class="form-signin" id="form-login">
             <h2 class="form-signin-heading" style="margin-bottom: 16px;">系統登入</h2>
             <div class="form-group">
@@ -64,11 +71,10 @@
             $('#RemMe').attr('checked',true);
         }
         $('#form-login').submit(function () {
+            HideAlert();
             var input_acc = $('#InputAcc').val();
             var input_pw = $('#InputPw').val();
             if (input_acc == "" || input_pw == "") {
-                $('#alert_su').text('').hide();
-                $('#alert_da').text('').hide();
                 $.alert({
                     title: '錯誤',
                     content: '帳號或密碼未輸入!!請再試一次',
@@ -88,29 +94,29 @@
                         console.log('no_enable');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：此帳號尚未啟用,請聯繫管理員!!').show();
+                        $('#alert-danger-in').text('此帳號尚未啟用,請聯繫管理員!!');
+                        $('#alert-danger').show();
                     }
                     if (msg == 'tmppw_no_tmppw') {
                         console.log('tmppw_no_tmppw');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：此使用者無臨時密碼!!').show();
+                        $('#alert-danger-in').text('此使用者無臨時密碼!!');
+                        $('#alert-danger').show();
                     }
                     if (msg == 'tmppw_error') {
                         console.log('tmppw_error');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：臨時密碼錯誤!!').show();
+                        $('#alert-danger-in').text('臨時密碼錯誤!!');
+                        $('#alert-danger').show();
                     }
                     if (msg == 'tmppw_timeout') {
                         console.log('tmppw_timeout');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：臨時密碼超過有效期限!!').show();
+                        $('#alert-danger-in').text('臨時密碼超過有效期限!!');
+                        $('#alert-danger').show();
                     }
                     if (msg.substring(0, 2) == 'ok') {
                         console.log('ok');
@@ -145,17 +151,16 @@
                         console.log('no_acc');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：員工編號錯誤!!,此員工編號尚未註冊').show();
+                        $('#alert-danger-in').text('員工編號錯誤!!,此員工編號尚未註冊');
+                        $('#alert-danger').show();
                     }
                     if (msg == 'pw_error') {
                         console.log('pw_error');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        $('#alert_su').text('').hide();
-                        $('#alert_da').text('錯誤：密碼錯誤!!').show();
+                        $('#alert-danger-in').text('密碼錯誤!!');
+                        $('#alert-danger').show();
                     }
-                    //return false;
                 },
                 error: function (xhr) {
                     console.log('ajax er');
@@ -165,12 +170,13 @@
                         type: 'red',
                         typeAnimated: true
                     });
-                    //return false;
                 }
             });
             return false;
         });
     });
+
+    w3.includeHTML();
 </script>
 </body>
 </html>
