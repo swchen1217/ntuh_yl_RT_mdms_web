@@ -53,6 +53,9 @@
 </div>
 <script>
     $(document).ready(function () {
+        if($.cookie('login')){
+            $.cookie("login", '', { expires: -1 });
+        }
         if($.cookie('acc')){
             var rem_acc=$.cookie('acc');
             var rem_pw=$.cookie('pw');
@@ -119,7 +122,9 @@
                             $.cookie("acc", '', { expires: -1 });
                             $.cookie("pw", '', { expires: -1 });
                         }
+                        $.cookie('login', input_acc);
                         var split_OkData = msg.split(',');
+
                         if (split_OkData[0] == 'ok') {
                             console.log('ok');
                             $('#alert_su').text('登入成功：' + split_OkData[1] + ',歡迎回來').show();
