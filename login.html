@@ -118,7 +118,6 @@
                     }
                     if (msg.substring(0, 2) == 'ok') {
                         console.log('ok');
-                        $('#alert_da').text('').hide();
                         if(document.getElementById("RemMe").checked){
                             $.cookie('acc', input_acc, { expires: 7 });
                             $.cookie('pw', input_pw, { expires: 7 });
