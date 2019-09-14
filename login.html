@@ -98,11 +98,14 @@
                             //TODO
                             $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來').show();
                             setTimeout(function () {
-                                
+                                location.replace("./index.html")
                             }, 3000);
                         } else if (split_OkData[0] == 'ok_tmppw') {
                             //TODO
                             $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來(使用臨時密碼登入)').show();
+                            setTimeout(function () {
+                                location.replace("./index.html")
+                            }, 3000);
                         }
 
                     }
