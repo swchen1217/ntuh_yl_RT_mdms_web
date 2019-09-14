@@ -50,8 +50,8 @@
             var input_acc = $('#InputAcc').val();
             var input_pw = $('#InputPw').val();
             if (input_acc == "" || input_pw == "") {
-                $('#alert_su').html('').hide();
-                $('#alert_da').html('').hide();
+                $('#alert_su').text('').hide();
+                $('#alert_da').text('').hide();
                 $.alert({
                     title: '錯誤',
                     content: '帳號或密碼未輸入!!請再試一次',
@@ -65,11 +65,59 @@
                 data: "mode=login_check&acc=" + input_acc + "&pw=" + input_pw,
                 type: "POST",
                 success: function (msg) {
-                    if(msg=='no_enable'){
-                        $('#alert_su').html('').hide();
-                        $('#alert_da').html('錯誤：').hide();
+                    if (msg == 'no_enable') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：此帳號尚未啟用,請聯繫管理員!!').hide();
                     }
-                    // TODO
+                    if (msg == 'tmppw_no_tmppw') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：此使用者無臨時密碼!!').hide();
+                    }
+                    if (msg == 'tmppw_error') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：臨時密碼錯誤!!').hide();
+                    }
+                    if (msg == 'tmppw_timeout') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：臨時密碼超過有效期限!!').hide();
+                    }
+                    if (msg.substring(0, 2) == 'ok') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_da').text('').hide();
+                        var split_OkData = msg.split;
+                        if (split_OkData[0] == 'ok') {
+                            //TODO
+                            $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來').show();
+                            setTimeout(function () {
+
+                            }, 3000);
+                        } else if (split_OkData[0] == 'ok_tmppw') {
+                            //TODO
+                            $('#alert_su').text('成功：' + split_OkData[1] + '歡迎回來(使用臨時密碼登入)').show();
+                        }
+
+                    }
+                    if (msg == 'no_acc') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：員工編號錯誤!!,此員工編號尚未註冊').hide();
+                    }
+                    if (msg == 'pw_error') {
+                        $('#InputAcc').val('');
+                        $('#InputPw').val('');
+                        $('#alert_su').text('').hide();
+                        $('#alert_da').text('錯誤：密碼錯誤!!').hide();
+                    }
                 },
                 error: function (xhr) {
                     $.alert({
