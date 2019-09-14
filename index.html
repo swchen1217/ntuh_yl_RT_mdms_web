@@ -73,20 +73,22 @@
 </nav>
 <div id="middle">
     <div class="container">
-        <div class="alert alert-primary" role="alert" style="display: none;margin-top: 16px" id="alert-primary"></div>
-        <div class="alert alert-success" role="alert" style="display: none;margin-top: 16px" id="alert-success"></div>
-        <div class="alert alert-danger" role="alert" style="display: none;margin-top: 16px" id="alert-danger"></div>
-        <div class="alert alert-warning" role="alert" style="display: none;margin-top: 16px" id="alert-warning">
+        <div class="alert alert-primary" role="alert" id="alert-primary"></div>
+        <div class="alert alert-success" role="alert" id="alert-success"></div>
+        <div class="alert alert-danger" role="alert" id="alert-danger"></div>
+        <div class="alert alert-warning" role="alert" id="alert-warning">
             <div class="row">
                 <div class="col-0">
-                    <span class="fa fa-exclamation-circle"></span>
+                    <div class="row" style="margin: 0px">
+                        <i class="fa fa-exclamation-circle fa-2x" style="margin:0px 5px"></i><strong>Warning!</strong>
+                    </div>
                 </div>
-                <div class="col" style="padding-left: 5px">
-                    <strong>Warning!</strong><span id="alert-warning-in"></span>
+                <div class="col" style="padding-left: 6px">
+                    <div id="alert-warning-in"></div>
                 </div>
             </div>
         </div>
-        <div class="alert alert-info" role="alert" style="display: none;margin-top: 16px" id="alert-info"></div>
+        <div class="alert alert-info" role="alert" id="alert-info"></div>
     </div>
 </div>
 <script>
@@ -149,7 +151,8 @@
         if ($.cookie('login')) {
             return true;
         } else if (location.hash == '') {
-            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
+            //$('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
+            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a><br>請先<a href='login.html' class='alert-link'>登入</a><br>請先<a href='login.html' class='alert-link'>登入</a>");
             $('#alert-warning').show();
         } else {
             $('#alert-danger').text('錯誤：尚未登入!!').show();
