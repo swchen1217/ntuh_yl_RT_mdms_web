@@ -38,28 +38,28 @@
     <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="nav navbar-nav mr-auto">
             <li>
-                <a class="nav-link" href="#">現況登錄</a>
+                <a class="nav-link" href="#UpdateStatus">現況登錄</a>
             </li>
             <li>
-                <a class="nav-link" href="#">狀態查詢</a>
+                <a class="nav-link" href="#InquireStatus">狀態查詢</a>
             </li>
             <li>
-                <a class="nav-link" href="#">歷史紀錄</a>
+                <a class="nav-link" href="#Log">歷史紀錄</a>
             </li>
             <li>
-                <a class="nav-link" href="#">維修項目</a>
+                <a class="nav-link" href="#Repair">維修項目</a>
             </li>
             <li>
-                <a class="nav-link" href="#">儀器保養</a>
+                <a class="nav-link" href="#MaintenanceCheck">儀器保養</a>
             </li>
             <li>
-                <a class="nav-link" href="#">設備管理</a>
+                <a class="nav-link" href="#DeviceManage">設備管理</a>
             </li>
             <li>
-                <a class="nav-link" href="#">帳號管理</a>
+                <a class="nav-link" href="#UserManage">帳號管理</a>
             </li>
             <li>
-                <a class="nav-link" href="#">更改密碼</a>
+                <a class="nav-link" href="#ChangePw">更改密碼</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto">
@@ -71,10 +71,15 @@
 </nav>
 <script>
     $(document).ready(function(){
+        OnHashchangeListener();
+        function OnHashchangeListener(){
+            console.log(location.hash);
+        }
         $(".nav a").on("click", function(){
             $(".nav").find(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
+        window.addEventListener('hashchange',OnHashchangeListener);
     });
 </script>
 </body>
