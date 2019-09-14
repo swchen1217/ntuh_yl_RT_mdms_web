@@ -41,7 +41,7 @@
                 <input type="password" class="form-control" id="InputPw" placeholder="請輸入密碼" required>
             </div>
             <div class="container">
-                <input type="checkbox" value="">記住我
+                <input type="checkbox" value="" id="RemMe">記住我
             </div>
 
             <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">登入</button>
@@ -50,6 +50,13 @@
 </div>
 <script>
     $(document).ready(function () {
+        if($.cookie('acc')){
+            var rem_acc=$.cookie('acc');
+            var rem_pw=$.cookie('pw');
+            $('#InputAcc').val(rem_acc);
+            $('#InputPw').val(rem_pw);
+            $('#RemMe').attr('checked',true);
+        }
         $('#form-login').submit(function () {
             var input_acc = $('#InputAcc').val();
             var input_pw = $('#InputPw').val();
@@ -104,6 +111,13 @@
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert_da').text('').hide();
+                        if($('#RemMe').checked()){
+                            $.cookie('acc', input_acc, { expires: 7 });
+                            $.cookie('pw', input_pw, { expires: 7 });
+                        }else{
+                            $.cookie("acc", '', { expires: -1 });
+                            $.cookie("pw", '', { expires: -1 });
+                        }
                         var split_OkData = msg.split(',');
                         if (split_OkData[0] == 'ok') {
                             console.log('ok');
