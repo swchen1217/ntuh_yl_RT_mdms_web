@@ -110,10 +110,8 @@
                     }
                     if (msg.substring(0, 2) == 'ok') {
                         console.log('ok');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
                         $('#alert_da').text('').hide();
-                        if($('#RemMe').checked()){
+                        if(document.getElementById("RemMe").checked){
                             $.cookie('acc', input_acc, { expires: 7 });
                             $.cookie('pw', input_pw, { expires: 7 });
                         }else{
@@ -126,14 +124,14 @@
                             $('#alert_su').text('登入成功：' + split_OkData[1] + ',歡迎回來').show();
                             setTimeout(function () {
                                 location.replace("./index.html")
-                            }, 3000);
+                            }, 1000);
                         } else if (split_OkData[0] == 'ok_tmppw') {
                             console.log('ok_tmppw');
                             $('#alert_su').text('登入成功：' + split_OkData[1] + ',歡迎回來(使用臨時密碼登入)').show();
                             location.replace("index.html");
                             setTimeout(function () {
                                 location.replace("./index.html")
-                            }, 3000);
+                            }, 1000);
                         }
 
                     }
