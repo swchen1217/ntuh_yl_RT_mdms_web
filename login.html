@@ -133,19 +133,20 @@
 
                         if (split_OkData[0] == 'ok') {
                             console.log('ok');
-                            $('#alert_su').text('登入成功：' + split_OkData[1] + ',歡迎回來').show();
+                            $('#alert-success-in').text(split_OkData[1] + ',歡迎回來');
+                            $('#alert-success').show();
                             setTimeout(function () {
                                 location.replace("./index.html")
                             }, 1000);
                         } else if (split_OkData[0] == 'ok_tmppw') {
                             console.log('ok_tmppw');
-                            $('#alert_su').text('登入成功：' + split_OkData[1] + ',歡迎回來(使用臨時密碼登入)').show();
+                            $('#alert-success-in').text(split_OkData[1] + ',歡迎回來(使用臨時密碼登入)');
+                            $('#alert-success').show();
                             location.replace("index.html");
                             setTimeout(function () {
                                 location.replace("./index.html")
                             }, 1000);
                         }
-
                     }
                     if (msg == 'no_acc') {
                         console.log('no_acc');
