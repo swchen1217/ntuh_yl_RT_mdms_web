@@ -71,7 +71,11 @@
 </nav>
 <div id="middle">
     <div class="container">
+        <div class="alert alert-primary" role="alert" style="display: none;margin-top: 16px" id="alert-primary"></div>
+        <div class="alert alert-success" role="alert" style="display: none;margin-top: 16px" id="alert-success"></div>
         <div class="alert alert-danger" role="alert" style="display: none;margin-top: 16px" id="alert-danger"></div>
+        <div class="alert alert-warning" role="alert" style="display: none;margin-top: 16px" id="alert-warning"></div>
+        <div class="alert alert-info" role="alert" style="display: none;margin-top: 16px" id="alert-info"></div>
     </div>
 </div>
 <script>
@@ -81,8 +85,16 @@
             $(".nav").find(".active").removeClass("active");
             $(this).parent().addClass("active");
         });
+        
         window.addEventListener('hashchange',OnHashchangeListener);
     });
+    function HideAlert() {
+        $('#alert-primary').text('').hide();
+        $('#alert-success').text('').hide();
+        $('#alert-danger').text('').hide();
+        $('#alert-warning').text('').hide();
+        $('#alert-info').text('').hide();
+    }
     function OnHashchangeListener(){
         var hash=location.hash;
         console.log(hash);
@@ -90,8 +102,8 @@
             $(".nav").find(".active").removeClass("active");
             $("a[href='"+hash+"']").parent().addClass('active');
         }
-        $('#alert-danger').text('').hide();
-        if(hash==''){
+        HideAlert();
+        if(hash=='' && login_check()){
 
         }
         if(hash=='#UpdateStatus' && login_check()){
@@ -122,6 +134,8 @@
     function login_check() {
         if($.cookie('login')){
             return true;
+        }else if(location.hash==''){
+            $('#alert-warning').text('請先登入').show();
         }else{
             $('#alert-danger').text('錯誤：尚未登入!!').show();
             return false;
