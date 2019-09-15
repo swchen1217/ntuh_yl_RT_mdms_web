@@ -59,6 +59,8 @@
 <script>
     $(document).ready(function () {
         if($.cookie('login')){
+            $('#alert-success-in').text('你已登出!!');
+            $('#alert-success').show();
             $.cookie("login", '', { expires: -1 });
         }
         if($.cookie('acc')){
