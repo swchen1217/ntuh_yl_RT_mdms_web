@@ -134,10 +134,9 @@
     }
 
     function login_check() {
-        if ($.cookie('login')) {
+        if ($.cookie('LoginInfoAcc')) {
             return true;
         } else if (location.hash == '') {
-            //$('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
             $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
             $('#alert-warning').show();
         } else {
