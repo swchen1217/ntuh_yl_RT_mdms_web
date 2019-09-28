@@ -60,10 +60,13 @@
 </div>
 <script>
     $(document).ready(function () {
-        if($.cookie('login')){
+        if($.cookie('LoginInfoAcc')){
             $('#alert-success-in').text('你已登出!!');
             $('#alert-success').show();
-            $.cookie("login", '', { expires: -1 });
+            $.cookie("LoginInfoAcc", '', { expires: -1 });
+            $.cookie("LoginInfoPw", '', { expires: -1 });
+            $.cookie("LoginInfoPermission", '', { expires: -1 });
+            $.cookie("LoginInfoNane", '', { expires: -1 });
         }
         if($.cookie('acc')){
             var rem_acc=$.cookie('acc');
@@ -123,14 +126,11 @@
                                         $.cookie("acc", '', { expires: -1 });
                                         $.cookie("pw", '', { expires: -1 });
                                     }
-                                    $.cookie('login', input_acc);
-
-                                    $.cookie('LoginInfoAcc', );
-                                    $.cookie('LoginInfoPw', );
-                                    $.cookie('LoginInfoPermission', );
-                                    $.cookie('LoginInfoNane', );
-
                                     var split_OkData = msg_nd.split(',');
+                                    $.cookie('LoginInfoAcc', input_acc);
+                                    $.cookie('LoginInfoPw', mMd5);
+                                    $.cookie('LoginInfoPermission', split_OkData[2]);
+                                    $.cookie('LoginInfoNane', split_OkData[1]);
                                     console.log('ok');
                                     $('#alert-success-in').text(split_OkData[1] + ',歡迎回來');
                                     $('#alert-success').show();
