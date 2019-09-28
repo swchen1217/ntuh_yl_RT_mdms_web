@@ -121,8 +121,8 @@
                     if (msg.substring(0, 2) == 'ok') {
                         console.log('ok');
                         if(document.getElementById("RemMe").checked){
-                            $.cookie('acc', input_acc, { expires: 7 });
-                            $.cookie('pw', input_pw, { expires: 7 });
+                            $.cookie('acc', input_acc, { expires: 1 });
+                            $.cookie('pw', input_pw, { expires: 1 });
                         }else{
                             $.cookie("acc", '', { expires: -1 });
                             $.cookie("pw", '', { expires: -1 });
