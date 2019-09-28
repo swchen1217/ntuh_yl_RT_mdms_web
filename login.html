@@ -21,6 +21,8 @@
     <link href="css/all.css" rel="stylesheet">
     <!-- w3 -->
     <script src="w3.js"></script>
+    <!-- md5 -->
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="login.css">
@@ -86,80 +88,75 @@
             console.log(input_acc + ',' + input_pw);
             $.ajax({
                 url: "../ntuh_yl_RT_mdms_api/user.php",
-                data: "mode=login_check&acc=" + input_acc + "&pw=" + input_pw,
+                data: "mode=get_create_time&acc=" + input_acc,
                 type: "POST",
-                success: function (msg) {
+                success: function (msg_st) {
                     console.log('ajax su');
-                    if (msg == 'no_enable') {
-                        console.log('no_enable');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
-                        $('#alert-danger-in').text('此帳號尚未啟用,請聯繫管理員!!');
-                        $('#alert-danger').show();
-                    }
-                    if (msg == 'tmppw_no_tmppw') {
-                        console.log('tmppw_no_tmppw');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
-                        $('#alert-danger-in').text('此使用者無臨時密碼!!');
-                        $('#alert-danger').show();
-                    }
-                    if (msg == 'tmppw_error') {
-                        console.log('tmppw_error');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
-                        $('#alert-danger-in').text('臨時密碼錯誤!!');
-                        $('#alert-danger').show();
-                    }
-                    if (msg == 'tmppw_timeout') {
-                        console.log('tmppw_timeout');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
-                        $('#alert-danger-in').text('臨時密碼超過有效期限!!');
-                        $('#alert-danger').show();
-                    }
-                    if (msg.substring(0, 2) == 'ok') {
-                        console.log('ok');
-                        if(document.getElementById("RemMe").checked){
-                            $.cookie('acc', input_acc, { expires: 1 });
-                            $.cookie('pw', input_pw, { expires: 1 });
-                        }else{
-                            $.cookie("acc", '', { expires: -1 });
-                            $.cookie("pw", '', { expires: -1 });
-                        }
-                        $.cookie('login', input_acc);
-                        var split_OkData = msg.split(',');
-
-                        if (split_OkData[0] == 'ok') {
-                            console.log('ok');
-                            $('#alert-success-in').text(split_OkData[1] + ',歡迎回來');
-                            $('#alert-success').show();
-                            setTimeout(function () {
-                                location.replace("./index.html")
-                            }, 1000);
-                        } else if (split_OkData[0] == 'ok_tmppw') {
-                            console.log('ok_tmppw');
-                            $('#alert-success-in').text(split_OkData[1] + ',歡迎回來(使用臨時密碼登入)');
-                            $('#alert-success').show();
-                            location.replace("index.html");
-                            setTimeout(function () {
-                                location.replace("./index.html")
-                            }, 1000);
-                        }
-                    }
-                    if (msg == 'no_acc') {
+                    if (msg_st == 'no_acc') {
                         console.log('no_acc');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
                         $('#alert-danger-in').text('員工編號錯誤!!,此員工編號尚未註冊');
                         $('#alert-danger').show();
-                    }
-                    if (msg == 'pw_error') {
-                        console.log('pw_error');
-                        $('#InputAcc').val('');
-                        $('#InputPw').val('');
-                        $('#alert-danger-in').text('密碼錯誤!!');
-                        $('#alert-danger').show();
+                    }else{
+                        var mMd5=md5(msg_st+input_pw);
+                        console.log(mMd5);
+                        $.ajax({
+                            url: "../ntuh_yl_RT_mdms_api/user.php",
+                            data: "mode=login_check&acc=" + input_acc + "&pw=" + mMd5,
+                            type: "POST",
+                            success: function (msg_nd) {
+                                console.log('ajax su');
+                                if (msg_nd == 'no_enable') {
+                                    console.log('no_enable');
+                                    $('#InputAcc').val('');
+                                    $('#InputPw').val('');
+                                    $('#alert-danger-in').text('此帳號尚未啟用,請聯繫管理員!!');
+                                    $('#alert-danger').show();
+                                }
+                                if (msg_nd.substring(0, 2) == 'ok') {
+                                    console.log('ok');
+                                    if(document.getElementById("RemMe").checked){
+                                        $.cookie('acc', input_acc, { expires: 1 });
+                                        $.cookie('pw', input_pw, { expires: 1 });
+                                    }else{
+                                        $.cookie("acc", '', { expires: -1 });
+                                        $.cookie("pw", '', { expires: -1 });
+                                    }
+                                    $.cookie('login', input_acc);
+
+                                    $.cookie('LoginInfoAcc', );
+                                    $.cookie('LoginInfoPw', );
+                                    $.cookie('LoginInfoPermission', );
+                                    $.cookie('LoginInfoNane', );
+
+                                    var split_OkData = msg_nd.split(',');
+                                    console.log('ok');
+                                    $('#alert-success-in').text(split_OkData[1] + ',歡迎回來');
+                                    $('#alert-success').show();
+                                    setTimeout(function () {
+                                        location.replace("./index.html")
+                                    }, 1000);
+                                }
+                                if (msg_nd == 'pw_error') {
+                                    console.log('pw_error');
+                                    $('#InputAcc').val('');
+                                    $('#InputPw').val('');
+                                    $('#alert-danger-in').text('密碼錯誤!!');
+                                    $('#alert-danger').show();
+                                }
+                            },
+                            error: function (xhr) {
+                                console.log('ajax er');
+                                $.alert({
+                                    title: '錯誤',
+                                    content: 'Ajax 發生錯誤',
+                                    type: 'red',
+                                    typeAnimated: true
+                                });
+                            }
+                        });
+
                     }
                 },
                 error: function (xhr) {
