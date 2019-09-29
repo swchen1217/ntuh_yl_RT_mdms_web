@@ -1,8 +1,8 @@
-const ALART_PRIMARY = 'alert-primary';
-const ALART_SUCCESS = 'alert-primary';
-const ALART_DANGER = 'alert-primary';
-const ALART_WARNING = 'alert-primary';
-const ALART_INFO = 'alert-primary';
+/*const ALART_PRIMARY = 'alert-primary';
+const ALART_SUCCESS = 'alert-success';
+const ALART_DANGER = 'alert-danger';
+const ALART_WARNING = 'alert-warning';
+const ALART_INFO = 'alert-info';*/
 
 function HideAlert() {
     $('#alert-primary').hide();
@@ -17,17 +17,17 @@ function HideAlert() {
     $('#alert-info-in').text('');
 }
 
-function ShowAlart(level, Content, isHTML, isFadeIn) {
-    if (level != ALART_PRIMARY) {
+/*function ShowAlart(level, Content, isHTML, isFadeIn) {
+    if (level != 'alert-primary') {
         if (isHTML) {
             $('#' + level + '-in').html(Content);
         } else {
             $('#' + level + '-in').text(Content);
         }
         if (isFadeIn) {
-            $('#' + level + '-in').fadeIn();
+            $('#' + level).fadeIn();
         } else {
-            $('#' + level + '-in').show();
+            $('#' + level).show();
         }
     } else {
         if (isHTML) {
@@ -36,9 +36,9 @@ function ShowAlart(level, Content, isHTML, isFadeIn) {
             $('#alert-primary').text(Content);
         }
         if (isFadeIn) {
-            $('#' + level).fadeIn();
+            $('#alert-primary').fadeIn();
         } else {
-            $('#' + level).show();
+            $('#alert-primary').show();
         }
     }
-}
+}*/
