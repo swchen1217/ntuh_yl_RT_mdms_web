@@ -76,6 +76,7 @@
             $('#RemMe').attr('checked',true);
         }
         $('#form-login').submit(function () {
+            ShowAlart(ALART_INFO,'Test',false,false);
             HideAlert();
             var input_acc = $('#InputAcc').val();
             var input_pw = $('#InputPw').val();
@@ -144,6 +145,7 @@
                                     $('#InputPw').val('');
                                     $('#alert-danger-in').text('密碼錯誤!!');
                                     $('#alert-danger').show();
+                                    //ShowAlart(ALART_DANGER,'密碼錯誤!!',false,false);
                                 }
                             },
                             error: function (xhr) {
