@@ -157,25 +157,25 @@
     }
 
     function change_pages(hash){
-        // TODO
         $("div[id^='Content_']").hide();
-        if(hash='')
+
+        if(hash=='')
             $('#Content_Dashboard').show();
-        if(hash='#UpdateStatus')
+        if(hash=='#UpdateStatus')
             $('#Content_Enter_status').show();
-        if(hash='#InquireStatus')
+        if(hash=='#InquireStatus')
             $('#Content_Inquire_status').show();
-        if(hash='#Log')
+        if(hash=='#Log')
             $('#Content_Log').show();
-        if(hash='#Repair')
+        if(hash=='#Repair')
             $('#Content_Fix').show();
-        if(hash='#MaintenanceCheck')
+        if(hash=='#MaintenanceCheck')
             $('#Content_Maintenance_check').show();
-        if(hash='#DeviceManage')
+        if(hash=='#DeviceManage')
             $('#Content_Device_manage').show();
-        if(hash='#UserManage')
+        if(hash=='#UserManage')
             $('#Content_User_manage').show();
-        if(hash='#ChangePw')
+        if(hash=='#ChangePw')
             $('#Content_Change_pw').show();
     }
 
