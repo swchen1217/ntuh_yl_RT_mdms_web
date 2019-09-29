@@ -78,6 +78,15 @@
 <div id="middle">
     <div class="container">
         <div w3-include-html="alert.html"></div>
+        <div id="Content_Dashboard">1</div>
+        <div id="Content_Enter_status">2</div>
+        <div id="Content_Inquire_status">3</div>
+        <div id="Content_Log">4</div>
+        <div id="Content_Fix">5</div>
+        <div id="Content_Maintenance_check">6</div>
+        <div id="Content_Device_manage">7</div>
+        <div id="Content_User_manage">8</div>
+        <div id="Content_Change_pw">9</div>
     </div>
 </div>
 <script>
@@ -99,6 +108,7 @@
             $(".nav").find(".active").removeClass("active");
             $("a[href='" + hash + "']").parent().addClass('active');
         }
+        change_pages(hash);
         HideAlert();
         if (hash == '' && login_check()) {
 
@@ -144,6 +154,29 @@
             $('#alert-danger').show();
             return false;
         }
+    }
+
+    function change_pages(hash){
+        // TODO
+        $("div[id^='Content_']").hide();
+        if(hash='')
+            $('#Content_Dashboard').show();
+        if(hash='#UpdateStatus')
+            $('#Content_Enter_status').show();
+        if(hash='#InquireStatus')
+            $('#Content_Inquire_status').show();
+        if(hash='#Log')
+            $('#Content_Log').show();
+        if(hash='#Repair')
+            $('#Content_Fix').show();
+        if(hash='#MaintenanceCheck')
+            $('#Content_Maintenance_check').show();
+        if(hash='#DeviceManage')
+            $('#Content_Device_manage').show();
+        if(hash='#UserManage')
+            $('#Content_User_manage').show();
+        if(hash='#ChangePw')
+            $('#Content_Change_pw').show();
     }
 
     w3.includeHTML();
