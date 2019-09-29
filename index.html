@@ -78,6 +78,7 @@
 <div id="middle">
     <div class="container">
         <div w3-include-html="alert.html"></div>
+
         <div id="Content_Dashboard">1</div>
         <div id="Content_Enter_status">2</div>
         <div id="Content_Inquire_status">3</div>
@@ -177,6 +178,32 @@
             $('#Content_User_manage').show();
         if(hash=='#ChangePw')
             $('#Content_Change_pw').show();
+    }
+
+    function ShowAlart(level, Content, isHTML, isFadeIn) {
+        if (level != 'alert-primary') {
+            if (isHTML) {
+                $('#' + level + '-in').html(Content);
+            } else {
+                $('#' + level + '-in').text(Content);
+            }
+            if (isFadeIn) {
+                $('#' + level).fadeIn();
+            } else {
+                $('#' + level).show();
+            }
+        } else {
+            if (isHTML) {
+                $('#alert-primary').html(Content);
+            } else {
+                $('#alert-primary').text(Content);
+            }
+            if (isFadeIn) {
+                $('#alert-primary').fadeIn();
+            } else {
+                $('#alert-primary').show();
+            }
+        }
     }
 
     w3.includeHTML();
