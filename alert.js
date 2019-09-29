@@ -18,11 +18,16 @@ function HideAlert() {
 }
 
 function ShowAlart(level, Content, isHTML, isFadeIn) {
-    if (level != 'alert-primary') {
+    if (level != ALART_PRIMARY) {
         if (isHTML) {
-            $('#' + level).html(Content);
+            $('#' + level + '-in').html(Content);
         } else {
-            $('#' + level).text(Content);
+            $('#' + level + '-in').text(Content);
+        }
+        if (isFadeIn) {
+            $('#' + level + '-in').fadeIn();
+        } else {
+            $('#' + level + '-in').show();
         }
     } else {
         if (isHTML) {
@@ -30,10 +35,10 @@ function ShowAlart(level, Content, isHTML, isFadeIn) {
         } else {
             $('#alert-primary').text(Content);
         }
-    }
-    if (isFadeIn) {
-        $('#' + level).fadeIn();
-    } else {
-        $('#' + level).show();
+        if (isFadeIn) {
+            $('#' + level).fadeIn();
+        } else {
+            $('#' + level).show();
+        }
     }
 }
