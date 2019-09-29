@@ -27,3 +27,6 @@
 body{
     background-color: #e5e5e5;
 }
+/*div[id^='Content_']{
+    display: none;
+}*/
