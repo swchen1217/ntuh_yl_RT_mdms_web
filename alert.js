@@ -1,3 +1,9 @@
+const ALART_PRIMARY = 'alert-primary';
+const ALART_SUCCESS = 'alert-primary';
+const ALART_DANGER = 'alert-primary';
+const ALART_WARNING = 'alert-primary';
+const ALART_INFO = 'alert-primary';
+
 function HideAlert() {
     $('#alert-primary').hide();
     $('#alert-success').hide();
@@ -9,4 +15,25 @@ function HideAlert() {
     $('#alert-danger-in').text('');
     $('#alert-warning-in').text('');
     $('#alert-info-in').text('');
+}
+
+function ShowAlart(level, Content, isHTML, isFadeIn) {
+    if (level != 'alert-primary') {
+        if (isHTML) {
+            $('#' + level).html(Content);
+        } else {
+            $('#' + level).text(Content);
+        }
+    } else {
+        if (isHTML) {
+            $('#alert-primary').html(Content);
+        } else {
+            $('#alert-primary').text(Content);
+        }
+    }
+    if (isFadeIn) {
+        $('#' + level).fadeIn();
+    } else {
+        $('#' + level).show();
+    }
 }
