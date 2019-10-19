@@ -17,7 +17,7 @@ function HideAlert() {
     $('#alert-info-in').text('');
 }
 
-/*function ShowAlart(level, Content, isHTML, isFadeIn) {
+function ShowAlart(level, Content, isHTML, isFadeIn) {
     if (level != 'alert-primary') {
         if (isHTML) {
             $('#' + level + '-in').html(Content);
@@ -41,4 +41,4 @@ function HideAlert() {
             $('#alert-primary').show();
         }
     }
-}*/
+}
