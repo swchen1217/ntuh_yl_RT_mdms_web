@@ -167,33 +167,6 @@
             });
             return false;
         });
-
-        function ShowAlart(level, Content, isHTML, isFadeIn) {
-            if (level != 'alert-primary') {
-                if (isHTML) {
-                    $('#' + level + '-in').html(Content);
-                } else {
-                    $('#' + level + '-in').text(Content);
-                }
-                if (isFadeIn) {
-                    $('#' + level).fadeIn();
-                } else {
-                    $('#' + level).show();
-                }
-            } else {
-                if (isHTML) {
-                    $('#alert-primary').html(Content);
-                } else {
-                    $('#alert-primary').text(Content);
-                }
-                if (isFadeIn) {
-                    $('#alert-primary').fadeIn();
-                } else {
-                    $('#alert-primary').show();
-                }
-            }
-        }
-
     });
 
     w3.includeHTML();
