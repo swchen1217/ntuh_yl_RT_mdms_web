@@ -147,7 +147,7 @@
                     success: function (msg) {
                         if(msg=="token_ok"){
                             // TODO
-                            
+
                         }
                         if(msg=="token_timeout"){
                             ShowAlart('alert-danger','連結已過期,請重新申請!!',false,false);
@@ -170,11 +170,11 @@
 
             }
 
-            $('#alert-primary').show();
+            /*$('#alert-primary').show();
             $('#alert-success').show();
             $('#alert-danger').show();
             $('#alert-warning').show();
-            $('#alert-info').show();
+            $('#alert-info').show();*/
         }
     }
 
@@ -182,11 +182,13 @@
         if ($.cookie('LoginInfoAcc')) {
             return true;
         } else if (location.hash == '') {
-            $('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
-            $('#alert-warning').show();
+            ShowAlart('warning',"請先<a href='login.html' class='alert-link'>登入</a>",true,false);
+            /*$('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
+            $('#alert-warning').show();*/
         } else {
-            $('#alert-danger-in').text('尚未登入!!');
-            $('#alert-danger').show();
+            ShowAlart('danger','尚未登入!!',false,false);
+            /*$('#alert-danger-in').text('尚未登入!!');
+            $('#alert-danger').show();*/
             return false;
         }
     }
@@ -213,7 +215,6 @@
         if (hash == '#ChangePw')
             $('#Content_Change_pw').show();
     }
-
     w3.includeHTML();
 </script>
 </body>
