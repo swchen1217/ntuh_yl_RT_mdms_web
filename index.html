@@ -332,13 +332,21 @@
                 $('#InputNewPw_f').val('');
                 $('#InputNewPwRe_f').val('');
                 var mMd5 = md5(smsg[3] + npw);
-                /*$.ajax({
+                var token = new URL(location.href).searchParams.get('token');
+                console.log(smsg[3] + npw);
+                console.log(mMd5);
+                console.log(token);
+                $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
                     data: "mode=rstpw_submit&token="+token+"&new_pw=" + mMd5,
                     type: "POST",
                     success: function (msg) {
                         if(msg=="rstpw_ok"){
                             console.log('ok');
+                            ShowAlart('alert-success','設定成功!!!',false,true);
+                            /*setTimeout(function () {
+                                location.replace("./index.html#ChangePw")
+                            }, 1500);*/
                         }
                         if (msg == "token_timeout") {
                             ShowAlart('alert-danger', "連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
@@ -356,7 +364,7 @@
                             typeAnimated: true
                         });
                     }
-                });*/
+                });
             }
             return false;
         });
