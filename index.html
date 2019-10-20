@@ -88,14 +88,13 @@
         <div id="Content_Device_manage">7</div>
         <div id="Content_User_manage">8</div>
         <div id="Content_Change_pw">
-            <!-- TODO chgpw fgtpw -->
-            <div class="row">
+            <div class="row" id="row-fgtpw">
                 <div class="card" id="Fgtpw_HasToken" style="width: 450px">
                     <div class="card-header">
                         <h2 class="card-title">重設密碼</h2>
                     </div>
                     <div class="card-body">
-                        <form role="form" class="form-my" id="form-GetToken3">
+                        <form role="form" class="form-my" id="form-HasToken">
                             <div class="form-group">
                                 <label for="InputOldPw">帳號</label>
                                 <input type="text" class="form-control-plaintext" id="ShowAcc" readonly >
@@ -113,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="row-chgpw">
                 <div class="col-md-6">
                     <div class="card" id="Chgpw">
                         <div class="card-header">
@@ -171,6 +170,8 @@
             $("#navbarToggler").collapse('hide');
         });
 
+        FormSubmitListener();
+
         window.addEventListener('hashchange', OnHashchangeListener);
     });
 
@@ -211,20 +212,22 @@
             console.log(location.href);
             var getURl = new URL(location.href);
             if (getURl.searchParams.has('token')) {
-                console.log(getURl.searchParams.get('token'));
+                $('#row-fgtpw').show();
+                $('#row-chgpw').hide();
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
                     data: "mode=rstpw_check&token=" + getURl.searchParams.get('token'),
                     type: "POST",
                     success: function (msg) {
-                        if(msg.substr(0,8)=="token_ok"){
+                        smsg=msg.split(',');
+                        if(smsg[0]=="token_ok"){
                             // TODO
-
+                            $('#ShowAcc').val(smsg[1]);
                         }
-                        if(msg=="token_timeout"){
+                        if(smsg[0]=="token_timeout"){
                             ShowAlart('alert-danger',"連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!",true,false);
                         }
-                        if(msg=="hasnot_token"){
+                        if(smsg[0]=="hasnot_token"){
                             ShowAlart('alert-danger',"此連結無效,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!",true,false);
                         }
                     },
@@ -239,7 +242,8 @@
                     }
                 });
             } else {
-
+                $('#row-fgtpw').hide();
+                $('#row-chgpw').show();
             }
 
             /*$('#alert-primary').show();
@@ -287,6 +291,22 @@
         if (hash == '#ChangePw')
             $('#Content_Change_pw').show();
     }
+
+    function FormSubmitListener(){
+        $('#form-HasToken').submit(function () {
+            
+            return false;
+        });
+        $('#form-Chgpw').submit(function () {
+
+            return false;
+        });
+        $('#form-GetToken').submit(function () {
+
+            return false;
+        });
+    }
+
     w3.includeHTML();
 </script>
 </body>
