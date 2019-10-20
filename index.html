@@ -142,10 +142,19 @@
                 console.log(getURl.searchParams.get('token'));
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                    data: "mode=login_check&acc=" + input_acc + "&pw=" + mMd5,
+                    data: "mode=rstpw_check&token=" + getURl.searchParams.get('token'),
                     type: "POST",
                     success: function (msg) {
-
+                        if(msg=="token_ok"){
+                            // TODO
+                            
+                        }
+                        if(msg=="token_timeout"){
+                            ShowAlart('alert-danger','連結已過期,請重新申請!!',false,false);
+                        }
+                        if(msg=="hasnot_token"){
+                            ShowAlart('alert-danger','此連結無效,請重新申請!!',false,false);
+                        }
                     },
                     error: function (xhr) {
                         console.log('ajax er');
