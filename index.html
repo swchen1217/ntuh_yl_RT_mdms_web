@@ -234,9 +234,9 @@
                     data: "mode=rstpw_check&token=" + token,
                     type: "POST",
                     success: function (msg) {
-                        smsg = msg.split(',');
+                        // TODO
+                        var smsg = msg.split(',');
                         if (smsg[0] == "token_ok") {
-                            // TODO
                             $('#ShowAcc').val(smsg[1]);
                         }
                         if (smsg[0] == "token_timeout") {
@@ -331,6 +331,7 @@
             } else {
                 $('#InputNewPw_f').val('');
                 $('#InputNewPwRe_f').val('');
+                // TODO
                 var mMd5 = md5(smsg[3] + npw);
                 var token = new URL(location.href).searchParams.get('token');
                 console.log(smsg[3] + npw);
