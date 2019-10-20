@@ -92,13 +92,21 @@
             <div class="row">
                 <div class="card" id="Fgtpw_HasToken" style="width: 450px">
                     <div class="card-header">
-                        <h2 class="card-title">忘記密碼</h2>
+                        <h2 class="card-title">重設密碼</h2>
                     </div>
                     <div class="card-body">
                         <form role="form" class="form-my" id="form-GetToken3">
                             <div class="form-group">
-                                <label for="InputEmail3">請入您註冊的E-mail</label>
-                                <input type="text" class="form-control" id="InputEmail3" placeholder="請輸入E-mail" required>
+                                <label for="InputOldPw">帳號</label>
+                                <input type="text" class="form-control-plaintext" id="ShowAcc" readonly >
+                            </div>
+                            <div class="form-group">
+                                <label for="InputNewPw">新密碼</label>
+                                <input type="password" class="form-control" id="InputNewPw_f" placeholder="請輸入新密碼" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputNewPwRe">確認新密碼</label>
+                                <input type="password" class="form-control" id="InputNewPwRe_f" placeholder="請再次輸入新密碼" required>
                             </div>
                             <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">送出</button>
                         </form>
@@ -109,13 +117,25 @@
                 <div class="col-md-6">
                     <div class="card" id="Chgpw">
                         <div class="card-header">
-                            <h2 class="card-title">忘記密碼2</h2>
+                            <h2 class="card-title">更改密碼</h2>
                         </div>
                         <div class="card-body">
-                            <form role="form" class="form-my" id="form-GetToken2">
+                            <form role="form" class="form-my" id="form-Chgpw">
                                 <div class="form-group">
-                                    <label for="InputEmail2">請輸入您註冊的E-mail</label>
-                                    <input type="text" class="form-control" id="InputEmail2" placeholder="請輸入E-mail" required>
+                                    <label for="InputOldPw">請輸入帳號</label>
+                                    <input type="text" class="form-control" id="InputAcc" placeholder="請輸入E-mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputOldPw">請輸入密碼</label>
+                                    <input type="password" class="form-control" id="InputOldPw" placeholder="請輸入E-mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputNewPw">請輸入新密碼</label>
+                                    <input type="password" class="form-control" id="InputNewPw" placeholder="請輸入E-mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputNewPwRe">請再次輸入新密碼</label>
+                                    <input type="password" class="form-control" id="InputNewPwRe" placeholder="請輸入E-mail" required>
                                 </div>
                                 <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">送出</button>
                             </form>
@@ -125,7 +145,7 @@
                 <div class="col-md-6">
                     <div class="card" id="Fgtpw_GetToken">
                         <div class="card-header">
-                            <h2 class="card-title">忘記密碼3</h2>
+                            <h2 class="card-title">忘記密碼</h2>
                         </div>
                         <div class="card-body">
                             <form role="form" class="form-my" id="form-GetToken">
@@ -197,7 +217,7 @@
                     data: "mode=rstpw_check&token=" + getURl.searchParams.get('token'),
                     type: "POST",
                     success: function (msg) {
-                        if(msg=="token_ok"){
+                        if(msg.substr(0,8)=="token_ok"){
                             // TODO
 
                         }
