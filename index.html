@@ -87,7 +87,26 @@
         <div id="Content_Maintenance_check">6</div>
         <div id="Content_Device_manage">7</div>
         <div id="Content_User_manage">8</div>
-        <div id="Content_Change_pw">9</div>
+        <div id="Content_Change_pw">
+            <!-- TODO chgpw fgtpw -->
+            <div class="row" id="Fgtpw_GetToken" style="display: block">
+                <form role="form" class="form-my" id="form-GetToken">
+                    <h2 class="form-signin-heading" style="margin-bottom: 16px;">系統登入</h2>
+                    <div class="form-group">
+                        <label for="InputAcc">員工編號</label>
+                        <input type="text" class="form-control" id="InputAcc" placeholder="請輸入帳號" required>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">登入</button>
+                </form>
+            </div>
+
+            <div class="row" id="Fgtpw_HasToken" style="display: none">
+
+            </div>
+            <div class="row" id="Chgpw" style="display: none">
+
+            </div>
+        </div>
     </div>
 </div>
 <script>
