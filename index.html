@@ -385,21 +385,16 @@
             }else{
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                    data: "mode=rstpw_submit&token="+token+"&new_pw=" + mMd5,
+                    data: "mode=forget_pw&email="+email,
                     type: "POST",
                     success: function (msg) {
-                        if(msg=="rstpw_ok"){
+                        if(msg=="寄信成功"){
                             console.log('ok');
-                            ShowAlart('alert-success','設定成功!!!',false,true);
-                            setTimeout(function () {
-                                location.replace("./index.html#ChangePw")
-                            }, 1500);
-                        }
-                        if (msg == "token_timeout") {
-                            ShowAlart('alert-danger', "連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
-                        }
-                        if (msg == "hasnot_token") {
-                            ShowAlart('alert-danger', "此連結無效,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
+                            ShowAlart('alert-success','密碼重設資料已寄出!!!',false,true);
+                        }else if (msg == "email_not_exist") {
+                            ShowAlart('alert-danger', "無此E-mail!!", false, false);
+                        }else{
+                            ShowAlart('alert-warning',"寄信系統錯誤,請聯絡系統管理員")
                         }
                     },
                     error: function (xhr) {
