@@ -383,6 +383,7 @@
                     typeAnimated: true
                 });
             }else{
+                $('#InputEmail').val('');
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
                     data: "mode=forget_pw&email="+email,
