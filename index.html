@@ -307,8 +307,8 @@
     }
 
     function FormSubmitListener() {
+        HideAlert();
         $('#form-HasToken').submit(function () {
-            HideAlert();
             var npw = $('#InputNewPw_f').val();
             var npwr = $('#InputNewPwRe_f').val();
             if (npw == "" || npwr == "") {
@@ -374,9 +374,48 @@
         });
         $('#form-GetToken').submit(function () {
             HideAlert();
-
+            var email = $('#InputEmail').val();
+            if (email == "") {
+                $.alert({
+                    title: '錯誤',
+                    content: 'E-mail未輸入!!請再試一次',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }else{
+                $.ajax({
+                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                    data: "mode=rstpw_submit&token="+token+"&new_pw=" + mMd5,
+                    type: "POST",
+                    success: function (msg) {
+                        if(msg=="rstpw_ok"){
+                            console.log('ok');
+                            ShowAlart('alert-success','設定成功!!!',false,true);
+                            setTimeout(function () {
+                                location.replace("./index.html#ChangePw")
+                            }, 1500);
+                        }
+                        if (msg == "token_timeout") {
+                            ShowAlart('alert-danger', "連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
+                        }
+                        if (msg == "hasnot_token") {
+                            ShowAlart('alert-danger', "此連結無效,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('ajax er');
+                        $.alert ({
+                            title: '錯誤',
+                            content: 'Ajax 發生錯誤',
+                            type: 'red',
+                            typeAnimated: true
+                        });
+                    }
+                });
+            }
             return false;
         });
+
     }
 
     w3.includeHTML();
