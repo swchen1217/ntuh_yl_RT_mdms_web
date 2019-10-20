@@ -352,7 +352,7 @@
                     },
                     error: function (xhr) {
                         console.log('ajax er');
-                        $.alert({
+                        $.alert ({
                             title: '錯誤',
                             content: 'Ajax 發生錯誤',
                             type: 'red',
@@ -361,7 +361,6 @@
                     }
                 });
             }
-
             return false;
         });
         $('#form-Chgpw').submit(function () {
