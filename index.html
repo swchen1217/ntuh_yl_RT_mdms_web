@@ -127,8 +127,8 @@
                         <div class="card-body">
                             <form role="form" class="form-my" id="form-Chgpw">
                                 <div class="form-group">
-                                    <label for="InputOldPw">帳號</label>
-                                    <input type="text" class="form-control" id="InputAcc" placeholder="請輸入帳號" required>
+                                    <label for="InputAcc">帳號</label>
+                                    <input type="text" class="form-control" id="InputAcc" placeholder="請輸入員工編號" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputOldPw">舊密碼</label>
@@ -307,8 +307,8 @@
     }
 
     function FormSubmitListener() {
-        HideAlert();
         $('#form-HasToken').submit(function () {
+            HideAlert();
             var npw = $('#InputNewPw_f').val();
             var npwr = $('#InputNewPwRe_f').val();
             if (npw == "" || npwr == "") {
@@ -330,19 +330,18 @@
             } else {
                 $('#InputNewPw_f').val('');
                 $('#InputNewPwRe_f').val('');
-                // TODO
                 var mMd5 = md5(smsg[2] + npw);
                 console.log(smsg[2] + npw);
                 console.log(mMd5);
                 console.log(token);
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                    data: "mode=rstpw_submit&token="+token+"&new_pw=" + mMd5,
+                    data: "mode=rstpw_submit&token=" + token + "&new_pw=" + mMd5,
                     type: "POST",
                     success: function (msg) {
-                        if(msg=="rstpw_ok"){
+                        if (msg == "rstpw_ok") {
                             console.log('ok');
-                            ShowAlart('alert-success','設定成功!!!',false,true);
+                            ShowAlart('alert-success', '設定成功!!!', false, true);
                             setTimeout(function () {
                                 location.replace("./index.html#ChangePw")
                             }, 1500);
@@ -356,7 +355,7 @@
                     },
                     error: function (xhr) {
                         console.log('ajax er');
-                        $.alert ({
+                        $.alert({
                             title: '錯誤',
                             content: 'Ajax 發生錯誤',
                             type: 'red',
@@ -369,6 +368,72 @@
         });
         $('#form-Chgpw').submit(function () {
             HideAlert();
+            var acc = $('#InputAcc').val();
+            var oldpw = $('#InputOldPw').val();
+            var npw = $('#InputNewPw').val();
+            var npwr = $('#InputNewPwRe').val();
+            if (npw == "" || npwr == "" || acc == "" || oldpw == "") {
+                $.alert({
+                    title: '錯誤',
+                    content: '未輸入完整!!請再試一次',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            } else if (npw != npwr) {
+                $('#InputNewPw').val('');
+                $('#InputNewPwRe').val('');
+                $.alert({
+                    title: '錯誤',
+                    content: '確認新密碼不符合!!請再試一次',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            } else {
+                $.ajax({
+                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                    data: "mode=get_create_time&acc=" + acc,
+                    type: "POST",
+                    success: function (msg_st) {
+                        if (msg_st == 'no_acc') {
+                            console.log('no_acc');
+                            $('#InputAcc').val('');
+                            $('#InputOldPw').val('');
+                            $('#InputNewPw').val('');
+                            $('#InputNewPwRe').val('');
+                            ShowAlart('alert-danger','員工編號錯誤!!,此員工編號尚未註冊',false,true);
+                        }else{
+                            var oldpwMd5=md5(msg_st+oldpw);
+                            var newpwMd5=md5(msg_st+npw);
+                            $.ajax({
+                                url: "../ntuh_yl_RT_mdms_api/user.php",
+                                data: "mode=chgpw&old_pw=" + oldpwMd5+"&new_pw="+newpwMd5,
+                                type: "POST",
+                                success: function (msg_nd) {
+                                    
+                                },
+                                error: function (xhr) {
+                                    console.log('ajax er');
+                                    $.alert({
+                                        title: '錯誤',
+                                        content: 'Ajax 發生錯誤',
+                                        type: 'red',
+                                        typeAnimated: true
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('ajax er');
+                        $.alert({
+                            title: '錯誤',
+                            content: 'Ajax 發生錯誤',
+                            type: 'red',
+                            typeAnimated: true
+                        });
+                    }
+                });
+            }
 
             return false;
         });
@@ -382,25 +447,25 @@
                     type: 'red',
                     typeAnimated: true
                 });
-            }else{
+            } else {
                 $('#InputEmail').val('');
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                    data: "mode=forget_pw&email="+email,
+                    data: "mode=forget_pw&email=" + email,
                     type: "POST",
                     success: function (msg) {
-                        if(msg=="寄信成功"){
+                        if (msg == "寄信成功") {
                             console.log('ok');
-                            ShowAlart('alert-success','密碼重設資料已寄出!!!',false,true);
-                        }else if (msg == "email_not_exist") {
+                            ShowAlart('alert-success', '密碼重設資料已寄出!!!', false, true);
+                        } else if (msg == "email_not_exist") {
                             ShowAlart('alert-danger', "無此E-mail!!", false, false);
-                        }else{
-                            ShowAlart('alert-warning',"寄信系統錯誤,請聯絡系統管理員")
+                        } else {
+                            ShowAlart('alert-warning', "寄信系統錯誤,請聯絡系統管理員")
                         }
                     },
                     error: function (xhr) {
                         console.log('ajax er');
-                        $.alert ({
+                        $.alert({
                             title: '錯誤',
                             content: 'Ajax 發生錯誤',
                             type: 'red',
