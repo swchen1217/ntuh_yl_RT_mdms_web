@@ -22,7 +22,7 @@
     <!-- w3 -->
     <script src="w3.js"></script>
     <!-- md5 -->
-    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <script src="md5.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="main.css">
@@ -332,16 +332,13 @@
                 $('#InputNewPw_f').val('');
                 $('#InputNewPwRe_f').val('');
                 var mMd5 = md5(smsg[3] + npw);
-                $.ajax({
+                /*$.ajax({
                     url: "../ntuh_yl_RT_mdms_api/user.php",
                     data: "mode=rstpw_submit&token="+token+"&new_pw=" + mMd5,
                     type: "POST",
                     success: function (msg) {
                         if(msg=="rstpw_ok"){
-                            ShowAlart('alert-success','更改成功!!',false,true);
-                            setTimeout(function () {
-                                location.replace("./index.html#ChangePw")
-                            }, 1500);
+                            console.log('ok');
                         }
                         if (msg == "token_timeout") {
                             ShowAlart('alert-danger', "連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
@@ -359,7 +356,7 @@
                             typeAnimated: true
                         });
                     }
-                });
+                });*/
             }
             return false;
         });
