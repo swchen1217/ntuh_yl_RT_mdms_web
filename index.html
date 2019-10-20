@@ -409,7 +409,12 @@
                                 data: "mode=chgpw&old_pw=" + oldpwMd5+"&new_pw="+newpwMd5,
                                 type: "POST",
                                 success: function (msg_nd) {
-                                    
+                                    if(msg_nd=="old_pw_error"){
+                                        ShowAlart('alert-danger','舊密碼錯誤',false,false);
+                                    }
+                                    if(msg_nd=="ok"){
+                                        ShowAlart('alert-success', '更改成功!!!', false, true);
+                                    }
                                 },
                                 error: function (xhr) {
                                     console.log('ajax er');
