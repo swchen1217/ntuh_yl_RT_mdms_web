@@ -225,7 +225,7 @@
         if (hash == '#ChangePw') {
             console.log(location.href);
             var getURl = new URL(location.href);
-            var token = getURl.searchParams.get('token');
+            token = getURl.searchParams.get('token');
             if (getURl.searchParams.has('token')) {
                 $('#row-fgtpw').show();
                 $('#row-chgpw').hide();
@@ -234,8 +234,7 @@
                     data: "mode=rstpw_check&token=" + token,
                     type: "POST",
                     success: function (msg) {
-                        // TODO
-                        var smsg = msg.split(',');
+                        smsg = msg.split(',');
                         if (smsg[0] == "token_ok") {
                             $('#ShowAcc').val(smsg[1]);
                         }
@@ -332,9 +331,8 @@
                 $('#InputNewPw_f').val('');
                 $('#InputNewPwRe_f').val('');
                 // TODO
-                var mMd5 = md5(smsg[3] + npw);
-                var token = new URL(location.href).searchParams.get('token');
-                console.log(smsg[3] + npw);
+                var mMd5 = md5(smsg[2] + npw);
+                console.log(smsg[2] + npw);
                 console.log(mMd5);
                 console.log(token);
                 $.ajax({
@@ -345,9 +343,9 @@
                         if(msg=="rstpw_ok"){
                             console.log('ok');
                             ShowAlart('alert-success','設定成功!!!',false,true);
-                            /*setTimeout(function () {
+                            setTimeout(function () {
                                 location.replace("./index.html#ChangePw")
-                            }, 1500);*/
+                            }, 1500);
                         }
                         if (msg == "token_timeout") {
                             ShowAlart('alert-danger', "連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!", true, false);
