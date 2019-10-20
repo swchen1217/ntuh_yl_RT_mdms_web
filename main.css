@@ -27,11 +27,7 @@ body{
 .navbar-dark .navbar-brand{
     line-height: 40px;
 }
-#form-GetToken {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+.card{
+    padding: 10px;
+    margin: 10px auto;
 }
-/*div[id^='Content_']{
-    display: none;
-}*/
