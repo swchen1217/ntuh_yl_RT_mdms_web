@@ -294,14 +294,40 @@
 
     function FormSubmitListener(){
         $('#form-HasToken').submit(function () {
-            
+            HideAlert();
+            var npw=$('#InputNewPw_f').val();
+            var npwr=$('#InputNewPwRe_f').val();
+            if(npw=="" || npwr==""){
+                $.alert({
+                    title: '錯誤',
+                    content: '新密碼或確認新密碼未輸入!!請再試一次',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }else if(npw!=npwr){
+                $('#InputNewPw_f').val('');
+                $('#InputNewPwRe_f').val('');
+                $.alert({
+                    title: '錯誤',
+                    content: '確認新密碼不符合!!請再試一次',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }else{
+                $('#InputNewPw_f').val('');
+                $('#InputNewPwRe_f').val('');
+                
+            }
+
             return false;
         });
         $('#form-Chgpw').submit(function () {
+            HideAlert();
 
             return false;
         });
         $('#form-GetToken').submit(function () {
+            HideAlert();
 
             return false;
         });
