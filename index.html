@@ -150,10 +150,10 @@
 
                         }
                         if(msg=="token_timeout"){
-                            ShowAlart('alert-danger','連結已過期,請重新申請!!',false,false);
+                            ShowAlart('alert-danger',"連結已過期,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!",true,false);
                         }
                         if(msg=="hasnot_token"){
-                            ShowAlart('alert-danger','此連結無效,請重新申請!!',false,false);
+                            ShowAlart('alert-danger',"此連結無效,請重新<a href='index.html#ChangePw' class='alert-link'>申請</a>!!",true,false);
                         }
                     },
                     error: function (xhr) {
@@ -182,11 +182,11 @@
         if ($.cookie('LoginInfoAcc')) {
             return true;
         } else if (location.hash == '') {
-            ShowAlart('warning',"請先<a href='login.html' class='alert-link'>登入</a>",true,false);
+            ShowAlart('alert-warning',"請先<a href='login.html' class='alert-link'>登入</a>",true,false);
             /*$('#alert-warning-in').html("請先<a href='login.html' class='alert-link'>登入</a>");
             $('#alert-warning').show();*/
         } else {
-            ShowAlart('danger','尚未登入!!',false,false);
+            ShowAlart('alert-danger','尚未登入!!',false,false);
             /*$('#alert-danger-in').text('尚未登入!!');
             $('#alert-danger').show();*/
             return false;
