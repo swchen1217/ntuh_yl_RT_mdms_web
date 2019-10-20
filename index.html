@@ -225,7 +225,7 @@
         if (hash == '#ChangePw') {
             console.log(location.href);
             var getURl = new URL(location.href);
-            var token=getURl.searchParams.get('token');
+            var token = getURl.searchParams.get('token');
             if (getURl.searchParams.has('token')) {
                 $('#row-fgtpw').show();
                 $('#row-chgpw').hide();
