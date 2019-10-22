@@ -41,7 +41,8 @@
     <div class="container">
         <div w3-include-html="alert.html"></div>
         <form role="form" class="form-signin" id="form-login">
-            <h2 class="form-signin-heading" style="margin-bottom: 16px;">系統登入</h2>
+            <h2 class="form-signin-heading" style="margin-bottom: 16px;">系統登入 <a href="index.html"><i
+                    class="fas fa-home" style="float: right"></i></a></h2>
             <div class="form-group">
                 <label for="InputAcc">員工編號</label>
                 <input type="text" class="form-control" id="InputAcc" placeholder="請輸入帳號" required>
@@ -51,7 +52,8 @@
                 <input type="password" class="form-control" id="InputPw" placeholder="請輸入密碼" required>
             </div>
             <div class="container">
-                <input type="checkbox" value="" id="RemMe" style="width: 20px;height: 20px"><span style="font-size: 20px">記住我</span>
+                <input type="checkbox" value="" id="RemMe" style="width: 20px;height: 20px"><span
+                    style="font-size: 20px">記住我</span>
                 <a href="./index.html#ChangePw" style="font-size: 20px;float: right">忘記密碼</a>
             </div>
 
@@ -61,20 +63,20 @@
 </div>
 <script>
     $(document).ready(function () {
-        if($.cookie('LoginInfoAcc')){
-            ShowAlart('alert-success','你已登出!!',false,true);
+        if ($.cookie('LoginInfoAcc')) {
+            ShowAlart('alert-success', '你已登出!!', false, true);
 
-            $.cookie("LoginInfoAcc", '', { expires: -1 });
-            $.cookie("LoginInfoPw", '', { expires: -1 });
-            $.cookie("LoginInfoPermission", '', { expires: -1 });
-            $.cookie("LoginInfoNane", '', { expires: -1 });
+            $.cookie("LoginInfoAcc", '', {expires: -1});
+            $.cookie("LoginInfoPw", '', {expires: -1});
+            $.cookie("LoginInfoPermission", '', {expires: -1});
+            $.cookie("LoginInfoNane", '', {expires: -1});
         }
-        if($.cookie('acc')){
-            var rem_acc=$.cookie('acc');
-            var rem_pw=$.cookie('pw');
+        if ($.cookie('acc')) {
+            var rem_acc = $.cookie('acc');
+            var rem_pw = $.cookie('pw');
             $('#InputAcc').val(rem_acc);
             $('#InputPw').val(rem_pw);
-            $('#RemMe').attr('checked',true);
+            $('#RemMe').attr('checked', true);
         }
         $('#form-login').submit(function () {
             HideAlert();
@@ -100,9 +102,9 @@
                         console.log('no_acc');
                         $('#InputAcc').val('');
                         $('#InputPw').val('');
-                        ShowAlart('alert-danger','員工編號錯誤!!,此員工編號尚未註冊',false,true);
-                    }else{
-                        var mMd5=md5(msg_st+input_pw);
+                        ShowAlart('alert-danger', '員工編號錯誤!!,此員工編號尚未註冊', false, true);
+                    } else {
+                        var mMd5 = md5(msg_st + input_pw);
                         console.log(mMd5);
                         $.ajax({
                             url: "../ntuh_yl_RT_mdms_api/user.php",
@@ -114,16 +116,16 @@
                                     console.log('no_enable');
                                     $('#InputAcc').val('');
                                     $('#InputPw').val('');
-                                    ShowAlart('alert-danger','此帳號尚未啟用,請聯繫管理員!!',false,true);
+                                    ShowAlart('alert-danger', '此帳號尚未啟用,請聯繫管理員!!', false, true);
                                 }
                                 if (msg_nd.substring(0, 2) == 'ok') {
                                     console.log('ok');
-                                    if(document.getElementById("RemMe").checked){
-                                        $.cookie('acc', input_acc, { expires: 1 });
-                                        $.cookie('pw', input_pw, { expires: 1 });
-                                    }else{
-                                        $.cookie("acc", '', { expires: -1 });
-                                        $.cookie("pw", '', { expires: -1 });
+                                    if (document.getElementById("RemMe").checked) {
+                                        $.cookie('acc', input_acc, {expires: 1});
+                                        $.cookie('pw', input_pw, {expires: 1});
+                                    } else {
+                                        $.cookie("acc", '', {expires: -1});
+                                        $.cookie("pw", '', {expires: -1});
                                     }
                                     var split_OkData = msg_nd.split(',');
                                     $.cookie('LoginInfoAcc', input_acc);
@@ -131,7 +133,7 @@
                                     $.cookie('LoginInfoPermission', split_OkData[2]);
                                     $.cookie('LoginInfoNane', split_OkData[1]);
                                     console.log('ok');
-                                    ShowAlart('alert-success',split_OkData[1] + ',歡迎回來',false,true);
+                                    ShowAlart('alert-success', split_OkData[1] + ',歡迎回來', false, true);
                                     setTimeout(function () {
                                         location.replace("./index.html")
                                     }, 1000);
@@ -140,7 +142,7 @@
                                     console.log('pw_error');
                                     $('#InputAcc').val('');
                                     $('#InputPw').val('');
-                                    ShowAlart('alert-danger','密碼錯誤!!',false,true);
+                                    ShowAlart('alert-danger', '密碼錯誤!!', false, true);
                                 }
                             },
                             error: function (xhr) {
