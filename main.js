@@ -316,11 +316,16 @@ function FormSubmitListener() {
 function PermissionCheck(NeedPermission,isAlert) {
     HideAlert();
     var LIP=$.cookie("LoginInfoPermission");
-    if(LIP>=NeedPermission)
+    console.log("LPT:"+LIP);
+    console.log("NeedPermission:"+NeedPermission);
+    if(LIP>=NeedPermission){
+        console.log("Pass");
         return true;
+    }
     else{
+        console.log("NoPass");
         if(isAlert){
-            ShowAlart('alert-warning', "您的權限不足!!<br>您的權限:"+LIP+"<br>所需權限:"+NeedPermission,true,false);
+            ShowAlart('alert-warning', "您的權限不足!!<br>您的權限："+LIP+"<br>所需權限："+NeedPermission,true,false);
         }
         return false;
     }
