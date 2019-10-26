@@ -69,7 +69,7 @@
             $.cookie("LoginInfoAcc", '', {expires: -1});
             $.cookie("LoginInfoPw", '', {expires: -1});
             $.cookie("LoginInfoPermission", '', {expires: -1});
-            $.cookie("LoginInfoNane", '', {expires: -1});
+            $.cookie("LoginInfoName", '', {expires: -1});
         }
         if ($.cookie('acc')) {
             var rem_acc = $.cookie('acc');
@@ -131,7 +131,7 @@
                                     $.cookie('LoginInfoAcc', input_acc);
                                     $.cookie('LoginInfoPw', mMd5);
                                     $.cookie('LoginInfoPermission', split_OkData[2]);
-                                    $.cookie('LoginInfoNane', split_OkData[1]);
+                                    $.cookie('LoginInfoName', split_OkData[1]);
                                     console.log('ok');
                                     ShowAlart('alert-success', split_OkData[1] + ',歡迎回來', false, true);
                                     setTimeout(function () {
