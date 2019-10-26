@@ -33,13 +33,19 @@ function OnHashchangeListener() {
         }
     }
     if (hash == '#MaintenanceCheck' && login_check()) {
+        if(PermissionCheck(2,true)){
 
+        }
     }
     if (hash == '#DeviceManage' && login_check()) {
+        if(PermissionCheck(4,true)){
 
+        }
     }
     if (hash == '#UserManage' && login_check()) {
+        if(PermissionCheck(5,true)){
 
+        }
     }
     if (hash == '#ChangePw') {
         console.log(location.href);
