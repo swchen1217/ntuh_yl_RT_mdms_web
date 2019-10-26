@@ -8,19 +8,29 @@ function OnHashchangeListener() {
     change_pages(hash);
     HideAlert();
     if (hash == '' && login_check()) {
+        if(PermissionCheck(1,true)){
 
+        }
     }
     if (hash == '#UpdateStatus' && login_check()) {
+        if(PermissionCheck(2,true)){
 
+        }
     }
     if (hash == '#InquireStatus' && login_check()) {
+        if(PermissionCheck(1,true)){
 
+        }
     }
     if (hash == '#Log' && login_check()) {
+        if(PermissionCheck(3,true)){
 
+        }
     }
     if (hash == '#Repair' && login_check()) {
+        if(PermissionCheck(2,true)){
 
+        }
     }
     if (hash == '#MaintenanceCheck' && login_check()) {
 
