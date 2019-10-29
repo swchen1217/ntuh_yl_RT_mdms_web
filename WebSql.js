@@ -2,7 +2,7 @@ class WebSql {
     DATABASE_NAME = "ntuh.yl_mdms.db";
     DATABASE_VERSION = 5;
 
-    device_tb =
+    static device_tb =
         "CREATE TABLE IF NOT EXISTS device_tb (" +
         "  `DID` TEXT," +
         "  `category` TEXT," +
@@ -14,7 +14,7 @@ class WebSql {
         "  `LastModified` TEXT" +
         ")";
 
-    position_item_tb =
+    static position_item_tb =
         "CREATE TABLE IF NOT EXISTS position_item_tb (" +
         "  `type` TEXT," +
         "  `item` TEXT" +
@@ -23,7 +23,7 @@ class WebSql {
     db = openDatabase(this.DATABASE_NAME, this.DATABASE_VERSION, 'MDMS DB', 2 * 1024 * 1024);
 
     constructor(){
-        db.transaction(function (tx) {
+        this.db.transaction(function (tx) {
             tx.executeSql(this.device_tb);
             tx.executeSql(this.position_item_tb);
         });
@@ -48,7 +48,7 @@ class WebSql {
         }
         sql+=");";
 
-        db.transaction(function (tx) {
+        this.db.transaction(function (tx) {
             tx.executeSql(sql);
         });
     }
