@@ -10,6 +10,8 @@
     //var db = openDatabase('mdms', '1.0', 'mdms db', 2 * 1024 * 1024);
     //var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
     var sql=new WebSql();
+    var data=[["status","test"],["DID","MDMS.D0001"]];
+    sql.inster("device_tb",data);
 </script>
 </body>
 </html>
