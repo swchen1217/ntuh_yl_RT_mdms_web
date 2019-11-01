@@ -1,18 +1,19 @@
 function SyncDeviceTable(needBar) {
-    if (needBar == true)
-        $("#dialog_ProgressBar_Sync").modal("show")
+    // TODO dialog測試時隱藏
+    /*if (needBar == true)
+        $("#dialog_ProgressBar_Sync").modal("show");*/
     var LastSync;
     if (localStorage.hasOwnProperty("device_tb_LastSync"))
         LastSync = localStorage.getItem("device_tb_LastSync");
     else
         LastSync = "2019-01-01 00:00:00";
     // TODO
-    /*$.ajax({
+    $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
-        data: "mode=sync_device_tb_download",
+        data: "mode=sync_device_tb_download&acc="+$.cookie("LoginInfoAcc")+"&pw="+$.cookie("LoginInfoPw")+"&LastModified="+LastSync,
         type: "POST",
         success: function (msg) {
-
+            console.log(msg);
         },
         error: function (xhr) {
             console.log('ajax er');
@@ -23,7 +24,7 @@ function SyncDeviceTable(needBar) {
                 typeAnimated: true
             });
         }
-    });*/
+    });
 
 
 }
