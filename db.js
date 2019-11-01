@@ -7,7 +7,7 @@ function SyncDeviceTable(needBar) {
     else
         LastSync = "2019-01-01 00:00:00";
     // TODO
-    $.ajax({
+    /*$.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
         data: "mode=sync_device_tb_download",
         type: "POST",
@@ -23,7 +23,7 @@ function SyncDeviceTable(needBar) {
                 typeAnimated: true
             });
         }
-    });
+    });*/
 
 
 }
