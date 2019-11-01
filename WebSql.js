@@ -48,8 +48,7 @@ class WebSql {
 
     inster(tb_name,data_array){
         var sql="";
-        sql+="INSERT INTO `";
-        sql+=tb_name+"` (";
+        sql+="INSERT INTO `"+tb_name+"` (";
         for(var i=0;i<data_array.length;i++){
             sql+="`"+data_array[i][0]+"`";
             if(i!=data_array.length-1)
@@ -57,9 +56,7 @@ class WebSql {
         }
         sql+=") VALUES (";
         for(var i=0;i<data_array.length;i++){
-            sql+="'";
-            sql+=data_array[i][1];
-            sql+="'";
+            sql+="'"+data_array[i][1]+"'";
             if(i!=data_array.length-1)
                 sql+=",";
         }
@@ -72,6 +69,26 @@ class WebSql {
         this.db.transaction(function (tx) {
             tx.executeSql(sql);
         });
+    }
+
+    select(tb_name,col,require){
+        var sql="";
+        sql+="SELECT ";
+        for (var i=0;i<col.length;i++){
+            sql+="`"+col[i]+"`";
+            if(i!=col.length-1)
+                sql+=",";
+        }
+        sql+=" FROM "+tb_name+" "+require;
+
+        console.log(sql);
+        
+        this.db.transaction(function (tx) {
+            tx.executeSql(sql,[],function (tx,result) {
+                console.log(result);
+            })
+        })
+
     }
 
 }
