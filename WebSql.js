@@ -86,6 +86,12 @@ class WebSql {
         this.db.transaction(function (tx) {
             tx.executeSql(sql,[],function (tx,result) {
                 console.log(result);
+                console.log(result.rows);
+                console.log(result.rows.length);
+                console.log(result.rows[1]);
+                console.log(result.rows[1]['DID']);
+                console.log(result.rows.item(2));
+                console.log(result.rows.item(2)['DID']);
             })
         })
 
