@@ -48,10 +48,10 @@ class WebSql {
 
     inster(tb_name,data_array){
         var sql="";
-        sql+="INSERT INTO ";
-        sql+=tb_name+" (";
+        sql+="INSERT INTO `";
+        sql+=tb_name+"` (";
         for(var i=0;i<data_array.length;i++){
-            sql+=data_array[i][0];
+            sql+="`"+data_array[i][0]+"`";
             if(i!=data_array.length-1)
                 sql+=",";
         }
@@ -63,7 +63,11 @@ class WebSql {
             if(i!=data_array.length-1)
                 sql+=",";
         }
-        sql+=");";
+        sql+=")";
+
+        //sql="INSERT INTO `device_tb` (`status`,`DID`) VALUES ('test','MDMS.D0001')";
+
+        console.log(sql);
 
         this.db.transaction(function (tx) {
             tx.executeSql(sql);
