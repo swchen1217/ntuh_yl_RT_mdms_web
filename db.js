@@ -10,10 +10,11 @@ function SyncDeviceTable(needBar) {
     // TODO
     $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
-        data: "mode=sync_device_tb_download&acc="+$.cookie("LoginInfoAcc")+"&pw="+$.cookie("LoginInfoPw")+"&LastModified="+LastSync,
+        data: "mode=sync_device_tb_download&acc="+$.cookie("LoginInfoAcc")+"&pw="+$.cookie("LoginInfoPw")+"&LastModifie="+LastSync,
         type: "POST",
         success: function (msg) {
             console.log(msg);
+
         },
         error: function (xhr) {
             console.log('ajax er');
