@@ -21,6 +21,8 @@
     <link href="css/all.css" rel="stylesheet">
     <!-- md5 -->
     <script src="md5.js"></script>
+    <!-- Moment -->
+    <script src="moment.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="login.css">
@@ -205,10 +207,9 @@
                                     ShowAlart('alert-success', split_OkData[1] + ',歡迎回來', false, true);
                                     // TODO
                                     SyncDeviceTable(false);
-
-                                    /*setTimeout(function () {
-                                        location.replace("./index.html")
-                                    }, 1000);*/
+                                    setTimeout(function () {
+                                        //location.replace("./index.html")
+                                    }, 1000);
                                 }
                                 if (msg_nd == 'pw_error') {
                                     console.log('pw_error');
