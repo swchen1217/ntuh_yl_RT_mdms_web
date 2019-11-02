@@ -111,7 +111,7 @@ class WebSql {
         var sql="";
         sql+="DELETE FROM "+tb_name+" "+where;
         //console.log(sql);
-        
+
         this.db.transaction(function (tx) {
             tx.executeSql(sql);
         });
