@@ -36,7 +36,9 @@ function SyncDeviceTable(AlertDialog) {
                                     console.log(t2);
                                     if (Date.parse(t1).valueOf() > Date.parse(t2).valueOf()) {
                                         console.log("YES");
-
+                                        var tmp = JsonToArray(data[i]);
+                                        console.log(tmp);
+                                        sql.update("device_tb",tmp,"where `DID`='"+data[i].DID+"'")
                                     }
                                 } else {
                                     //TODO del
