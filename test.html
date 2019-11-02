@@ -13,7 +13,7 @@
     var data=[["status","test"],["DID","MDMS.D0001"]];
     var aa;
     //sql.inster("device_tb",data);
-    sql.select("device_tb",["DID","status"],"where 1",function (back) {
+    sql.select("device_tb",["DID","status"],"where DID='MDMS.D0002'",function (back) {
         console.log(back);
         aa=back;
     });
