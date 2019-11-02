@@ -46,6 +46,7 @@ function SyncDeviceTable(AlertDialog) {
                         });
                     }
                 }
+                // TODO AlertDialog Time
             }
         },
         error: function (xhr) {
