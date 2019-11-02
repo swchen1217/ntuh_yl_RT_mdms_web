@@ -49,13 +49,13 @@ class WebSql {
     inster(tb_name, data_array) {
         var sql = "";
         sql += "INSERT INTO `" + tb_name + "` (";
-        for (var i = 0; i < data_array.length; i++) {
+        for (let i = 0; i < data_array.length; i++) {
             sql += "`" + data_array[i][0] + "`";
             if (i != data_array.length - 1)
                 sql += ",";
         }
         sql += ") VALUES (";
-        for (var i = 0; i < data_array.length; i++) {
+        for (let i = 0; i < data_array.length; i++) {
             sql += "'" + data_array[i][1] + "'";
             if (i != data_array.length - 1)
                 sql += ",";
@@ -64,7 +64,7 @@ class WebSql {
 
         //sql="INSERT INTO `device_tb` (`status`,`DID`) VALUES ('test','MDMS.D0001')";
 
-        console.log(sql);
+        //console.log(sql);
 
         this.db.transaction(function (tx) {
             tx.executeSql(sql);
@@ -75,7 +75,7 @@ class WebSql {
         var sql = "";
         sql += "SELECT ";
         if (col != "*") {
-            for (var i = 0; i < col.length; i++) {
+            for (let i = 0; i < col.length; i++) {
                 sql += "`" + col[i] + "`";
                 if (i != col.length - 1)
                     sql += ",";
@@ -90,6 +90,22 @@ class WebSql {
             })
         })
 
+    }
+
+    update(tb_name,data_array,where){
+        var sql="";
+        sql+="UPDATE "+tb_name+" SET ";
+        for (let i = 0; i < data_array.length; i++) {
+            sql += "`" + data_array[i][0] + "` = '"+data_array[i][1]+"'";
+            if (i != data_array.length - 1)
+                sql += " , ";
+        }
+        sql+=" "+where;
+        console.log(sql);
+
+        this.db.transaction(function (tx) {
+            tx.executeSql(sql);
+        });
     }
 
 }
