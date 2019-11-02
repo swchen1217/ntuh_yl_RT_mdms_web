@@ -12,11 +12,16 @@ function SyncDeviceTable(AlertDialog) {
         type: "POST",
         success: function (msg) {
             console.log(msg);
-            var data = msg;
-            if (data != "" && data != "user_error") {
-                if(data != "no_data"){
+            var sql=new WebSql();
+            if (msg != "" && msg != "user_error") {
+                if(msg != "no_data"){
+                    var data = eval(msg);
+                    console.log(data);
                     for (var i=0;i<data.length;i++){
-                        
+                        sql.select("device_tb","8","where DID='"+data[i].DID+"'",function (result) {
+                            
+                        });
+                        //console.log(data[i].DID)
                     }
                 }
             }
