@@ -92,7 +92,7 @@ class WebSql {
                 console.log(result.rows[1]['DID']);
                 console.log(result.rows.item(2));
                 console.log(result.rows.item(2)['DID']);
-                callback(result);
+                callback(result.rows);
             })
         })
 
