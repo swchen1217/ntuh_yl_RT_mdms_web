@@ -12,32 +12,33 @@ function SyncDeviceTable(AlertDialog) {
         type: "POST",
         success: function (msg) {
             console.log(msg);
-            var sql=new WebSql();
+            var sql = new WebSql();
             if (msg != "" && msg != "user_error") {
-                if(msg != "no_data"){
+                if (msg != "no_data") {
                     var data = JSON.parse(msg);
                     console.log(data);
-                    for (let i=0; i<data.length; i++){
-                        sql.select("device_tb","*","where DID='"+data[i].DID+"'",function (result) {
+                    for (let i = 0; i < data.length; i++) {
+                        sql.select("device_tb", "*", "where DID='" + data[i].DID + "'", function (result) {
                             console.log(result);
-                            if(result.length==0){
+                            if (result.length == 0) {
                                 console.log(data[i]);
-                                if(data[i].status!="-1"){
-                                    var tmp=JsonToArray(data[i]);
+                                if (data[i].status != "-1") {
+                                    var tmp = JsonToArray(data[i]);
                                     console.log(tmp);
-                                    sql.inster("device_tb",tmp);
+                                    sql.inster("device_tb", tmp);
                                 }
-                            }else{
-                                if(data[i].status!="-1"){
+                            } else {
+                                if (data[i].status != "-1") {
                                     //TODO update
-                                    var t1=data[i].LastModified;
-                                    var t2=result[0].LastModified;
+                                    var t1 = data[i].LastModified;
+                                    var t2 = result[0].LastModified;
                                     console.log(t1);
                                     console.log(t2);
-                                    if(Data.parse(t1).valueOf()>Data.parse(t2).valueOf()){
-                                        
+                                    if (Date.parse(t1).valueOf() > Date.parse(t2).valueOf()) {
+                                        console.log("YES");
+
                                     }
-                                }else{
+                                } else {
                                     //TODO del
                                 }
                             }
@@ -59,11 +60,12 @@ function SyncDeviceTable(AlertDialog) {
 
 
 }
+
 function JsonToArray(json) {
     key = ["DID", "category", "model", "number", "user", "position", "status", "LastModified"];
-    var tmp=new Array();
-    for (let i=0;i<key.length;i++){
-        var tmp2=new Array();
+    var tmp = new Array();
+    for (let i = 0; i < key.length; i++) {
+        var tmp2 = new Array();
         tmp2.push(key[i]);
         tmp2.push(json[key[i]]);
         tmp.push(tmp2);
