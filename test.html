@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="WebSql.js"></script>
+    <script src="moment.js"></script>
 </head>
 <body>
 <script>
@@ -19,6 +20,8 @@
     });*/
     //sql.update("device_tb",data,"where `number`='a01'");
     sql.delete("device_tb","where `DID`='MDMS.D0008'");
+
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
 
 </script>
 </body>
