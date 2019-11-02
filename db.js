@@ -58,8 +58,6 @@ function SyncDeviceTable(AlertDialog) {
             });
         }
     });
-
-
 }
 
 function JsonToArray(json) {
