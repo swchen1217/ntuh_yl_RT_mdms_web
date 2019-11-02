@@ -10,13 +10,14 @@
     //var db = openDatabase('mdms', '1.0', 'mdms db', 2 * 1024 * 1024);
     //var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
     var sql=new WebSql();
-    var data=[["status","test"],["DID","MDMS.D0001"]];
+    var data=[["status","2"],["user","qwe"]];
     var aa;
     //sql.inster("device_tb",data);
-    sql.select("device_tb",["DID","status"],"where DID='MDMS.D0002'",function (back) {
+    /*sql.select("device_tb",["DID","status"],"where DID='MDMS.D0002'",function (back) {
         console.log(back);
         aa=back;
-    });
+    });*/
+    sql.update("device_tb",data,"where `number`='a01'");
 
 </script>
 </body>
