@@ -63,7 +63,6 @@ class WebSql {
         sql += ")";
 
         //sql="INSERT INTO `device_tb` (`status`,`DID`) VALUES ('test','MDMS.D0001')";
-
         //console.log(sql);
 
         this.db.transaction(function (tx) {
@@ -101,8 +100,18 @@ class WebSql {
                 sql += " , ";
         }
         sql+=" "+where;
-        console.log(sql);
+        //console.log(sql);
 
+        this.db.transaction(function (tx) {
+            tx.executeSql(sql);
+        });
+    }
+
+    delete(tb_name,where){
+        var sql="";
+        sql+="DELETE FROM "+tb_name+" "+where;
+        //console.log(sql);
+        
         this.db.transaction(function (tx) {
             tx.executeSql(sql);
         });
