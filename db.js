@@ -47,6 +47,17 @@ function SyncDeviceTable(AlertDialog) {
                     }
                 }
                 // TODO AlertDialog Time
+                if(AlertDialog){
+                    $.alert({
+                        title: '成功',
+                        content: '資料庫同步完成',
+                        type: 'blue',
+                        typeAnimated: true,
+                        backgroundDismiss: true
+                    });
+                }
+                var date=moment().format('YYYY-MM-DD HH:mm:ss');
+                localStorage.setItem('device_tb_LastSync',date);
             }
         },
         error: function (xhr) {
@@ -59,6 +70,9 @@ function SyncDeviceTable(AlertDialog) {
             });
         }
     });
+    setTimeout(function () {
+        $("#dialog_ProgressBar_Sync").modal('hide');
+    }, 500);
 }
 
 function JsonToArray(json) {
