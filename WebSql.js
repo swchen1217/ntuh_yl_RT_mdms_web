@@ -74,24 +74,27 @@ class WebSql {
     select(tb_name,col,require,callback){
         var sql="";
         sql+="SELECT ";
-        for (var i=0;i<col.length;i++){
-            sql+="`"+col[i]+"`";
-            if(i!=col.length-1)
-                sql+=",";
-        }
+        if(col!="*"){
+            for (var i=0;i<col.length;i++){
+                sql+="`"+col[i]+"`";
+                if(i!=col.length-1)
+                    sql+=",";
+            }
+        }else
+            sql+="*";
         sql+=" FROM "+tb_name+" "+require;
 
         console.log(sql);
         
         this.db.transaction(function (tx) {
             tx.executeSql(sql,[],function (tx,result) {
-                console.log(result);
+                /*console.log(result);
                 console.log(result.rows);
                 console.log(result.rows.length);
                 console.log(result.rows[1]);
                 console.log(result.rows[1]['DID']);
                 console.log(result.rows.item(2));
-                console.log(result.rows.item(2)['DID']);
+                console.log(result.rows.item(2)['DID']);*/
                 callback(result.rows);
             })
         })
