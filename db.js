@@ -29,7 +29,6 @@ function SyncDeviceTable(AlertDialog) {
                                 }
                             } else {
                                 if (data[i].status != "-1") {
-                                    //TODO update
                                     var t1 = data[i].LastModified;
                                     var t2 = result[0].LastModified;
                                     console.log(t1);
@@ -41,7 +40,7 @@ function SyncDeviceTable(AlertDialog) {
                                         sql.update("device_tb",tmp,"where `DID`='"+data[i].DID+"'")
                                     }
                                 } else {
-                                    //TODO del
+                                    sql.delete("device_tb","where `DID`='"+data[i].DID+"'");
                                 }
                             }
                         });
