@@ -15,7 +15,7 @@ function SyncDeviceTable(AlertDialog) {
             var sql=new WebSql();
             if (msg != "" && msg != "user_error") {
                 if(msg != "no_data"){
-                    var data = eval(msg);
+                    var data = JSON.parse(msg);
                     console.log(data);
                     for (var i=0;i<data.length;i++){
                         sql.select("device_tb","*","where DID='"+data[i].DID+"'",function (result) {
@@ -23,7 +23,7 @@ function SyncDeviceTable(AlertDialog) {
                             if(result.length==0){
                                 var tmp;
                                 tmp=data[i];
-                                console.log(data[i].length);
+                                console.log(data[i]);
 
                                 //sql.inster("device_tb",);
                             }else{
