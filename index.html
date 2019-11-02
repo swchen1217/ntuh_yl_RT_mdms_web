@@ -21,6 +21,8 @@
     <link href="css/all.css" rel="stylesheet">
     <!-- md5 -->
     <script src="md5.js"></script>
+    <!-- Moment -->
+    <script src="moment.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="main.css">
@@ -260,6 +262,8 @@
         FormSubmitListener();
 
         window.addEventListener('hashchange', OnHashchangeListener);
+
+        var sql=new WebSql();
     });
 </script>
 </html>
