@@ -34,6 +34,9 @@ function SyncDeviceTable(AlertDialog) {
                                     var t2=result[0].LastModified;
                                     console.log(t1);
                                     console.log(t2);
+                                    if(Data.parse(t1).valueOf()>Data.parse(t2).valueOf()){
+                                        
+                                    }
                                 }else{
                                     //TODO del
                                 }
