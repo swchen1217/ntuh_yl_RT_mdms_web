@@ -18,8 +18,17 @@ function SyncDeviceTable(AlertDialog) {
                     var data = eval(msg);
                     console.log(data);
                     for (var i=0;i<data.length;i++){
-                        sql.select("device_tb","8","where DID='"+data[i].DID+"'",function (result) {
-                            
+                        sql.select("device_tb","*","where DID='"+data[i].DID+"'",function (result) {
+                            console.log(result);
+                            if(result.length==0){
+                                var tmp;
+                                tmp=data[i];
+                                console.log(data[i].length);
+
+                                //sql.inster("device_tb",);
+                            }else{
+
+                            }
                         });
                         //console.log(data[i].DID)
                     }
