@@ -24,9 +24,12 @@
     <!-- Moment -->
     <script src="moment.js"></script>
     <!-- Bootstrap Table -->
-    <link rel="stylesheet" href="bootstrap-table.min.css">
+    <!--<link rel="stylesheet" href="bootstrap-table.min.css">
     <script src="bootstrap-table.min.js"></script>
-    <script src="bootstrap-table-zh-TW.min.js"></script>
+    <script src="bootstrap-table-zh-TW.min.js"></script>-->
+    <link rel="stylesheet" href="bootstrap-table.css">
+    <script src="bootstrap-table.js"></script>
+    <script src="bootstrap-table-zh-TW.js"></script>
 
 
     <!-- My CSS -->
@@ -163,18 +166,7 @@
         <div id="Content_Enter_status">2</div>
         <div id="Content_Inquire_status">
             <!-- TODO -->
-            <table id="#table_device"
-                   data-toggle="table"
-                   data-pagination="true"
-                   data-search="true">
-                <thead>
-                <tr>
-                    <th>Item ID</th>
-                    <th>Item Name</th>
-                    <th>Item Price</th>
-                </tr>
-                </thead>
-            </table>
+            <table id="#table_device"></table>
         </div>
         <div id="Content_Log">4</div>
         <div id="Content_Fix">5</div>
@@ -283,6 +275,59 @@
         window.addEventListener('hashchange', OnHashchangeListener);
 
         var sql=new WebSql();
+
+        $('#table_device').bootstrapTable({
+            columns:[ //欄位設定
+                {field:'checkbox', title:'選取', align:'center', width:80, visible:true, checkbox:true},
+                {field:'id', title:'代號', align:'center', width:120, visible:true, sortable:true},
+                {field:'name', title:'名稱', align:'left', visible:true},
+                {field:'mailAddress', title:'Email', align:'left', width:200, visible:true},
+                {field:'description', title:'說明', align:'left', width:200, visible:true}
+            ],
+            classes:'table',
+            data : getRandomData(),//所有資料
+            uniqueId:'id', //哪一個欄位是key
+            sortName:'name', //依照那個欄位排序
+            height : 450,
+            pagination : true, //使否要分頁
+
+            //可於ToolBar上顯示的按鈕
+            showColumns : true, //顯示/隱藏哪些欄位
+            showToggle : true, //名片式/table式切換
+            showPaginationSwitch : true, //分頁/不分頁切換
+            showRefresh : true, //重新整理
+            search : true, //查詢
+
+            onPageChange:function(currentPage, pageSize) {
+                console.log("目前頁數:"+currentPage+",一頁顯示:"+pageSize+"筆");
+            },
+            pageSize : 10, //一頁顯示幾筆
+            pageList : [ 10, 20, 50, 100], //一頁顯示幾筆的選項
+
+            formatRecordsPerPage:function(pageSize) {
+                return '&nbsp;&nbsp;每頁顯示' + pageSize + '筆';
+            },
+            formatShowingRows:function(fromIndex, toIndex, totalSize) {
+                //目前第幾頁
+                var currentPage = Math.ceil(fromIndex / this.pageSize);
+                //總共幾頁
+                var totalPageCount = Math.ceil(totalSize / this.pageSize);
+                return '第'+currentPage+'頁&nbsp;&nbsp;共'+totalPageCount+'頁';
+            }
+        });
+
+        function getRandomData() {
+            var data = [];
+            for (var i = 0; i < 50; i++) {
+                data.push({
+                    id: "ID_"+i,
+                    name: 'Name_' + i,
+                    mailAddress : "ID_"+i+"@ooooo.com",
+                    description : ""
+                });
+            }
+            return data;
+        }
     });
 </script>
 </html>
