@@ -27,12 +27,10 @@ function OnHashchangeListener() {
                     jsonA.push(result[i]);
                 }
                 console.log(jsonA);
-                $('#table_device').bootstrapTable({
+                /*$('#table_device').bootstrapTable({
                     url:jsonA
-                });
-
+                });*/
             });
-
 
         }
     }
