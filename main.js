@@ -19,6 +19,20 @@ function OnHashchangeListener() {
     }
     if (hash == '#InquireStatus' && login_check()) {
         if(PermissionCheck(1,true)){
+            //TODO
+            var sql=new WebSql();
+            sql.select("device_tb","*","where 1",function (result) {
+                var jsonA=[];
+                for(let i=0;i<result.length;i++){
+                    jsonA.push(result[i]);
+                }
+                console.log(jsonA);
+                $('#table_device').bootstrapTable({
+                    url:jsonA
+                });
+
+            });
+
 
         }
     }
