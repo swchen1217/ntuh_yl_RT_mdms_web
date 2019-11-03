@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="WebSql.js"></script>
     <script src="moment.js"></script>
+    <script src="db.js"></script>
 </head>
 <body>
 <script>
@@ -19,9 +20,11 @@
         aa=back;
     });*/
     //sql.update("device_tb",data,"where `number`='a01'");
-    sql.delete("device_tb","where `DID`='MDMS.D0008'");
+    //sql.delete("device_tb","where `DID`='MDMS.D0008'");
 
     console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
+
+    console.log(Device_tb_ToJson());
 
 </script>
 </body>
