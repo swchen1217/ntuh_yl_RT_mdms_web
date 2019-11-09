@@ -30,7 +30,7 @@ function OnHashchangeListener() {
                 $('#table_device').bootstrapTable({
                     data: jsonA,
                     dataType: "json",
-                    //classes:'table',
+                    classes: "table table-bordered table-striped table-sm",
                     striped: true,
                     pagination: true,
                     pageNumber: 1,
