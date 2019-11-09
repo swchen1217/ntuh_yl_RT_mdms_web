@@ -30,17 +30,18 @@ function OnHashchangeListener() {
                 $('#table_device').bootstrapTable({
                     data: jsonA,
                     dataType: "json",
+                    //classes:'table',
                     striped: true,
                     pagination: true,
-                    pageNumber:1,
+                    pageNumber: 1,
                     pageSize: 10,
                     pageList: [10, 25, 50, 100],
                     search: true,
-                    sortName:'DID',
-                    showColumns : true, //顯示/隱藏哪些欄位
-                    showToggle : true, //名片式/table式切換
-                    showPaginationSwitch : true, //分頁/不分頁切換
-                    showRefresh : true, //重新整理
+                    sortName: 'DID',
+                    showColumns: true,
+                    showToggle: true,
+                    showPaginationSwitch: true,
+                    showFullscreen: true,
                     columns: [{
                         field: 'DID',
                         title: '設備ID'
