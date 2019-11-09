@@ -1,0 +1,40 @@
+body{
+    background-color: #e5e5e5;
+}
+.navbar-nav li > a:hover, #topheader .navbar-nav li > a:focus {
+    background-color: #999;
+    color: #fff;
+    line-height: 40px;
+}
+
+.navbar-nav li.active > a {
+    background-color: #fff;
+    line-height: 40px;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: #f2f2f2;
+    line-height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
+    color: #000000;
+    line-height: 40px;
+}
+
+.navbar-dark .navbar-brand{
+    line-height: 40px;
+}
+.card{
+    padding: 10px;
+    margin: 10px auto;
+}
+
+/*.loader { position: relative; width: 60px; height: 60px; border-radius: 50%; margin: 75px; display: inline-block; vertical-align: middle; }
+.loader-star { position: absolute; top: calc(50% - 12px); }
+.loader-7 .line { width: 8px; position: absolute; border-radius: 5px; bottom: 0; background: -webkit-gradient(linear, left top, left bottom, from(#1ee95d), to(#5714ce)); background: -webkit-linear-gradient(top, #1ee95d, #5714ce); background: linear-gradient(to bottom, #1ee95d, #5714ce); }
+.loader-7 .line1 { left: 0; -webkit-animation: line-grow 0.5s ease alternate infinite; animation: line-grow 0.5s ease alternate infinite; }
+.loader-7 .line2 { left: 20px; -webkit-animation: line-grow 0.5s 0.2s ease alternate infinite; animation: line-grow 0.5s 0.2s ease alternate infinite; }
+.loader-7 .line3 { left: 40px; -webkit-animation: line-grow 0.5s 0.4s ease alternate infinite; animation: line-grow 0.5s 0.4s ease alternate infinite; }*/
