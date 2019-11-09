@@ -33,6 +33,7 @@ function OnHashchangeListener() {
                     classes: "table table-bordered table-striped table-sm",
                     striped: true,
                     pagination: true,
+                    uniqueId:'DID',
                     pageNumber: 1,
                     pageSize: 10,
                     pageList: [10, 25, 50, 100],
@@ -67,6 +68,13 @@ function OnHashchangeListener() {
                     }, {
                         field: 'LastModified',
                         title: '最後修改時間'
+                    }, {
+                        field: 'operating',
+                        title: '操作',
+                        width:135,
+                        formatter: '<button id="device_table_update" class="btn btn-info">登錄</button>' +
+                            '&nbsp;<button id="device_table_manage" class="btn btn-success">管理</button>',
+                        events:operateEvents
                     }]
                 });
             });
@@ -386,3 +394,22 @@ function PermissionCheck(NeedPermission, isAlert) {
         return false;
     }
 }
+
+window.operateEvents = {
+    'click #device_table_update': function (e, value, row, index) {
+        // e      Event
+        // value  undefined
+        // row    rowdata
+        // index  row
+        console.log("update");
+        var DID=row['DID'];
+        console.log(DID);
+        //TODO update
+    },
+    'click #device_table_manage': function (e, value, row, index) {
+        console.log("update");
+        var DID=row['DID'];
+        console.log(DID);
+        //TODO manage
+    }
+};
