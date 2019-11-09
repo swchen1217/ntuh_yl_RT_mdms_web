@@ -90,7 +90,7 @@ function OnHashchangeListener() {
     }
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
         $('#Content_User_manage').show();
-        // todo
+        // todo get user data
     }
     if (hash == '#ChangePw') {
         $('#Content_Change_pw').show();
