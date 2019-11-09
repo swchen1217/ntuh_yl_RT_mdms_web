@@ -5,7 +5,6 @@ function SyncDeviceTable(AlertDialog) {
         LastSync = localStorage.getItem("device_tb_LastSync");
     else
         LastSync = "2019-01-01 00:00:00";
-    // TODO
     $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
         data: "mode=sync_device_tb_download&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw") + "&LastModified=" + LastSync,
@@ -46,7 +45,6 @@ function SyncDeviceTable(AlertDialog) {
                         });
                     }
                 }
-                // TODO AlertDialog Time
                 if(AlertDialog){
                     $.alert({
                         title: '成功',
