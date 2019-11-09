@@ -8,54 +8,92 @@ function OnHashchangeListener() {
     change_pages(hash);
     HideAlert();
     if (hash == '' && login_check()) {
-        if(PermissionCheck(1,true)){
+        if (PermissionCheck(1, true)) {
 
         }
     }
     if (hash == '#UpdateStatus' && login_check()) {
-        if(PermissionCheck(2,true)){
+        if (PermissionCheck(2, true)) {
 
         }
     }
     if (hash == '#InquireStatus' && login_check()) {
-        if(PermissionCheck(1,true)){
+        if (PermissionCheck(1, true)) {
             //TODO
-            var sql=new WebSql();
-            sql.select("device_tb","*","where 1",function (result) {
-                var jsonA=[];
-                for(let i=0;i<result.length;i++){
+            var sql = new WebSql();
+            sql.select("device_tb", "*", "where 1", function (result) {
+                var jsonA = [];
+                for (let i = 0; i < result.length; i++) {
                     jsonA.push(result[i]);
                 }
                 console.log(jsonA);
-                /*$('#table_device').bootstrapTable({
-                    url:jsonA
-                });*/
+                $('#table_device').bootstrapTable({
+                    data: jsonA,
+                    dataType: "json",
+                    striped: true,
+                    pagination: true,
+                    pageNumber:1,
+                    pageSize: 10,
+                    pageList: [10, 25, 50, 100],
+                    search: true,
+                    sortName:'DID',
+                    showColumns : true, //顯示/隱藏哪些欄位
+                    showToggle : true, //名片式/table式切換
+                    showPaginationSwitch : true, //分頁/不分頁切換
+                    showRefresh : true, //重新整理
+                    columns: [{
+                        field: 'DID',
+                        title: '設備ID'
+                    }, {
+                        field: 'category',
+                        title: '分類'
+                    }, {
+                        field: 'model',
+                        title: '型號'
+                    }, {
+                        field: 'number',
+                        title: '編號'
+                    }, {
+                        field: 'user',
+                        title: '使用者',
+                        //align:'center'
+                    }, {
+                        field: 'position',
+                        title: '位置'
+                    }, {
+                        field: 'status',
+                        title: '狀態'
+                    }, {
+                        field: 'LastModified',
+                        title: '最後修改時間'
+                    }]
+                });
             });
 
         }
     }
     if (hash == '#Log' && login_check()) {
-        if(PermissionCheck(3,true)){
+        if (PermissionCheck(3, true)) {
 
         }
     }
     if (hash == '#Repair' && login_check()) {
-        if(PermissionCheck(2,true)){
+        if (PermissionCheck(2, true)) {
 
         }
     }
     if (hash == '#MaintenanceCheck' && login_check()) {
-        if(PermissionCheck(2,true)){
+        if (PermissionCheck(2, true)) {
 
         }
     }
     if (hash == '#DeviceManage' && login_check()) {
-        if(PermissionCheck(4,true)){
+        if (PermissionCheck(4, true)) {
 
         }
     }
     if (hash == '#UserManage' && login_check()) {
-        if(PermissionCheck(5,true)){
+        if (PermissionCheck(5, true)) {
 
         }
     }
@@ -331,19 +369,18 @@ function FormSubmitListener() {
 
 }
 
-function PermissionCheck(NeedPermission,isAlert) {
+function PermissionCheck(NeedPermission, isAlert) {
     HideAlert();
-    var LIP=$.cookie("LoginInfoPermission");
-    console.log("LPT:"+LIP);
-    console.log("NeedPermission:"+NeedPermission);
-    if(LIP>=NeedPermission){
+    var LIP = $.cookie("LoginInfoPermission");
+    console.log("LPT:" + LIP);
+    console.log("NeedPermission:" + NeedPermission);
+    if (LIP >= NeedPermission) {
         console.log("Pass");
         return true;
-    }
-    else{
+    } else {
         console.log("NoPass");
-        if(isAlert){
-            ShowAlart('alert-warning', "您的權限不足!!<br>您的權限："+LIP+"<br>所需權限："+NeedPermission,true,false);
+        if (isAlert) {
+            ShowAlart('alert-warning', "您的權限不足!!<br>您的權限：" + LIP + "<br>所需權限：" + NeedPermission, true, false);
         }
         return false;
     }
