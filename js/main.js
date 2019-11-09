@@ -404,14 +404,12 @@ window.operateEvents = {
         console.log("update");
         var DID=row['DID'];
         console.log(DID);
-        //TODO update
         location.href='?DID='+DID+'#UpdateStatus';
     },
     'click #device_table_manage': function (e, value, row, index) {
         console.log("update");
         var DID=row['DID'];
         console.log(DID);
-        //TODO manage
         location.href='?DID='+DID+'#DeviceManage';
     }
 };
