@@ -5,108 +5,95 @@ function OnHashchangeListener() {
         $(".nav").find(".active").removeClass("active");
         $("a[href='" + hash + "']").parent().addClass('active');
     }
-    change_pages(hash);
+    //change_pages(hash);
+    $("div[id^='Content_']").hide();
     HideAlert();
-    if (hash == '' && login_check()) {
-        if (PermissionCheck(1, true)) {
 
-        }
+    if (hash == '' && login_check() && PermissionCheck(1, true)) {
+        $('#Content_Dashboard').show();
     }
-    if (hash == '#UpdateStatus' && login_check()) {
-        if (PermissionCheck(2, true)) {
-
-        }
+    if (hash == '#UpdateStatus' && login_check() && PermissionCheck(2, true)) {
+        $('#Content_Enter_status').show();
     }
-    if (hash == '#InquireStatus' && login_check()) {
-        if (PermissionCheck(1, true)) {
-            //TODO
-            var sql = new WebSql();
-            sql.select("device_tb", "*", "where 1", function (result) {
-                var jsonA = [];
-                for (let i = 0; i < result.length; i++) {
-                    jsonA.push(result[i]);
-                }
-                console.log(jsonA);
-                $('#table_device').bootstrapTable({
-                    data: jsonA,
-                    dataType: "json",
-                    classes: "table table-bordered table-striped table-sm",
-                    striped: true,
-                    pagination: true,
-                    uniqueId:'DID',
-                    pageNumber: 1,
-                    pageSize: 10,
-                    pageList: [10, 25, 50, 100],
-                    search: true,
-                    sortName: 'DID',
-                    showColumns: true,
-                    showToggle: true,
-                    showPaginationSwitch: true,
-                    showFullscreen: true,
-                    columns: [{
-                        field: 'DID',
-                        title: '設備ID'
-                    }, {
-                        field: 'category',
-                        title: '分類'
-                    }, {
-                        field: 'model',
-                        title: '型號'
-                    }, {
-                        field: 'number',
-                        title: '編號'
-                    }, {
-                        field: 'user',
-                        title: '使用者',
-                        //align:'center'
-                    }, {
-                        field: 'position',
-                        title: '位置'
-                    }, {
-                        field: 'status',
-                        title: '狀態'
-                    }, {
-                        field: 'LastModified',
-                        title: '最後修改時間'
-                    }, {
-                        field: 'operating',
-                        title: '操作',
-                        width:135,
-                        formatter: '<button id="device_table_update" class="btn btn-info">登錄</button>' +
-                            '&nbsp;<button id="device_table_manage" class="btn btn-success">管理</button>',
-                        events:operateEvents
-                    }]
-                });
+    if (hash == '#InquireStatus' && login_check() && PermissionCheck(1, true)) {
+        $('#Content_Inquire_status').show();
+        var sql = new WebSql();
+        sql.select("device_tb", "*", "where 1", function (result) {
+            var jsonA = [];
+            for (let i = 0; i < result.length; i++) {
+                jsonA.push(result[i]);
+            }
+            console.log(jsonA);
+            $('#table_device').bootstrapTable({
+                data: jsonA,
+                dataType: "json",
+                classes: "table table-bordered table-striped table-sm",
+                striped: true,
+                pagination: true,
+                uniqueId: 'DID',
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100],
+                search: true,
+                sortName: 'DID',
+                showColumns: true,
+                showToggle: true,
+                showPaginationSwitch: true,
+                showFullscreen: true,
+                columns: [{
+                    field: 'DID',
+                    title: '設備ID'
+                }, {
+                    field: 'category',
+                    title: '分類'
+                }, {
+                    field: 'model',
+                    title: '型號'
+                }, {
+                    field: 'number',
+                    title: '編號'
+                }, {
+                    field: 'user',
+                    title: '使用者',
+                    //align:'center'
+                }, {
+                    field: 'position',
+                    title: '位置'
+                }, {
+                    field: 'status',
+                    title: '狀態'
+                }, {
+                    field: 'LastModified',
+                    title: '最後修改時間'
+                }, {
+                    field: 'operating',
+                    title: '操作',
+                    width: 135,
+                    formatter: '<button id="device_table_update" class="btn btn-info">登錄</button>' +
+                        '&nbsp;<button id="device_table_manage" class="btn btn-success">管理</button>',
+                    events: operateEvents
+                }]
             });
-
-        }
+        });
     }
-    if (hash == '#Log' && login_check()) {
-        if (PermissionCheck(3, true)) {
-
-        }
+    if (hash == '#Log' && login_check() && PermissionCheck(3, true)) {
+        $('#Content_Log').show();
     }
-    if (hash == '#Repair' && login_check()) {
-        if (PermissionCheck(2, true)) {
-
-        }
+    if (hash == '#Repair' && login_check() && PermissionCheck(2, true)) {
+        $('#Content_Fix').show();
     }
-    if (hash == '#MaintenanceCheck' && login_check()) {
-        if (PermissionCheck(2, true)) {
-
-        }
+    if (hash == '#MaintenanceCheck' && login_check() && PermissionCheck(2, true)) {
+        $('#Content_Maintenance_check').show();
     }
-    if (hash == '#DeviceManage' && login_check()) {
-        if (PermissionCheck(4, true)) {
-
-        }
+    if (hash == '#DeviceManage' && login_check() && PermissionCheck(4, true)) {
+        $('#Content_Device_manage').show();
     }
-    if (hash == '#UserManage' && login_check()) {
-        if (PermissionCheck(5, true)) {
-
-        }
+    if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
+        $('#Content_User_manage').show();
+        // todo
     }
     if (hash == '#ChangePw') {
+        $('#Content_Change_pw').show();
         console.log(location.href);
         var getURl = new URL(location.href);
         token = getURl.searchParams.get('token');
@@ -402,14 +389,14 @@ window.operateEvents = {
         // row    rowdata
         // index  row
         console.log("update");
-        var DID=row['DID'];
+        var DID = row['DID'];
         console.log(DID);
-        location.href='?DID='+DID+'#UpdateStatus';
+        location.href = '?DID=' + DID + '#UpdateStatus';
     },
     'click #device_table_manage': function (e, value, row, index) {
         console.log("update");
-        var DID=row['DID'];
+        var DID = row['DID'];
         console.log(DID);
-        location.href='?DID='+DID+'#DeviceManage';
+        location.href = '?DID=' + DID + '#DeviceManage';
     }
 };
