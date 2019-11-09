@@ -154,29 +154,6 @@ function login_check() {
     }
 }
 
-function change_pages(hash) {
-    $("div[id^='Content_']").hide();
-
-    if (hash == '')
-        $('#Content_Dashboard').show();
-    if (hash == '#UpdateStatus')
-        $('#Content_Enter_status').show();
-    if (hash == '#InquireStatus')
-        $('#Content_Inquire_status').show();
-    if (hash == '#Log')
-        $('#Content_Log').show();
-    if (hash == '#Repair')
-        $('#Content_Fix').show();
-    if (hash == '#MaintenanceCheck')
-        $('#Content_Maintenance_check').show();
-    if (hash == '#DeviceManage')
-        $('#Content_Device_manage').show();
-    if (hash == '#UserManage')
-        $('#Content_User_manage').show();
-    if (hash == '#ChangePw')
-        $('#Content_Change_pw').show();
-}
-
 function FormSubmitListener() {
     $('#form-HasToken').submit(function () {
         HideAlert();
