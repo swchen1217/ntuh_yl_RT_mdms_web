@@ -176,7 +176,8 @@ function OnHashchangeListener() {
         var getURl = new URL(location.href);
         if(getURl.searchParams.has('acc')){
             var acc = getURl.searchParams.get('acc');
-
+            var users=JSON.parse($.cookie("AlluUserData"));
+            console.log(users);
         }else{
 
         }
