@@ -423,6 +423,11 @@ function FormSubmitListener() {
         }
         return false;
     });
+    $('#form-chguser').submit(function () {
+        HideAlert();
+        //TODO
+        return false;
+    });
 
 }
 
