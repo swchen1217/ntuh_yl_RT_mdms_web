@@ -147,7 +147,9 @@ function OnHashchangeListener() {
                             '4 裝置管理<br>' +
                             '5 使用者管理<br>' +
                             '6-8 狀態登錄<br>' +
-                            '9 管理員" style="margin-left: 3px"></i>'
+                            '9 管理員<br>' +
+                            '若擁有權限>=所需權限<br>' +
+                            '皆可使用" style="margin-left: 3px"></i>'
                     }, {
                         field: 'email',
                         title: 'E-mail',
