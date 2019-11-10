@@ -1,3 +1,8 @@
+function init() {
+    StatusStr = ["無狀態", "使用中", "倉庫", "維修中", "保養中"];
+    PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
+}
+
 function OnHashchangeListener() {
     var hash = location.hash;
     console.log(hash);
@@ -23,7 +28,6 @@ function OnHashchangeListener() {
 
         SyncDeviceTable(false);
 
-        var StatusStr = ["無狀態", "使用中", "倉庫", "維修中", "保養中"];
         var sql = new WebSql();
         sql.select("device_tb", "*", "where 1", function (result) {
             var jsonA = [];
