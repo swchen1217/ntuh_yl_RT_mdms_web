@@ -30,15 +30,15 @@
 
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
     <!-- My js -->
     <script src="js/alert.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/db.js"></script>
     <script src="js/WebSql.js"></script>
 </head>
 <body>
-<div class="jumbotron text-center" style="margin-bottom:0;padding-top: 20px;padding-bottom: 20px;">
+<div class="jumbotron text-center" id="title_bar" style="margin-bottom:0;padding-top: 20px;padding-bottom: 20px;">
     <div class="container">
         <h1>NTUH.YL 醫療儀器管理系統</h1>
         <h4>NTUH.YL Medical Device Manage System</h4>
@@ -174,7 +174,9 @@
         <div id="Content_User_manage">
             <div class="row" id="row-user-list">
                 <!-- TODO user list -->
-                <table id="table_user"></table>
+                <div class="container">
+                    <table id="table_user"></table>
+                </div>
             </div>
             <div class="row" id="row-user-operate">
                 <div class="col-md-6">
