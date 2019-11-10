@@ -138,7 +138,16 @@ function OnHashchangeListener() {
                         title: '名稱'
                     }, {
                         field: 'permission',
-                        title: '權限<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" data-html="true" title="權限說明:<br>1" style="margin-left: 3px"></i>'
+                        title: '權限<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" data-html="true" ' +
+                            'title="<h6>權限說明：</h6>' +
+                            '0 未啟用<br>' +
+                            '1 狀態查詢<br>' +
+                            '2 狀態登錄<br>' +
+                            '3 紀錄查看<br>' +
+                            '4 裝置管理<br>' +
+                            '5 使用者管理<br>' +
+                            '6-8 狀態登錄<br>' +
+                            '9 管理員" style="margin-left: 3px"></i>'
                     }, {
                         field: 'email',
                         title: 'E-mail',
