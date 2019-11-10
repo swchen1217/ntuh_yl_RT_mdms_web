@@ -111,7 +111,11 @@ function OnHashchangeListener() {
             data: "mode=get_user_list&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw"),
             type: "POST",
             success: function (msg) {
+                var PermissionStr=[""];
                 var jsonA = JSON.parse(msg);
+                for(let i=0;i<jsonA.length;i++){
+                    jsonA[i]['permission']+="p";
+                }
                 console.log(jsonA);
                 $('#table_user').bootstrapTable({
                     data: jsonA,
