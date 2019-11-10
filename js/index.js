@@ -477,6 +477,7 @@ function FormSubmitListener() {
                 var ConfrimContent="";
                 var chguserParams="";
                 ConfrimContent+="欲修改資訊如下 請確認:<br>帳號: "+acc+"<br>";
+                chguserParams+="&operate_acc="+acc;
                 if(n_name!=""){
                     chguserParams+="&new_name="+n_name;
                     ConfrimContent+="名稱: <var>"+old_name+"</var> 更改為 <var>"+n_name+"</var><br>";
@@ -492,7 +493,6 @@ function FormSubmitListener() {
                 if(n_pw!=""){
                     if(n_pw!='' && n_pw_re!=''){
                         if(n_pw==n_pw_re){
-                            //todo MD5
                             var create_time=moment(userinfo['created']).format('YYYYMMDDHHmmss');
                             var mMD5=md5(create_time+n_pw);
                             chguserParams+="&new_pw="+mMD5;
@@ -527,6 +527,23 @@ function FormSubmitListener() {
                                 HideAlert();
                                 //TODO ajax
                                 console.log(chguserParams);
+                                $.ajax({
+                                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                                    data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw")+chguserParams,
+                                    type: "POST",
+                                    success: function (msg) {
+
+                                    },
+                                    error: function (xhr) {
+                                        console.log('ajax er');
+                                        $.alert({
+                                            title: '錯誤',
+                                            content: 'Ajax 發生錯誤',
+                                            type: 'red',
+                                            typeAnimated: true
+                                        });
+                                    }
+                                });
                             }
                         },
                         cancel: {
