@@ -138,7 +138,7 @@ function OnHashchangeListener() {
                         title: '名稱'
                     }, {
                         field: 'permission',
-                        title: '權限'
+                        title: '權限<i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" data-html="true" title="權限說明:<br>1" style="margin-left: 3px"></i>'
                     }, {
                         field: 'email',
                         title: 'E-mail',
@@ -147,6 +147,7 @@ function OnHashchangeListener() {
                         title: '建立時間',
                     }]
                 });
+                $('[data-toggle="tooltip"]').tooltip();
             },
             error: function (xhr) {
                 console.log('ajax er');
