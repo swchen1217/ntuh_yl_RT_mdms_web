@@ -446,6 +446,18 @@ function FormSubmitListener() {
         var n_email=$('#chguser-InputEmail').val();
         var n_pw=$('#chguser-InputPw').val();
         var n_pw_re=$('#chguser-InputPwRe').val();
+        var users=JSON.parse($.cookie("AllUserData"));
+        var userinfo;
+        for(let i=0;i<users.length;i++){
+            if(users[i]['account']==acc){
+                userinfo=users[i];
+                break;
+            }
+        }
+        var old_name=userinfo['name'];
+        var old_permission=userinfo['permission'];
+        var old_email=userinfo['email'];
+
         if(acc==null){
             $.alert({
                 title: '錯誤',
@@ -467,38 +479,43 @@ function FormSubmitListener() {
                 ConfrimContent+="欲修改資訊如下 請確認:<br>帳號: "+acc+"<br>";
                 if(n_name!=""){
                     chguserParams+="&new_name="+n_name;
-                    ConfrimContent+="名稱: <var>"+$('#chguser-ShowName').val()+"</var> 更改為 <var>"+n_name+"</var><br>";
+                    ConfrimContent+="名稱: <var>"+old_name+"</var> 更改為 <var>"+n_name+"</var><br>";
                 }
                 if(n_permission!='-1'){
                     chguserParams+="&new_permission="+n_permission;
-                    ConfrimContent+="權限: <var>"+$('#chguser-ShowPermission').val()+"("+PermissionStr[$('#chguser-ShowPermission').val()]+")</var> 更改為 <var>"+n_permission+"("+PermissionStr[n_permission]+")</var><br>";
+                    ConfrimContent+="權限: <var>"+old_permission+"("+PermissionStr[old_permission]+")</var> 更改為 <var>"+n_permission+"("+PermissionStr[n_permission]+")</var><br>";
                 }
                 if(n_email!=""){
                     chguserParams+="&new_email="+n_email;
+                    ConfrimContent+="E-mail: <var>"+old_email+"</var><br>更改為 <var>"+n_email+"</var><br>";
                 }
-
                 if(n_pw!=""){
-                    if(n_pw!='' || n_pw_re!=''){
+                    if(n_pw!='' && n_pw_re!=''){
                         if(n_pw==n_pw_re){
                             //todo MD5
+                            var create_time=moment(userinfo['created']).format('YYYYMMDDHHmmss');
+                            var mMD5=md5(create_time+n_pw);
+                            chguserParams+="&new_pw="+mMD5;
+                            ConfrimContent+="<b>密碼更改</b><br>";
                         }else{
                             $.alert({
                                 title: '錯誤',
-                                content: '密碼未輸入完整!!請重新輸入',
+                                content: '確認新密碼不符合!!請重新輸入',
                                 type: 'red',
                                 typeAnimated: true
                             });
+                            return false;
                         }
                     }else{
                         $.alert({
                             title: '錯誤',
-                            content: '確認新密碼不符合!!請重新輸入',
+                            content: '密碼未輸入完整!!請重新輸入',
                             type: 'red',
                             typeAnimated: true
                         });
+                        return false;
                     }
                 }
-
                 $.confirm({
                     title: '更改確認!',
                     content: ConfrimContent,
@@ -509,6 +526,7 @@ function FormSubmitListener() {
                             action:function () {
                                 HideAlert();
                                 //TODO ajax
+                                console.log(chguserParams);
                             }
                         },
                         cancel: {
