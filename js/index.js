@@ -132,7 +132,8 @@ function OnHashchangeListener() {
                     showPaginationSwitch: true,
                     columns: [{
                         field: 'account',
-                        title: '帳號(員工編號)'
+                        title: '帳號(員工編號)',
+                        formatter:LinkFormatter
                     }, {
                         field: 'name',
                         title: '名稱'
@@ -452,4 +453,8 @@ window.operateEvents = {
         location.href = '?DID=' + DID + '#DeviceManage';
     }
 };
+
+function LinkFormatter(value, row, index) {
+    return "<a href='?acc="+value+"#UserManage'>"+value+"</a>";
+}
 
