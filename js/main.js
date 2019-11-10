@@ -17,11 +17,14 @@ function OnHashchangeListener() {
     }
     if (hash == '#InquireStatus' && login_check() && PermissionCheck(1, true)) {
         $('#Content_Inquire_status').show();
+        var StatusStr = ["無狀態", "使用中","倉庫", "維修中", "保養中"];
         var sql = new WebSql();
         sql.select("device_tb", "*", "where 1", function (result) {
             var jsonA = [];
             for (let i = 0; i < result.length; i++) {
-                jsonA.push(result[i]);
+                var tmp=result[i];
+                tmp['status']=StatusStr[tmp['status']];
+                jsonA.push(tmp);
             }
             console.log(jsonA);
             $('#table_device').bootstrapTable({
