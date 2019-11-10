@@ -443,49 +443,76 @@ function FormSubmitListener() {
         var n_email=$('#chguser-InputEmail').val();
         var n_pw=$('#chguser-InputPw').val();
         var n_pw_re=$('#chguser-InputPwRe').val();
-        var ConfrimContent="";
-        $.confirm({
-            title: '更改確認!',
-            content: ConfrimContent,
-            buttons: {
-                confirm: {
-                    btnClass: 'btn-blue',
-                    action:function () {
-                        HideAlert();
-                        var chguserParams="";
-                        if(n_name!="")
-                            chguserParams+="&new_name="+n_name;
-                        if(n_permission!="")
-                            chguserParams+="&new_permission="+n_permission;
-                        if(n_email!="")
-                            chguserParams+="&new_email="+n_email;
-                        if(n_pw!=""){
-                            if(n_pw!='' || n_pw_re!=''){
-                                if(n_pw==n_pw_re){
-                                    //todo MD5
-                                }else{
-                                    $.alert({
-                                        title: '錯誤',
-                                        content: '密碼未輸入完整!!請重新輸入',
-                                        type: 'red',
-                                        typeAnimated: true
-                                    });
-                                }
-                            }else{
-                                $.alert({
-                                    title: '錯誤',
-                                    content: '確認新密碼不符合!!請重新輸入',
-                                    type: 'red',
-                                    typeAnimated: true
-                                });
+        if(acc==''){
+            $.alert({
+                title: '錯誤',
+                content: '尚未選擇欲更改之帳號',
+                type: 'red',
+                typeAnimated: true
+            });
+        }else{
+            if(n_name=='' && n_permission=='' && n_email=='' && n_pw==''){
+                $.alert({
+                    title: '錯誤',
+                    content: '無任何欲修改之資料',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }else{
+                var ConfrimContent="";
+                var chguserParams="";
+                ConfrimContent+="欲修改資訊如下 請確認";
+                if(n_name!=""){
+                    chguserParams+="&new_name="+n_name;
+                }
+                if(n_permission!=""){
+                    chguserParams+="&new_permission="+n_permission;
+                }
+                if(n_email!=""){
+                    chguserParams+="&new_email="+n_email;
+                }
+
+                if(n_pw!=""){
+                    if(n_pw!='' || n_pw_re!=''){
+                        if(n_pw==n_pw_re){
+                            //todo MD5
+                        }else{
+                            $.alert({
+                                title: '錯誤',
+                                content: '密碼未輸入完整!!請重新輸入',
+                                type: 'red',
+                                typeAnimated: true
+                            });
+                        }
+                    }else{
+                        $.alert({
+                            title: '錯誤',
+                            content: '確認新密碼不符合!!請重新輸入',
+                            type: 'red',
+                            typeAnimated: true
+                        });
+                    }
+                }
+
+                $.confirm({
+                    title: '更改確認!',
+                    content: ConfrimContent,
+                    buttons: {
+                        confirm: {
+                            text: '確認',
+                            btnClass: 'btn-blue',
+                            action:function () {
+                                HideAlert();
+                                //TODO ajax
                             }
+                        },
+                        cancel: {
+                            text: '取消'
                         }
                     }
-                },
-                cancel: function () {
-                }
+                });
             }
-        });
+        }
         return false;
     });
 
