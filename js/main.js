@@ -94,6 +94,23 @@ function OnHashchangeListener() {
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
         $('#Content_User_manage').show();
         // todo get user data
+        $.ajax({
+            url: "../ntuh_yl_RT_mdms_api/user.php",
+            data: "mode=get_user",
+            type: "POST",
+            success: function (msg) {
+
+            },
+            error: function (xhr) {
+                console.log('ajax er');
+                $.alert({
+                    title: '錯誤',
+                    content: 'Ajax 發生錯誤',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }
+        });
     }
     if (hash == '#ChangePw') {
         $('#Content_Change_pw').show();
