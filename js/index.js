@@ -525,14 +525,28 @@ function FormSubmitListener() {
                             btnClass: 'btn-blue',
                             action:function () {
                                 HideAlert();
-                                //TODO ajax
-                                console.log(chguserParams);
                                 $.ajax({
                                     url: "../ntuh_yl_RT_mdms_api/user.php",
                                     data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw")+chguserParams,
                                     type: "POST",
                                     success: function (msg) {
-
+                                        $('#chguser-InputName').val('');
+                                        $('#chguser-InputPermission').val(-1);
+                                        $('#chguser-InputEmail').val('');
+                                        $('#chguser-InputPw').val('');
+                                        $('#chguser-InputPwRe').val('');
+                                        if(msg=="ok"){
+                                            ShowAlart('alert-success', '修改成功', false, true);
+                                            if(acc==$.cookie("LoginInfoAcc")){
+                                                location.replace("./login.html")
+                                            }else{
+                                                setTimeout(function () {
+                                                    location.replace("./index.html#UserManage")
+                                                }, 1500);
+                                            }
+                                        }else{
+                                            ShowAlart('alert-danger', '錯誤!!', false, false);
+                                        }
                                     },
                                     error: function (xhr) {
                                         console.log('ajax er');
