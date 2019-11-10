@@ -105,7 +105,6 @@ function OnHashchangeListener() {
         $('#Content_User_manage').show();
         $("#title_bar").hide();
 
-        // todo get user data
         $.ajax({
             url: "../ntuh_yl_RT_mdms_api/user.php",
             data: "mode=get_user_list&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw"),
@@ -171,6 +170,15 @@ function OnHashchangeListener() {
                 });
             }
         });
+
+        // todo has acc
+        var getURl = new URL(location.href);
+        if(getURl.searchParams.has('acc')){
+            var acc = getURl.searchParams.get('acc');
+
+        }else{
+
+        }
     }
     if (hash == '#ChangePw') {
         $('#Content_Change_pw').show();
