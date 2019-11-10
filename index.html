@@ -184,7 +184,63 @@
                         <div class="card-header">
                             <h3 class="card-title">修改使用者</h3>
                         </div>
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <form role="form" class="form-my" id="form-chguser">
+                                <div class="form-group">
+                                    <label for="chguser-ShowAcc">帳號(員工編號)</label>
+                                    <input type="text" class="form-control-plaintext" id="chguser-ShowAcc" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chguser-ShowName">名稱</label>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="chguser-ShowName" readonly>
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="chguser-InputName" placeholder="修改名稱">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chguser-ShowName">權限</label>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <select class="custom-select" id="chguser-ShowPermission" disabled>
+                                                <option value="0">0(未啟用)</option>
+                                                <option value="1">1(狀態查詢)</option>
+                                                <option value="2">2(狀態登錄)</option>
+                                                <option value="3">3(紀錄查看)</option>
+                                                <option value="4">4(裝置管理)</option>
+                                                <option value="5">5(使用者管理)</option>
+                                                <option value="6">6(*)</option>
+                                                <option value="7">7(*)</option>
+                                                <option value="8">8(*)</option>
+                                                <option value="9">9(管理員)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select class="custom-select" id="chguser-InputPermission">
+                                                <option selected disabled>修改權限</option>
+                                                <option value="0">0(未啟用)</option>
+                                                <option value="1">1(狀態查詢)</option>
+                                                <option value="2">2(狀態登錄)</option>
+                                                <option value="3">3(紀錄查看)</option>
+                                                <option value="4">4(裝置管理)</option>
+                                                <option value="5">5(使用者管理)</option>
+                                                <option value="6">6(*)</option>
+                                                <option value="7">7(*)</option>
+                                                <option value="8">8(*)</option>
+                                                <option value="9">9(管理員)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">
+                                    送出
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -206,16 +262,16 @@
                     <div class="card-body">
                         <form role="form" class="form-my" id="form-HasToken">
                             <div class="form-group">
-                                <label for="InputOldPw">帳號</label>
+                                <label for="ShowAcc">帳號</label>
                                 <input type="text" class="form-control-plaintext" id="ShowAcc" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="InputNewPw">新密碼</label>
+                                <label for="InputNewPw_f">新密碼</label>
                                 <input type="password" class="form-control" id="InputNewPw_f" placeholder="請輸入新密碼"
                                        required>
                             </div>
                             <div class="form-group">
-                                <label for="InputNewPwRe">確認新密碼</label>
+                                <label for="InputNewPwRe_f">確認新密碼</label>
                                 <input type="password" class="form-control" id="InputNewPwRe_f" placeholder="請再次輸入新密碼"
                                        required>
                             </div>
