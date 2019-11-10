@@ -111,10 +111,10 @@ function OnHashchangeListener() {
             data: "mode=get_user_list&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw"),
             type: "POST",
             success: function (msg) {
-                var PermissionStr=[""];
+                var PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
                 var jsonA = JSON.parse(msg);
                 for(let i=0;i<jsonA.length;i++){
-                    jsonA[i]['permission']+="p";
+                    jsonA[i]['permission']+="("+PermissionStr[jsonA[i]['permission']]+")";
                 }
                 console.log(jsonA);
                 $('#table_user').bootstrapTable({
