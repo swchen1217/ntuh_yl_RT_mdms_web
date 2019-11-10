@@ -172,14 +172,24 @@ function OnHashchangeListener() {
             }
         });
 
-        // todo has acc
         var getURl = new URL(location.href);
         if(getURl.searchParams.has('acc')){
             var acc = getURl.searchParams.get('acc');
-            var users=JSON.parse($.cookie("AlluUserData"));
+            var users=JSON.parse($.cookie("AllUserData"));
             console.log(users);
-        }else{
-
+            var userinfo;
+            for(let i=0;i<users.length;i++){
+                if(users[i]['account']==acc){
+                    userinfo=users[i];
+                    break;
+                }
+            }
+            if(userinfo!=undefined){
+                $('#chguser-ShowAcc').val(userinfo['account']);
+                $('#chguser-ShowName').val(userinfo['name']);
+                $('#chguser-ShowPermission').val(userinfo['permission']);
+                $('#chguser-ShowEmail').val(userinfo['email']);
+            }
         }
     }
     if (hash == '#ChangePw') {
@@ -426,8 +436,56 @@ function FormSubmitListener() {
         return false;
     });
     $('#form-chguser').submit(function () {
-        HideAlert();
-        //TODO
+        var getURl = new URL(location.href);
+        var acc=getURl.searchParams.get('acc');
+        var n_name=$('#chguser-InputName').val();
+        var n_permission=$('#chguser-InputPermission').val();
+        var n_email=$('#chguser-InputEmail').val();
+        var n_pw=$('#chguser-InputPw').val();
+        var n_pw_re=$('#chguser-InputPwRe').val();
+        var ConfrimContent="";
+        $.confirm({
+            title: '更改確認!',
+            content: ConfrimContent,
+            buttons: {
+                confirm: {
+                    btnClass: 'btn-blue',
+                    action:function () {
+                        HideAlert();
+                        var chguserParams="";
+                        if(n_name!="")
+                            chguserParams+="&new_name="+n_name;
+                        if(n_permission!="")
+                            chguserParams+="&new_permission="+n_permission;
+                        if(n_email!="")
+                            chguserParams+="&new_email="+n_email;
+                        if(n_pw!=""){
+                            if(n_pw!='' || n_pw_re!=''){
+                                if(n_pw==n_pw_re){
+                                    //todo MD5
+                                }else{
+                                    $.alert({
+                                        title: '錯誤',
+                                        content: '密碼未輸入完整!!請重新輸入',
+                                        type: 'red',
+                                        typeAnimated: true
+                                    });
+                                }
+                            }else{
+                                $.alert({
+                                    title: '錯誤',
+                                    content: '確認新密碼不符合!!請重新輸入',
+                                    type: 'red',
+                                    typeAnimated: true
+                                });
+                            }
+                        }
+                    }
+                },
+                cancel: function () {
+                }
+            }
+        });
         return false;
     });
 
