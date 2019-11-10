@@ -353,6 +353,7 @@
 </body>
 <script>
     $(document).ready(function () {
+        init();
         OnHashchangeListener();
         $(".nav a").on("click", function () {
             $(".nav").find(".active").removeClass("active");
@@ -366,7 +367,6 @@
 
         var sql = new WebSql();
 
-        PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
     });
 </script>
 </html>
