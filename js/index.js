@@ -111,7 +111,6 @@ function OnHashchangeListener() {
             type: "POST",
             success: function (msg) {
                 $.cookie("AllUserData",msg);
-                var PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
                 var jsonA = JSON.parse(msg);
                 for(let i=0;i<jsonA.length;i++){
                     jsonA[i]['permission']+="("+PermissionStr[jsonA[i]['permission']]+")";
@@ -443,7 +442,7 @@ function FormSubmitListener() {
         var n_email=$('#chguser-InputEmail').val();
         var n_pw=$('#chguser-InputPw').val();
         var n_pw_re=$('#chguser-InputPwRe').val();
-        if(acc==''){
+        if(acc==null){
             $.alert({
                 title: '錯誤',
                 content: '尚未選擇欲更改之帳號',
@@ -451,7 +450,7 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         }else{
-            if(n_name=='' && n_permission=='' && n_email=='' && n_pw==''){
+            if(n_name=='' && n_permission=='-1' && n_email=='' && n_pw==''){
                 $.alert({
                     title: '錯誤',
                     content: '無任何欲修改之資料',
@@ -461,12 +460,14 @@ function FormSubmitListener() {
             }else{
                 var ConfrimContent="";
                 var chguserParams="";
-                ConfrimContent+="欲修改資訊如下 請確認";
+                ConfrimContent+="欲修改資訊如下 請確認:<br>帳號: "+acc+"<br>";
                 if(n_name!=""){
                     chguserParams+="&new_name="+n_name;
+                    ConfrimContent+="名稱: <var>"+$('#chguser-ShowName').val()+"</var> 更改為 <var>"+n_name+"</var><br>";
                 }
-                if(n_permission!=""){
+                if(n_permission!='-1'){
                     chguserParams+="&new_permission="+n_permission;
+                    ConfrimContent+="權限: <var>"+$('#chguser-ShowPermission').val()+"("+PermissionStr[$('#chguser-ShowPermission').val()]+")</var> 更改為 <var>"+n_permission+"("+PermissionStr[n_permission]+")</var><br>";
                 }
                 if(n_email!=""){
                     chguserParams+="&new_email="+n_email;
