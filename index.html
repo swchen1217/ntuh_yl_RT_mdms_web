@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="col">
                                             <select class="custom-select" id="chguser-InputPermission">
-                                                <option selected disabled>修改權限</option>
+                                                <option value="-1" selected>修改權限</option>
                                                 <option value="0">0(未啟用)</option>
                                                 <option value="1">1(狀態查詢)</option>
                                                 <option value="2">2(狀態登錄)</option>
@@ -365,6 +365,8 @@
         window.addEventListener('hashchange', OnHashchangeListener);
 
         var sql = new WebSql();
+
+        PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
     });
 </script>
 </html>
