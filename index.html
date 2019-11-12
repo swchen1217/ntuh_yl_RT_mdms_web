@@ -257,7 +257,47 @@
                         <div class="card-header">
                             <h3 class="card-title">新增使用者</h3>
                         </div>
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <form role="form" class="form-my" id="form-newuser">
+                                <div class="form-group">
+                                    <label for="newuser-InputAcc">帳號(員工編號)</label>
+                                    <input type="text" class="form-control" id="newuser-InputAcc" placeholder="輸入帳號" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newuser-InputName">名稱</label>
+                                    <input type="text" class="form-control" id="newuser-InputName" placeholder="輸入名稱" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newuser-InputPermission">權限</label>
+                                    <select class="custom-select" id="newuser-InputPermission" required>
+                                        <option value="-1" selected>設定權限</option>
+                                        <option value="0">0(未啟用)</option>
+                                        <option value="1">1(狀態查詢)</option>
+                                        <option value="2">2(狀態登錄)</option>
+                                        <option value="3">3(紀錄查看)</option>
+                                        <option value="4">4(裝置管理)</option>
+                                        <option value="5">5(使用者管理)</option>
+                                        <option value="6">6(*)</option>
+                                        <option value="7">7(*)</option>
+                                        <option value="8">8(*)</option>
+                                        <option value="9">9(管理員)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newuser-InputEmail">E-mail</label>
+                                    <input type="email" class="form-control" id="newuser-InputEmail" placeholder="輸入E-mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newuser-InputPw">密碼</label>
+                                    <input type="password" class="form-control" id="newuser-InputPw" placeholder="設定密碼">
+                                    <input type="password" class="form-control" id="newuser-InputPwRe" placeholder="確認新密碼">
+                                </div>
+
+                                <button type="submit" class="btn btn-default btn-primary btn-block" style="margin-top: 8px">
+                                    送出
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
