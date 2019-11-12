@@ -596,12 +596,12 @@ function FormSubmitListener() {
                                     data: "mode=newuser" +
                                         "&acc=" + $.cookie("LoginInfoAcc")+
                                         "&pw=" + $.cookie("LoginInfoPw")+
-                                        "&$operate_acc="+n_acc+
+                                        "&operate_acc="+n_acc+
                                         "&new_name="+n_name+
                                         "&new_permission="+n_permission+
                                         "&new_email="+n_email+
                                         "&new_pw="+mMD5+
-                                        "&nwe_create_time="+create_time2
+                                        "&new_create_time="+create_time2
                                     ,
                                     type: "POST",
                                     success: function (msg) {
