@@ -569,6 +569,93 @@ function FormSubmitListener() {
         }
         return false;
     });
+    $('#form-newuser').submit(function () {
+        var n_acc=$('#newuser-InputAcc').val();
+        var n_name=$('#newuser-InputName').val();
+        var n_permission=$('#newuser-InputPermission').val();
+        var n_email=$('#newuser-InputEmail').val();
+        var n_pw=$('#newuser-InputPw').val();
+        var n_pw_re=$('#newuser-InputPwRe').val();
+        if(n_acc!='' && n_name!='' && n_email!='' && n_permission!='-1' && n_pw!='' && n_pw_re!=''){
+            if(n_pw==n_pw_re){
+                //todo ajax
+                var create_time=moment().format('YYYYMMDDHHmmss');
+                var create_time2=moment().format('YYYY-MM-DD HH:mm:ss');
+                var mMD5=md5(create_time+n_pw);
+                $.confirm({
+                    title: '新增帳號!!',
+                    content: '確認新增此帳號??',
+                    buttons: {
+                        confirm: {
+                            text: '確認',
+                            btnClass: 'btn-blue',
+                            action:function () {
+                                HideAlert();
+                                $.ajax({
+                                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                                    data: "mode=newuser" +
+                                        "&acc=" + $.cookie("LoginInfoAcc")+
+                                        "&pw=" + $.cookie("LoginInfoPw")+
+                                        "&$operate_acc="+n_acc+
+                                        "&new_name="+n_name+
+                                        "&new_permission="+n_permission+
+                                        "&new_email="+n_email+
+                                        "&new_pw="+mMD5+
+                                        "&nwe_create_time="+create_time2
+                                    ,
+                                    type: "POST",
+                                    success: function (msg) {
+                                        $('#newuser-InputAcc').val('');
+                                        $('#newuser-InputPermission').val(-1);
+                                        $('#newuser-InputName').val('');
+                                        $('#newuser-InputEmail').val('');
+                                        $('#newuser-InputPw').val('');
+                                        $('#newuser-InputPwRe').val('');
+                                        if(msg=="ok")
+                                            ShowAlart('alert-success', '新增成功', false, true);
+                                        else
+                                            ShowAlart('alert-danger', '錯誤!!', false, false);
+                                    },
+                                    error: function (xhr) {
+                                        console.log('ajax er');
+                                        $.alert({
+                                            title: '錯誤',
+                                            content: 'Ajax 發生錯誤',
+                                            type: 'red',
+                                            typeAnimated: true
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: '取消'
+                        }
+                    }
+                });
+            }else{
+                $.alert({
+                    title: '錯誤',
+                    content: '確認新密碼不符合!!請重新輸入',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            }
+        }else{
+            $.alert({
+                title: '錯誤',
+                content: '輸入未完整!!',
+                type: 'red',
+                typeAnimated: true
+            });
+        }
+
+
+
+        return false;
+    });
+
+
 
 }
 
