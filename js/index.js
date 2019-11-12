@@ -446,17 +446,6 @@ function FormSubmitListener() {
         var n_email=$('#chguser-InputEmail').val();
         var n_pw=$('#chguser-InputPw').val();
         var n_pw_re=$('#chguser-InputPwRe').val();
-        var users=JSON.parse($.cookie("AllUserData"));
-        var userinfo;
-        for(let i=0;i<users.length;i++){
-            if(users[i]['account']==acc){
-                userinfo=users[i];
-                break;
-            }
-        }
-        var old_name=userinfo['name'];
-        var old_permission=userinfo['permission'];
-        var old_email=userinfo['email'];
 
         if(acc==null){
             $.alert({
@@ -466,6 +455,17 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         }else{
+            var users=JSON.parse($.cookie("AllUserData"));
+            var userinfo;
+            for(let i=0;i<users.length;i++){
+                if(users[i]['account']==acc){
+                    userinfo=users[i];
+                    break;
+                }
+            }
+            var old_name=userinfo['name'];
+            var old_permission=userinfo['permission'];
+            var old_email=userinfo['email'];
             if(n_name=='' && n_permission=='-1' && n_email=='' && n_pw==''){
                 $.alert({
                     title: '錯誤',
