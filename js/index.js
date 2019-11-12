@@ -615,6 +615,7 @@ function FormSubmitListener() {
                                             ShowAlart('alert-success', '新增成功', false, true);
                                         else
                                             ShowAlart('alert-danger', '錯誤!!', false, false);
+                                        location.replace("./index.html#UserManage");
                                     },
                                     error: function (xhr) {
                                         console.log('ajax er');
@@ -649,9 +650,6 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         }
-
-
-
         return false;
     });
 
