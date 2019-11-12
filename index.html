@@ -400,6 +400,11 @@
             $("#navbarToggler").collapse('hide');
         });
 
+        if($.cookie('LoginInfoPw')==undefined)
+            $('#btn_logio').text("登入");
+        else
+            $('#btn_logio').text($.cookie('LoginInfoName')+"/登出");
+
         FormSubmitListener();
 
         window.addEventListener('hashchange', OnHashchangeListener);
