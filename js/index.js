@@ -655,7 +655,57 @@ function FormSubmitListener() {
 
 function ButtonOnClickListener() {
     $('#btn_chguser-del').click(function () {
-
+        var getURl = new URL(location.href);
+        var acc=getURl.searchParams.get('acc');
+        if(acc==null){
+            $.alert({
+                title: '錯誤',
+                content: '尚未選擇欲刪除之帳號',
+                type: 'red',
+                typeAnimated: true
+            });
+        }else{
+            var users=JSON.parse($.cookie("AllUserData"));
+            var userinfo;
+            for(let i=0;i<users.length;i++){
+                if(users[i]['account']==acc){
+                    userinfo=users[i];
+                    break;
+                }
+            }
+            var name=userinfo['name'];
+            $.confirm({
+                title: '確認刪除!!',
+                content: '' +
+                    '<form>' +
+                    '<div class="form-group">' +
+                    '即將刪除:'+acc+'('+name+')'+
+                    '<label>請再次輸入你的密碼確認刪除此帳號</label>' +
+                    '<input type="password" placeholder="輸入密碼" class="pw form-control" required/>' +
+                    '</div>' +
+                    '</form>',
+                type:'red',
+                autoClose: 'cancel|10000',
+                buttons: {
+                    formSubmit: {
+                        text: '刪除',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            var pw = this.$content.find('.pw').val();
+                            if(pw!=''){
+                                $.alert('ajax');
+                            }else{
+                                $.alert('未輸入密碼');
+                                return false;
+                            }
+                        }
+                    },
+                    cancel: {
+                        text: '取消'
+                    },
+                }
+            });
+        }
     });
 }
 
