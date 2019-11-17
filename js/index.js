@@ -651,9 +651,12 @@ function FormSubmitListener() {
         }
         return false;
     });
+}
 
+function ButtonOnClickListener() {
+    $('#btn_chguser-del').click(function () {
 
-
+    });
 }
 
 function PermissionCheck(NeedPermission, isAlert) {
