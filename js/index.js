@@ -693,7 +693,53 @@ function ButtonOnClickListener() {
                         action: function () {
                             var pw = this.$content.find('.pw').val();
                             if(pw!=''){
-                                $.alert('ajax');
+                                $.ajax({
+                                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                                    data: "mode=get_create_time" +
+                                        "&acc=" + $.cookie("LoginInfoAcc"),
+                                    type: "POST",
+                                    success: function (msg) {
+                                        if(msg!='no_acc'){
+                                            mMd5=md5(msg+pw);
+                                            if(mMd5==$.cookie("LoginInfoPw")){
+                                                /*$.ajax({
+                                                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                                                    data: "mode=get_create_time" +
+                                                        "&acc=" + $.cookie("LoginInfoAcc"),
+                                                    type: "POST",
+                                                    success: function (msg) {
+
+                                                    },
+                                                    error: function (xhr) {
+                                                        console.log('ajax er');
+                                                        $.alert({
+                                                            title: '錯誤',
+                                                            content: 'Ajax 發生錯誤',
+                                                            type: 'red',
+                                                            typeAnimated: true
+                                                        });
+                                                    }
+                                                });*/
+                                                $.alert('ajax2');
+                                            }else{
+                                                $.alert('密碼錯誤');
+                                                return false;
+                                            }
+                                        }else{
+                                            $.alert('錯誤');
+                                            return false;
+                                        }
+                                    },
+                                    error: function (xhr) {
+                                        console.log('ajax er');
+                                        $.alert({
+                                            title: '錯誤',
+                                            content: 'Ajax 發生錯誤',
+                                            type: 'red',
+                                            typeAnimated: true
+                                        });
+                                    }
+                                });
                             }else{
                                 $.alert('未輸入密碼');
                                 return false;
