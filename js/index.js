@@ -702,13 +702,27 @@ function ButtonOnClickListener() {
                                         if(msg!='no_acc'){
                                             mMd5=md5(msg+pw);
                                             if(mMd5==$.cookie("LoginInfoPw")){
-                                                /*$.ajax({
+                                                $.ajax({
                                                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                                                    data: "mode=get_create_time" +
-                                                        "&acc=" + $.cookie("LoginInfoAcc"),
+                                                    data: "mode=deluser" +
+                                                        "&acc=" + $.cookie("LoginInfoAcc")+
+                                                        "&pw=" + $.cookie("LoginInfoPw")+
+                                                        "&operate_acc=" +acc
+                                                    ,
                                                     type: "POST",
                                                     success: function (msg) {
-
+                                                        if(msg=="ok"){
+                                                            ShowAlart('alert-success', '刪除成功', false, true);
+                                                            if(acc==$.cookie("LoginInfoAcc")){
+                                                                location.replace("./login.html")
+                                                            }else{
+                                                                setTimeout(function () {
+                                                                    location.replace("./index.html#UserManage")
+                                                                }, 1500);
+                                                            }
+                                                        }else{
+                                                            ShowAlart('alert-danger', '錯誤!!', false, false);
+                                                        }
                                                     },
                                                     error: function (xhr) {
                                                         console.log('ajax er');
@@ -719,15 +733,13 @@ function ButtonOnClickListener() {
                                                             typeAnimated: true
                                                         });
                                                     }
-                                                });*/
+                                                });
                                                 $.alert('ajax2');
                                             }else{
                                                 $.alert('密碼錯誤');
-                                                return false;
                                             }
                                         }else{
                                             $.alert('錯誤');
-                                            return false;
                                         }
                                     },
                                     error: function (xhr) {
