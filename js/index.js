@@ -676,22 +676,18 @@ function ButtonOnClickListener() {
             var name=userinfo['name'];
             $.confirm({
                 title: '確認刪除!!',
-                content: '' +
-                    '<form>' +
-                    '<div class="form-group">' +
+                content:
                     '即將刪除:'+acc+'('+name+')'+
                     '<label>請再次輸入你的密碼確認刪除此帳號</label>' +
-                    '<input type="password" placeholder="輸入密碼" class="pw form-control" required/>' +
-                    '</div>' +
-                    '</form>',
+                    '<input type="password" placeholder="輸入密碼" class="pw form-control" required/>'
+                ,
                 type:'red',
                 autoClose: 'cancel|10000',
                 buttons: {
-                    formSubmit: {
+                    confirm: {
                         text: '刪除',
                         btnClass: 'btn-blue',
                         action: function () {
-                            return false;
                             var pw = this.$content.find('.pw').val();
                             if(pw!=''){
                                 $.ajax({
