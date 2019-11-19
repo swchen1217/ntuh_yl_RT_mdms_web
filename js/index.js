@@ -691,6 +691,7 @@ function ButtonOnClickListener() {
                         text: '刪除',
                         btnClass: 'btn-blue',
                         action: function () {
+                            return false;
                             var pw = this.$content.find('.pw').val();
                             if(pw!=''){
                                 $.ajax({
