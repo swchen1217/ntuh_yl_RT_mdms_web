@@ -734,7 +734,6 @@ function ButtonOnClickListener() {
                                                         });
                                                     }
                                                 });
-                                                $.alert('ajax2');
                                             }else{
                                                 $.alert('密碼錯誤');
                                             }
