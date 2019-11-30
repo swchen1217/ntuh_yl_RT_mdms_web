@@ -128,6 +128,7 @@ function OnHashchangeListener() {
                 pageSize: 5,
                 search: true,
                 showPaginationSwitch: true,
+                pageList: [5, 10, 15, 20],
                 columns: [{
                     field: 'DID',
                     title: '設備ID'
