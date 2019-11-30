@@ -104,6 +104,58 @@ function OnHashchangeListener() {
     if (hash == '#DeviceManage' && login_check() && PermissionCheck(4, true)) {
         $('#Content_Device_manage').show();
         $("#title_bar").hide();
+
+        SyncDeviceTable(false);
+
+        var sql = new WebSql();
+        sql.select("device_tb", "*", "where 1", function (result) {
+            var jsonA = [];
+            for (let i = 0; i < result.length; i++) {
+                var tmp = result[i];
+                tmp['status'] = StatusStr[tmp['status']];
+                jsonA.push(tmp);
+            }
+            console.log(jsonA);
+            $('#table_device_mng').bootstrapTable({
+                data: jsonA,
+                dataType: "json",
+                classes: "table table-bordered table-striped table-sm",
+                striped: true,
+                pagination: true,
+                uniqueId: 'DID',
+                sortName: 'DID',
+                pageNumber: 1,
+                pageSize: 5,
+                pageList: [10, 25, 50, 100],
+                search: true,
+                showPaginationSwitch: true,
+                columns: [{
+                    field: 'DID',
+                    title: '設備ID'
+                }, {
+                    field: 'category',
+                    title: '分類'
+                }, {
+                    field: 'model',
+                    title: '型號'
+                }, {
+                    field: 'number',
+                    title: '編號'
+                }, {
+                    field: 'user',
+                    title: '使用者',
+                }, {
+                    field: 'position',
+                    title: '位置'
+                }, {
+                    field: 'status',
+                    title: '狀態'
+                }, {
+                    field: 'LastModified',
+                    title: '最後修改時間'
+                }]
+            });
+        });
     }
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
         $('#Content_User_manage').show();
@@ -125,9 +177,9 @@ function OnHashchangeListener() {
                     dataType: "json",
                     classes: "table table-bordered table-striped table-sm",
                     striped: true,
+                    pagination: true,
                     uniqueId: 'account',
                     sortName: 'account',
-                    pagination: true,
                     pageNumber: 1,
                     pageSize: 5,
                     search: true,
