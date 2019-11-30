@@ -126,7 +126,6 @@ function OnHashchangeListener() {
                 sortName: 'DID',
                 pageNumber: 1,
                 pageSize: 5,
-                pageList: [10, 25, 50, 100],
                 search: true,
                 showPaginationSwitch: true,
                 columns: [{
@@ -183,7 +182,6 @@ function OnHashchangeListener() {
                     pageNumber: 1,
                     pageSize: 5,
                     search: true,
-                    //showToggle: true,
                     showPaginationSwitch: true,
                     columns: [{
                         field: 'account',
