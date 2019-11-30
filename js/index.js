@@ -156,6 +156,13 @@ function OnHashchangeListener() {
                 }]
             });
         });
+
+        var getURl = new URL(location.href);
+        if(getURl.searchParams.has('DID')){
+            var DID = getURl.searchParams.get('DID');
+            console.log(DID);
+        }
+
     }
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
         $('#Content_User_manage').show();
