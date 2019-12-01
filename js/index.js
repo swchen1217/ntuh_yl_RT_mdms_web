@@ -865,3 +865,15 @@ function LinkFormatterDM(value, row, index) {
     return "<a href='?DID="+value+"#DeviceManage'>"+value+"</a>";
 }
 
+function DM_Switch() {
+    console.log('DSok');
+    setTimeout(function () {
+        $('#DM_DM').hide();
+        $('#DM_PM').hide();
+        if($('#lb_DM_DM').is('.active'))
+            $('#DM_DM').show();
+        else
+            $('#DM_PM').show();
+    },0);
+}
+
