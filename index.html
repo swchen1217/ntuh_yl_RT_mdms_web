@@ -71,6 +71,13 @@
             <li>
                 <a class="nav-link" href="#DeviceManage">設備管理</a>
             </li>
+            <!--<li class="dropdown" data-toggle="dropdown">
+                <a class="nav-link" href="#DeviceManage">設備管理</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#DeviceManage">設備管理</a></li>
+                    <li><a href="#PositionManage">床位管理</a></li>
+                </ul>
+            </li>-->
             <li>
                 <a class="nav-link" href="#UserManage">帳號管理</a>
             </li>
@@ -171,32 +178,45 @@
         <div id="Content_Fix">5</div>
         <div id="Content_Maintenance_check">6</div>
         <div id="Content_Device_manage">
-            <div class="row" id="row-device-list2">
-                <div class="container">
-                    <table id="table_device_mng"></table>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 10px;position:absolute; z-index:5;">
+                <label class="btn btn-secondary active" id="lb_DM_DM">
+                    <input type="radio" checked onchange="DM_Switch();console.log('oc1')"> 設備管理
+                </label>
+                <label class="btn btn-secondary" id="lb_DM_PM">
+                    <input type="radio" onchange="DM_Switch();console.log('oc2')"> 床位管理
+                </label>
+            </div>
+            <div id="DM_DM">
+                <div class="row" id="row-device-list2">
+                    <div class="container">
+                        <table id="table_device_mng"></table>
+                    </div>
+                </div>
+                <div class="row" id="row-device-operate">
+                    <div class="col-md-6">
+                        <div class="card" id="card-device-change">
+                            <div class="card-header">
+                                <h3 class="card-title">修改裝置</h3>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" id="card-device-new">
+                            <div class="card-header">
+                                <h3 class="card-title">新增裝置</h3>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row" id="row-device-operate">
-                <div class="col-md-6">
-                    <div class="card" id="card-device-change">
-                        <div class="card-header">
-                            <h3 class="card-title">修改裝置</h3>
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card" id="card-device-new">
-                        <div class="card-header">
-                            <h3 class="card-title">新增裝置</h3>
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-                </div>
+            <div id="DM_PM" style="padding-top: 50px">
+                PM
             </div>
         </div>
         <div id="Content_User_manage">
