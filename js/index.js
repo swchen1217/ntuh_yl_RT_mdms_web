@@ -131,7 +131,8 @@ function OnHashchangeListener() {
                 pageList: [5, 10, 15, 20],
                 columns: [{
                     field: 'DID',
-                    title: '設備ID'
+                    title: '設備ID',
+                    formatter:LinkFormatterDM
                 }, {
                     field: 'category',
                     title: '分類'
@@ -194,7 +195,7 @@ function OnHashchangeListener() {
                     columns: [{
                         field: 'account',
                         title: '帳號(員工編號)',
-                        formatter:LinkFormatter
+                        formatter:LinkFormatterUM
                     }, {
                         field: 'name',
                         title: '名稱'
@@ -857,7 +858,10 @@ window.operateEvents = {
     }
 };
 
-function LinkFormatter(value, row, index) {
+function LinkFormatterUM(value, row, index) {
     return "<a href='?acc="+value+"#UserManage'>"+value+"</a>";
+}
+function LinkFormatterDM(value, row, index) {
+    return "<a href='?DID="+value+"#DeviceManage'>"+value+"</a>";
 }
 
