@@ -105,6 +105,8 @@ function OnHashchangeListener() {
         $('#Content_Device_manage').show();
         $("#title_bar").hide();
 
+        DM_Switch();
+
         SyncDeviceTable(false);
 
         var sql = new WebSql();
