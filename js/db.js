@@ -70,7 +70,7 @@ function SyncDeviceTable(AlertDialog) {
     });
     setTimeout(function () {
         $("#dialog_ProgressBar_Sync").modal('hide');
-    }, 500);
+    }, 750);
 }
 
 function JsonToArray(json) {
