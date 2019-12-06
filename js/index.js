@@ -880,10 +880,10 @@ function DM_Switch() {
         $('#DM_PM').hide();
         if ($('#lb_DM_DM').is('.active')) {
             $('#DM_DM').show();
-            a=1;
+            a = 'DM_DM';
             //return 'DM_DM';
         } else {
-            a=2;
+            a = 'DM_PM';
             $('#DM_PM').show();
             //return 'DM_PM';
         }
