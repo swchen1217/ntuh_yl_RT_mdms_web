@@ -887,7 +887,8 @@ function DM_Switch() {
             $('#DM_PM').show();
             //return 'DM_PM';
         }
-        return a;
     }, 0);
+    console.log(a);
+    return a;
 }
 
