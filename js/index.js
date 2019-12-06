@@ -799,6 +799,47 @@ window.operateEvents = {
     },
     'click #position_table_del': function (e, value, row, index) {
         console.log("del");
+        console.log(row);
+        HideAlert();
+        $.confirm({
+            title: '確認刪除!!',
+            content: '確認刪除??',
+            type: 'red',
+            buttons: {
+                confirm: {
+                    text: '刪除',
+                    btnClass: 'btn-red',
+                    action: function () {
+                        $.ajax({
+                            url: "../ntuh_yl_RT_mdms_api/db.php",
+                            data: "mode=del_position" +
+                                "&acc=" + $.cookie("LoginInfoAcc")+
+                                "&pw=" + $.cookie("LoginInfoPw")+
+                                "&position="+row['type']+"-"+row['item'],
+                            type: "POST",
+                            success: function (msg) {
+                                if(msg=='ok')
+                                    ShowAlart('alert-success', '刪除成功', false, true);
+                                else
+                                    ShowAlart('alert-danger', '錯誤!!', false, false);
+                            },
+                            error: function (xhr) {
+                                console.log('ajax er');
+                                $.alert({
+                                    title: '錯誤',
+                                    content: 'Ajax 發生錯誤',
+                                    type: 'red',
+                                    typeAnimated: true
+                                });
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消'
+                },
+            }
+        });
     }
 };
 
