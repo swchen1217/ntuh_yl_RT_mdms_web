@@ -818,8 +818,9 @@ window.operateEvents = {
                                 "&position="+row['type']+"-"+row['item'],
                             type: "POST",
                             success: function (msg) {
-                                if(msg=='ok')
+                                if(msg=='ok'){
                                     ShowAlart('alert-success', '刪除成功', false, true);
+                                }
                                 else
                                     ShowAlart('alert-danger', '錯誤!!', false, false);
                             },
@@ -918,7 +919,7 @@ function DM_Switch() {
                 var DID = getURl.searchParams.get('DID');
                 console.log(DID);
             }
-        } else {
+        } else{
             $('#DM_PM').show();
 
             $.ajax({
