@@ -168,6 +168,25 @@ function OnHashchangeListener() {
             }
         } else if (DM == 'DM_PM') {
             //TODO PM
+            $.ajax({
+                url: "../ntuh_yl_RT_mdms_api/db.php",
+                data: "mode=sync_position_item_tb_download" +
+                    "&acc=" + $.cookie("LoginInfoAcc")+
+                    "&pw="+$.cookie("LoginInfoPw"),
+                type: "POST",
+                success: function (msg) {
+                    console.log(msg);
+                },
+                error: function (xhr) {
+                    console.log('ajax er');
+                    $.alert({
+                        title: '錯誤',
+                        content: 'Ajax 發生錯誤',
+                        type: 'red',
+                        typeAnimated: true
+                    });
+                }
+            });
         }
 
     }
