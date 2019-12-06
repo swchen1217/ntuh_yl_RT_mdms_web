@@ -547,7 +547,7 @@ function FormSubmitListener() {
                                                 }, 1500);
                                             }
                                         } else {
-                                            ShowAlart('alert-danger', '錯誤!!', false, false);
+                                            ShowAlart('alert-danger', '權限錯誤!!', false, false);
                                         }
                                     },
                                     error: function (xhr) {
