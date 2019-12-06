@@ -1,6 +1,6 @@
 function init() {
     StatusStr = ["無狀態", "使用中", "倉庫", "維修中", "保養中"];
-    PermissionStr=["未啟用","狀態查詢","狀態登錄","紀錄查看","裝置管理","使用者管理","*","*","*","管理員"];
+    PermissionStr = ["未啟用", "狀態查詢", "狀態登錄", "紀錄查看", "裝置管理", "使用者管理", "*", "*", "*", "管理員"];
 }
 
 function OnHashchangeListener() {
@@ -105,9 +105,9 @@ function OnHashchangeListener() {
         $('#Content_Device_manage').show();
         $("#title_bar").hide();
 
-        var DM=DM_Switch();
+        var DM = DM_Switch();
 
-        if(DM=='DM_DM'){
+        if (DM == 'DM_DM') {
             SyncDeviceTable(false);
 
             var sql = new WebSql();
@@ -135,7 +135,7 @@ function OnHashchangeListener() {
                     columns: [{
                         field: 'DID',
                         title: '設備ID',
-                        formatter:LinkFormatterDM
+                        formatter: LinkFormatterDM
                     }, {
                         field: 'category',
                         title: '分類'
@@ -162,12 +162,12 @@ function OnHashchangeListener() {
             });
 
             var getURl = new URL(location.href);
-            if(getURl.searchParams.has('DID')){
+            if (getURl.searchParams.has('DID')) {
                 var DID = getURl.searchParams.get('DID');
                 console.log(DID);
             }
-        }else if(DM=='DM_PM'){
-
+        } else if (DM == 'DM_PM') {
+            //TODO PM
         }
 
     }
@@ -180,10 +180,10 @@ function OnHashchangeListener() {
             data: "mode=get_user_list&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw"),
             type: "POST",
             success: function (msg) {
-                $.cookie("AllUserData",msg);
+                $.cookie("AllUserData", msg);
                 var jsonA = JSON.parse(msg);
-                for(let i=0;i<jsonA.length;i++){
-                    jsonA[i]['permission']+="("+PermissionStr[jsonA[i]['permission']]+")";
+                for (let i = 0; i < jsonA.length; i++) {
+                    jsonA[i]['permission'] += "(" + PermissionStr[jsonA[i]['permission']] + ")";
                 }
                 console.log(jsonA);
                 $('#table_user').bootstrapTable({
@@ -201,7 +201,7 @@ function OnHashchangeListener() {
                     columns: [{
                         field: 'account',
                         title: '帳號(員工編號)',
-                        formatter:LinkFormatterUM
+                        formatter: LinkFormatterUM
                     }, {
                         field: 'name',
                         title: '名稱'
@@ -241,18 +241,18 @@ function OnHashchangeListener() {
         });
 
         var getURl = new URL(location.href);
-        if(getURl.searchParams.has('acc')){
+        if (getURl.searchParams.has('acc')) {
             var acc = getURl.searchParams.get('acc');
-            var users=JSON.parse($.cookie("AllUserData"));
+            var users = JSON.parse($.cookie("AllUserData"));
             console.log(users);
             var userinfo;
-            for(let i=0;i<users.length;i++){
-                if(users[i]['account']==acc){
-                    userinfo=users[i];
+            for (let i = 0; i < users.length; i++) {
+                if (users[i]['account'] == acc) {
+                    userinfo = users[i];
                     break;
                 }
             }
-            if(userinfo!=undefined){
+            if (userinfo != undefined) {
                 $('#chguser-ShowAcc').val(userinfo['account']);
                 $('#chguser-ShowName').val(userinfo['name']);
                 $('#chguser-ShowPermission').val(userinfo['permission']);
@@ -505,64 +505,64 @@ function FormSubmitListener() {
     });
     $('#form-chguser').submit(function () {
         var getURl = new URL(location.href);
-        var acc=getURl.searchParams.get('acc');
-        var n_name=$('#chguser-InputName').val();
-        var n_permission=$('#chguser-InputPermission').val();
-        var n_email=$('#chguser-InputEmail').val();
-        var n_pw=$('#chguser-InputPw').val();
-        var n_pw_re=$('#chguser-InputPwRe').val();
+        var acc = getURl.searchParams.get('acc');
+        var n_name = $('#chguser-InputName').val();
+        var n_permission = $('#chguser-InputPermission').val();
+        var n_email = $('#chguser-InputEmail').val();
+        var n_pw = $('#chguser-InputPw').val();
+        var n_pw_re = $('#chguser-InputPwRe').val();
 
-        if(acc==null){
+        if (acc == null) {
             $.alert({
                 title: '錯誤',
                 content: '尚未選擇欲更改之帳號',
                 type: 'red',
                 typeAnimated: true
             });
-        }else{
-            var users=JSON.parse($.cookie("AllUserData"));
+        } else {
+            var users = JSON.parse($.cookie("AllUserData"));
             var userinfo;
-            for(let i=0;i<users.length;i++){
-                if(users[i]['account']==acc){
-                    userinfo=users[i];
+            for (let i = 0; i < users.length; i++) {
+                if (users[i]['account'] == acc) {
+                    userinfo = users[i];
                     break;
                 }
             }
-            var old_name=userinfo['name'];
-            var old_permission=userinfo['permission'];
-            var old_email=userinfo['email'];
-            if(n_name=='' && n_permission=='-1' && n_email=='' && n_pw==''){
+            var old_name = userinfo['name'];
+            var old_permission = userinfo['permission'];
+            var old_email = userinfo['email'];
+            if (n_name == '' && n_permission == '-1' && n_email == '' && n_pw == '') {
                 $.alert({
                     title: '錯誤',
                     content: '無任何欲修改之資料',
                     type: 'red',
                     typeAnimated: true
                 });
-            }else{
-                var ConfrimContent="";
-                var chguserParams="";
-                ConfrimContent+="欲修改資訊如下 請確認:<br>帳號: "+acc+"<br>";
-                chguserParams+="&operate_acc="+acc;
-                if(n_name!=""){
-                    chguserParams+="&new_name="+n_name;
-                    ConfrimContent+="名稱: <var>"+old_name+"</var> 更改為 <var>"+n_name+"</var><br>";
+            } else {
+                var ConfrimContent = "";
+                var chguserParams = "";
+                ConfrimContent += "欲修改資訊如下 請確認:<br>帳號: " + acc + "<br>";
+                chguserParams += "&operate_acc=" + acc;
+                if (n_name != "") {
+                    chguserParams += "&new_name=" + n_name;
+                    ConfrimContent += "名稱: <var>" + old_name + "</var> 更改為 <var>" + n_name + "</var><br>";
                 }
-                if(n_permission!='-1'){
-                    chguserParams+="&new_permission="+n_permission;
-                    ConfrimContent+="權限: <var>"+old_permission+"("+PermissionStr[old_permission]+")</var> 更改為 <var>"+n_permission+"("+PermissionStr[n_permission]+")</var><br>";
+                if (n_permission != '-1') {
+                    chguserParams += "&new_permission=" + n_permission;
+                    ConfrimContent += "權限: <var>" + old_permission + "(" + PermissionStr[old_permission] + ")</var> 更改為 <var>" + n_permission + "(" + PermissionStr[n_permission] + ")</var><br>";
                 }
-                if(n_email!=""){
-                    chguserParams+="&new_email="+n_email;
-                    ConfrimContent+="E-mail: <var>"+old_email+"</var><br>更改為 <var>"+n_email+"</var><br>";
+                if (n_email != "") {
+                    chguserParams += "&new_email=" + n_email;
+                    ConfrimContent += "E-mail: <var>" + old_email + "</var><br>更改為 <var>" + n_email + "</var><br>";
                 }
-                if(n_pw!=""){
-                    if(n_pw!='' && n_pw_re!=''){
-                        if(n_pw==n_pw_re){
-                            var create_time=moment(userinfo['created']).format('YYYYMMDDHHmmss');
-                            var mMD5=md5(create_time+n_pw);
-                            chguserParams+="&new_pw="+mMD5;
-                            ConfrimContent+="<b>密碼更改</b><br>";
-                        }else{
+                if (n_pw != "") {
+                    if (n_pw != '' && n_pw_re != '') {
+                        if (n_pw == n_pw_re) {
+                            var create_time = moment(userinfo['created']).format('YYYYMMDDHHmmss');
+                            var mMD5 = md5(create_time + n_pw);
+                            chguserParams += "&new_pw=" + mMD5;
+                            ConfrimContent += "<b>密碼更改</b><br>";
+                        } else {
                             $.alert({
                                 title: '錯誤',
                                 content: '確認新密碼不符合!!請重新輸入',
@@ -571,7 +571,7 @@ function FormSubmitListener() {
                             });
                             return false;
                         }
-                    }else{
+                    } else {
                         $.alert({
                             title: '錯誤',
                             content: '密碼未輸入完整!!請重新輸入',
@@ -588,11 +588,11 @@ function FormSubmitListener() {
                         confirm: {
                             text: '確認',
                             btnClass: 'btn-blue',
-                            action:function () {
+                            action: function () {
                                 HideAlert();
                                 $.ajax({
                                     url: "../ntuh_yl_RT_mdms_api/user.php",
-                                    data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw")+chguserParams,
+                                    data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw") + chguserParams,
                                     type: "POST",
                                     success: function (msg) {
                                         $('#chguser-InputName').val('');
@@ -600,16 +600,16 @@ function FormSubmitListener() {
                                         $('#chguser-InputEmail').val('');
                                         $('#chguser-InputPw').val('');
                                         $('#chguser-InputPwRe').val('');
-                                        if(msg=="ok"){
+                                        if (msg == "ok") {
                                             ShowAlart('alert-success', '修改成功', false, true);
-                                            if(acc==$.cookie("LoginInfoAcc")){
+                                            if (acc == $.cookie("LoginInfoAcc")) {
                                                 location.replace("./login.html")
-                                            }else{
+                                            } else {
                                                 setTimeout(function () {
                                                     location.replace("./index.html#UserManage")
                                                 }, 1500);
                                             }
-                                        }else{
+                                        } else {
                                             ShowAlart('alert-danger', '錯誤!!', false, false);
                                         }
                                     },
@@ -635,18 +635,18 @@ function FormSubmitListener() {
         return false;
     });
     $('#form-newuser').submit(function () {
-        var n_acc=$('#newuser-InputAcc').val();
-        var n_name=$('#newuser-InputName').val();
-        var n_permission=$('#newuser-InputPermission').val();
-        var n_email=$('#newuser-InputEmail').val();
-        var n_pw=$('#newuser-InputPw').val();
-        var n_pw_re=$('#newuser-InputPwRe').val();
-        if(n_acc!='' && n_name!='' && n_email!='' && n_permission!='-1' && n_pw!='' && n_pw_re!=''){
-            if(n_pw==n_pw_re){
+        var n_acc = $('#newuser-InputAcc').val();
+        var n_name = $('#newuser-InputName').val();
+        var n_permission = $('#newuser-InputPermission').val();
+        var n_email = $('#newuser-InputEmail').val();
+        var n_pw = $('#newuser-InputPw').val();
+        var n_pw_re = $('#newuser-InputPwRe').val();
+        if (n_acc != '' && n_name != '' && n_email != '' && n_permission != '-1' && n_pw != '' && n_pw_re != '') {
+            if (n_pw == n_pw_re) {
                 //todo ajax
-                var create_time=moment().format('YYYYMMDDHHmmss');
-                var create_time2=moment().format('YYYY-MM-DD HH:mm:ss');
-                var mMD5=md5(create_time+n_pw);
+                var create_time = moment().format('YYYYMMDDHHmmss');
+                var create_time2 = moment().format('YYYY-MM-DD HH:mm:ss');
+                var mMD5 = md5(create_time + n_pw);
                 $.confirm({
                     title: '新增帳號!!',
                     content: '確認新增此帳號??',
@@ -654,19 +654,19 @@ function FormSubmitListener() {
                         confirm: {
                             text: '確認',
                             btnClass: 'btn-blue',
-                            action:function () {
+                            action: function () {
                                 HideAlert();
                                 $.ajax({
                                     url: "../ntuh_yl_RT_mdms_api/user.php",
                                     data: "mode=newuser" +
-                                        "&acc=" + $.cookie("LoginInfoAcc")+
-                                        "&pw=" + $.cookie("LoginInfoPw")+
-                                        "&operate_acc="+n_acc+
-                                        "&new_name="+n_name+
-                                        "&new_permission="+n_permission+
-                                        "&new_email="+n_email+
-                                        "&new_pw="+mMD5+
-                                        "&new_create_time="+create_time2
+                                        "&acc=" + $.cookie("LoginInfoAcc") +
+                                        "&pw=" + $.cookie("LoginInfoPw") +
+                                        "&operate_acc=" + n_acc +
+                                        "&new_name=" + n_name +
+                                        "&new_permission=" + n_permission +
+                                        "&new_email=" + n_email +
+                                        "&new_pw=" + mMD5 +
+                                        "&new_create_time=" + create_time2
                                     ,
                                     type: "POST",
                                     success: function (msg) {
@@ -676,7 +676,7 @@ function FormSubmitListener() {
                                         $('#newuser-InputEmail').val('');
                                         $('#newuser-InputPw').val('');
                                         $('#newuser-InputPwRe').val('');
-                                        if(msg=="ok")
+                                        if (msg == "ok")
                                             ShowAlart('alert-success', '新增成功', false, true);
                                         else
                                             ShowAlart('alert-danger', '錯誤!!', false, false);
@@ -698,7 +698,7 @@ function FormSubmitListener() {
                         }
                     }
                 });
-            }else{
+            } else {
                 $.alert({
                     title: '錯誤',
                     content: '確認新密碼不符合!!請重新輸入',
@@ -706,7 +706,7 @@ function FormSubmitListener() {
                     typeAnimated: true
                 });
             }
-        }else{
+        } else {
             $.alert({
                 title: '錯誤',
                 content: '輸入未完整!!',
@@ -721,32 +721,32 @@ function FormSubmitListener() {
 function ButtonOnClickListener() {
     $('#btn_chguser-del').click(function () {
         var getURl = new URL(location.href);
-        var acc=getURl.searchParams.get('acc');
-        if(acc==null){
+        var acc = getURl.searchParams.get('acc');
+        if (acc == null) {
             $.alert({
                 title: '錯誤',
                 content: '尚未選擇欲刪除之帳號',
                 type: 'red',
                 typeAnimated: true
             });
-        }else{
-            var users=JSON.parse($.cookie("AllUserData"));
+        } else {
+            var users = JSON.parse($.cookie("AllUserData"));
             var userinfo;
-            for(let i=0;i<users.length;i++){
-                if(users[i]['account']==acc){
-                    userinfo=users[i];
+            for (let i = 0; i < users.length; i++) {
+                if (users[i]['account'] == acc) {
+                    userinfo = users[i];
                     break;
                 }
             }
-            var name=userinfo['name'];
+            var name = userinfo['name'];
             $.confirm({
                 title: '確認刪除!!',
                 content:
-                    '即將刪除:'+acc+'('+name+')'+
+                    '即將刪除:' + acc + '(' + name + ')' +
                     '<label>請再次輸入你的密碼確認刪除此帳號</label>' +
                     '<input type="password" placeholder="輸入密碼" class="pw form-control" required/>'
                 ,
-                type:'red',
+                type: 'red',
                 autoClose: 'cancel|10000',
                 buttons: {
                     confirm: {
@@ -754,35 +754,35 @@ function ButtonOnClickListener() {
                         btnClass: 'btn-blue',
                         action: function () {
                             var pw = this.$content.find('.pw').val();
-                            if(pw!=''){
+                            if (pw != '') {
                                 $.ajax({
                                     url: "../ntuh_yl_RT_mdms_api/user.php",
                                     data: "mode=get_create_time" +
                                         "&acc=" + $.cookie("LoginInfoAcc"),
                                     type: "POST",
                                     success: function (msg) {
-                                        if(msg!='no_acc'){
-                                            mMd5=md5(msg+pw);
-                                            if(mMd5==$.cookie("LoginInfoPw")){
+                                        if (msg != 'no_acc') {
+                                            mMd5 = md5(msg + pw);
+                                            if (mMd5 == $.cookie("LoginInfoPw")) {
                                                 $.ajax({
                                                     url: "../ntuh_yl_RT_mdms_api/user.php",
                                                     data: "mode=deluser" +
-                                                        "&acc=" + $.cookie("LoginInfoAcc")+
-                                                        "&pw=" + $.cookie("LoginInfoPw")+
-                                                        "&operate_acc=" +acc
+                                                        "&acc=" + $.cookie("LoginInfoAcc") +
+                                                        "&pw=" + $.cookie("LoginInfoPw") +
+                                                        "&operate_acc=" + acc
                                                     ,
                                                     type: "POST",
                                                     success: function (msg) {
-                                                        if(msg=="ok"){
+                                                        if (msg == "ok") {
                                                             ShowAlart('alert-success', '刪除成功', false, true);
-                                                            if(acc==$.cookie("LoginInfoAcc")){
+                                                            if (acc == $.cookie("LoginInfoAcc")) {
                                                                 location.replace("./login.html")
-                                                            }else{
+                                                            } else {
                                                                 setTimeout(function () {
                                                                     location.replace("./index.html#UserManage")
                                                                 }, 1500);
                                                             }
-                                                        }else{
+                                                        } else {
                                                             ShowAlart('alert-danger', '錯誤!!', false, false);
                                                         }
                                                     },
@@ -796,10 +796,10 @@ function ButtonOnClickListener() {
                                                         });
                                                     }
                                                 });
-                                            }else{
+                                            } else {
                                                 $.alert('密碼錯誤');
                                             }
-                                        }else{
+                                        } else {
                                             $.alert('錯誤');
                                         }
                                     },
@@ -813,7 +813,7 @@ function ButtonOnClickListener() {
                                         });
                                     }
                                 });
-                            }else{
+                            } else {
                                 $.alert('未輸入密碼');
                                 return false;
                             }
@@ -865,10 +865,11 @@ window.operateEvents = {
 };
 
 function LinkFormatterUM(value, row, index) {
-    return "<a href='?acc="+value+"#UserManage'>"+value+"</a>";
+    return "<a href='?acc=" + value + "#UserManage'>" + value + "</a>";
 }
+
 function LinkFormatterDM(value, row, index) {
-    return "<a href='?DID="+value+"#DeviceManage'>"+value+"</a>";
+    return "<a href='?DID=" + value + "#DeviceManage'>" + value + "</a>";
 }
 
 function DM_Switch() {
@@ -876,15 +877,14 @@ function DM_Switch() {
     setTimeout(function () {
         $('#DM_DM').hide();
         $('#DM_PM').hide();
-        if($('#lb_DM_DM').is('.active')){
+        if ($('#lb_DM_DM').is('.active')) {
             $('#DM_DM').show();
             return 'DM_DM';
-        }
-        else{
+        } else {
             $('#DM_PM').show();
             return 'DM_PM';
         }
 
-    },0);
+    }, 0);
 }
 
