@@ -887,7 +887,7 @@ function DM_Switch() {
             $('#DM_PM').show();
             //return 'DM_PM';
         }
-        console.log(a);
+        return a;
     }, 0);
 }
 
