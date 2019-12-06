@@ -824,7 +824,7 @@ function DM_Switch() {
 }
 
 function DM_(mode) {
-    if (DM == 'DM_DM') {
+    if (mode == 'DM_DM') {
         SyncDeviceTable(false);
 
         var sql = new WebSql();
@@ -883,7 +883,7 @@ function DM_(mode) {
             var DID = getURl.searchParams.get('DID');
             console.log(DID);
         }
-    } else if (DM == 'DM_PM') {
+    } else if (mode == 'DM_PM') {
         //TODO PM
         $.ajax({
             url: "../ntuh_yl_RT_mdms_api/db.php",
