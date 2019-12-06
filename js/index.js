@@ -874,22 +874,6 @@ function LinkFormatterDM(value, row, index) {
 
 function DM_Switch() {
     console.log('DSok');
-    /*var a;
-    setTimeout(function () {
-        $('#DM_DM').hide();
-        $('#DM_PM').hide();
-        if ($('#lb_DM_DM').is('.active')) {
-            $('#DM_DM').show();
-            a = 'DM_DM';
-            //return 'DM_DM';
-        } else {
-            a = 'DM_PM';
-            $('#DM_PM').show();
-            //return 'DM_PM';
-        }
-    }, 0);
-    console.log(a);
-    return a;*/
     $('#DM_DM').hide();
     $('#DM_PM').hide();
     if ($('#lb_DM_DM').is('.active')) {
