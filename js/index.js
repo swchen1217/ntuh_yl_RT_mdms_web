@@ -105,65 +105,69 @@ function OnHashchangeListener() {
         $('#Content_Device_manage').show();
         $("#title_bar").hide();
 
-        DM_Switch();
+        var DM=DM_Switch();
 
-        SyncDeviceTable(false);
+        if(DM=='DM_DM'){
+            SyncDeviceTable(false);
 
-        var sql = new WebSql();
-        sql.select("device_tb", "*", "where 1", function (result) {
-            var jsonA = [];
-            for (let i = 0; i < result.length; i++) {
-                var tmp = result[i];
-                tmp['status'] = StatusStr[tmp['status']];
-                jsonA.push(tmp);
-            }
-            console.log(jsonA);
-            $('#table_device_mng').bootstrapTable({
-                data: jsonA,
-                dataType: "json",
-                classes: "table table-bordered table-striped table-sm",
-                striped: true,
-                pagination: true,
-                uniqueId: 'DID',
-                sortName: 'DID',
-                pageNumber: 1,
-                pageSize: 5,
-                search: true,
-                showPaginationSwitch: true,
-                pageList: [5, 10, 15, 20],
-                columns: [{
-                    field: 'DID',
-                    title: '設備ID',
-                    formatter:LinkFormatterDM
-                }, {
-                    field: 'category',
-                    title: '分類'
-                }, {
-                    field: 'model',
-                    title: '型號'
-                }, {
-                    field: 'number',
-                    title: '編號'
-                }, {
-                    field: 'user',
-                    title: '使用者',
-                }, {
-                    field: 'position',
-                    title: '位置'
-                }, {
-                    field: 'status',
-                    title: '狀態'
-                }, {
-                    field: 'LastModified',
-                    title: '最後修改時間'
-                }]
+            var sql = new WebSql();
+            sql.select("device_tb", "*", "where 1", function (result) {
+                var jsonA = [];
+                for (let i = 0; i < result.length; i++) {
+                    var tmp = result[i];
+                    tmp['status'] = StatusStr[tmp['status']];
+                    jsonA.push(tmp);
+                }
+                console.log(jsonA);
+                $('#table_device_mng').bootstrapTable({
+                    data: jsonA,
+                    dataType: "json",
+                    classes: "table table-bordered table-striped table-sm",
+                    striped: true,
+                    pagination: true,
+                    uniqueId: 'DID',
+                    sortName: 'DID',
+                    pageNumber: 1,
+                    pageSize: 5,
+                    search: true,
+                    showPaginationSwitch: true,
+                    pageList: [5, 10, 15, 20],
+                    columns: [{
+                        field: 'DID',
+                        title: '設備ID',
+                        formatter:LinkFormatterDM
+                    }, {
+                        field: 'category',
+                        title: '分類'
+                    }, {
+                        field: 'model',
+                        title: '型號'
+                    }, {
+                        field: 'number',
+                        title: '編號'
+                    }, {
+                        field: 'user',
+                        title: '使用者',
+                    }, {
+                        field: 'position',
+                        title: '位置'
+                    }, {
+                        field: 'status',
+                        title: '狀態'
+                    }, {
+                        field: 'LastModified',
+                        title: '最後修改時間'
+                    }]
+                });
             });
-        });
 
-        var getURl = new URL(location.href);
-        if(getURl.searchParams.has('DID')){
-            var DID = getURl.searchParams.get('DID');
-            console.log(DID);
+            var getURl = new URL(location.href);
+            if(getURl.searchParams.has('DID')){
+                var DID = getURl.searchParams.get('DID');
+                console.log(DID);
+            }
+        }else if(DM=='DM_PM'){
+
         }
 
     }
@@ -872,10 +876,15 @@ function DM_Switch() {
     setTimeout(function () {
         $('#DM_DM').hide();
         $('#DM_PM').hide();
-        if($('#lb_DM_DM').is('.active'))
+        if($('#lb_DM_DM').is('.active')){
             $('#DM_DM').show();
-        else
+            return 'DM_DM';
+        }
+        else{
             $('#DM_PM').show();
+            return 'DM_PM';
+        }
+
     },0);
 }
 
