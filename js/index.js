@@ -788,16 +788,17 @@ window.operateEvents = {
         // value  undefined
         // row    rowdata
         // index  row
-        console.log("update");
         var DID = row['DID'];
         console.log(DID);
         location.href = '?DID=' + DID + '#UpdateStatus';
     },
     'click #device_table_manage': function (e, value, row, index) {
-        console.log("update");
         var DID = row['DID'];
         console.log(DID);
         location.href = '?DID=' + DID + '#DeviceManage';
+    },
+    'click #position_table_del': function (e, value, row, index) {
+        console.log("del");
     }
 };
 
@@ -887,6 +888,35 @@ function DM_Switch() {
                 type: "POST",
                 success: function (msg) {
                     console.log(msg);
+                    var jsonA=JSON.parse(msg);
+                    console.log(jsonA);
+                    $('#table_position').bootstrapTable({
+                        data: jsonA,
+                        dataType: "json",
+                        classes: "table table-bordered table-striped table-sm",
+                        striped: true,
+                        pagination: true,
+                        uniqueId: 'type',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        pageList: [10, 25, 50, 100],
+                        search: true,
+                        sortName: 'type',
+                        showPaginationSwitch: true,
+                        columns: [{
+                            field: 'type',
+                            title: '分類'
+                        }, {
+                            field: 'item',
+                            title: '編號'
+                        }, {
+                            field: 'operating',
+                            title: '操作',
+                            width: 135,
+                            formatter: '<button id="position_table_del" class="btn btn-danger">刪除</button>',
+                            events: operateEvents
+                        }]
+                    });
                 },
                 error: function (xhr) {
                     console.log('ajax er');
