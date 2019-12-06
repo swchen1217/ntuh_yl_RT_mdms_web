@@ -105,7 +105,7 @@ function OnHashchangeListener() {
         $('#Content_Device_manage').show();
         $("#title_bar").hide();
 
-        DM_(DM_Switch());
+        DM_Switch();
 
     }
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
@@ -815,16 +815,6 @@ function DM_Switch() {
     $('#DM_PM').hide();
     if ($('#lb_DM_DM').is('.active')) {
         $('#DM_DM').show();
-        return 'DM_DM';
-    } else {
-        $('#DM_PM').show();
-        return 'DM_PM';
-    }
-
-}
-
-function DM_(mode) {
-    if (mode == 'DM_DM') {
         SyncDeviceTable(false);
 
         var sql = new WebSql();
@@ -883,8 +873,8 @@ function DM_(mode) {
             var DID = getURl.searchParams.get('DID');
             console.log(DID);
         }
-    } else if (mode == 'DM_PM') {
-        //TODO PM
+    } else {
+        $('#DM_PM').show();
         $.ajax({
             url: "../ntuh_yl_RT_mdms_api/db.php",
             data: "mode=sync_position_item_tb_download" +
@@ -905,5 +895,6 @@ function DM_(mode) {
             }
         });
     }
+
 }
 
