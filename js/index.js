@@ -874,7 +874,7 @@ function LinkFormatterDM(value, row, index) {
 
 function DM_Switch() {
     console.log('DSok');
-    var a;
+    /*var a;
     setTimeout(function () {
         $('#DM_DM').hide();
         $('#DM_PM').hide();
@@ -889,6 +889,16 @@ function DM_Switch() {
         }
     }, 0);
     console.log(a);
-    return a;
+    return a;*/
+    $('#DM_DM').hide();
+    $('#DM_PM').hide();
+    if ($('#lb_DM_DM').is('.active')) {
+        $('#DM_DM').show();
+        return 'DM_DM';
+    } else {
+        $('#DM_PM').show();
+        return 'DM_PM';
+    }
+
 }
 
