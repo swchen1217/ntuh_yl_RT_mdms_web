@@ -810,91 +810,95 @@ function LinkFormatterDM(value, row, index) {
 }
 
 function DM_Switch() {
-    console.log('DSok');
-    $('#DM_DM').hide();
-    $('#DM_PM').hide();
-    if ($('#lb_DM_DM').is('.active')) {
-        $('#DM_DM').show();
-        SyncDeviceTable(false);
+    setTimeout(function () {
+        console.log('DSok');
+        $('#DM_DM').hide();
+        $('#DM_PM').hide();
 
-        var sql = new WebSql();
-        sql.select("device_tb", "*", "where 1", function (result) {
-            var jsonA = [];
-            for (let i = 0; i < result.length; i++) {
-                var tmp = result[i];
-                tmp['status'] = StatusStr[tmp['status']];
-                jsonA.push(tmp);
-            }
-            console.log(jsonA);
-            $('#table_device_mng').bootstrapTable({
-                data: jsonA,
-                dataType: "json",
-                classes: "table table-bordered table-striped table-sm",
-                striped: true,
-                pagination: true,
-                uniqueId: 'DID',
-                sortName: 'DID',
-                pageNumber: 1,
-                pageSize: 5,
-                search: true,
-                showPaginationSwitch: true,
-                pageList: [5, 10, 15, 20],
-                columns: [{
-                    field: 'DID',
-                    title: '設備ID',
-                    formatter: LinkFormatterDM
-                }, {
-                    field: 'category',
-                    title: '分類'
-                }, {
-                    field: 'model',
-                    title: '型號'
-                }, {
-                    field: 'number',
-                    title: '編號'
-                }, {
-                    field: 'user',
-                    title: '使用者',
-                }, {
-                    field: 'position',
-                    title: '位置'
-                }, {
-                    field: 'status',
-                    title: '狀態'
-                }, {
-                    field: 'LastModified',
-                    title: '最後修改時間'
-                }]
-            });
-        });
+        if ($('#lb_DM_DM').is('.active')) {
+            $('#DM_DM').show();
 
-        var getURl = new URL(location.href);
-        if (getURl.searchParams.has('DID')) {
-            var DID = getURl.searchParams.get('DID');
-            console.log(DID);
-        }
-    } else {
-        $('#DM_PM').show();
-        $.ajax({
-            url: "../ntuh_yl_RT_mdms_api/db.php",
-            data: "mode=sync_position_item_tb_download" +
-                "&acc=" + $.cookie("LoginInfoAcc")+
-                "&pw="+$.cookie("LoginInfoPw"),
-            type: "POST",
-            success: function (msg) {
-                console.log(msg);
-            },
-            error: function (xhr) {
-                console.log('ajax er');
-                $.alert({
-                    title: '錯誤',
-                    content: 'Ajax 發生錯誤',
-                    type: 'red',
-                    typeAnimated: true
+            SyncDeviceTable(false);
+
+            var sql = new WebSql();
+            sql.select("device_tb", "*", "where 1", function (result) {
+                var jsonA = [];
+                for (let i = 0; i < result.length; i++) {
+                    var tmp = result[i];
+                    tmp['status'] = StatusStr[tmp['status']];
+                    jsonA.push(tmp);
+                }
+                console.log(jsonA);
+                $('#table_device_mng').bootstrapTable({
+                    data: jsonA,
+                    dataType: "json",
+                    classes: "table table-bordered table-striped table-sm",
+                    striped: true,
+                    pagination: true,
+                    uniqueId: 'DID',
+                    sortName: 'DID',
+                    pageNumber: 1,
+                    pageSize: 5,
+                    search: true,
+                    showPaginationSwitch: true,
+                    pageList: [5, 10, 15, 20],
+                    columns: [{
+                        field: 'DID',
+                        title: '設備ID',
+                        formatter: LinkFormatterDM
+                    }, {
+                        field: 'category',
+                        title: '分類'
+                    }, {
+                        field: 'model',
+                        title: '型號'
+                    }, {
+                        field: 'number',
+                        title: '編號'
+                    }, {
+                        field: 'user',
+                        title: '使用者',
+                    }, {
+                        field: 'position',
+                        title: '位置'
+                    }, {
+                        field: 'status',
+                        title: '狀態'
+                    }, {
+                        field: 'LastModified',
+                        title: '最後修改時間'
+                    }]
                 });
-            }
-        });
-    }
+            });
 
+            var getURl = new URL(location.href);
+            if (getURl.searchParams.has('DID')) {
+                var DID = getURl.searchParams.get('DID');
+                console.log(DID);
+            }
+        } else {
+            $('#DM_PM').show();
+
+            $.ajax({
+                url: "../ntuh_yl_RT_mdms_api/db.php",
+                data: "mode=sync_position_item_tb_download" +
+                    "&acc=" + $.cookie("LoginInfoAcc")+
+                    "&pw="+$.cookie("LoginInfoPw"),
+                type: "POST",
+                success: function (msg) {
+                    console.log(msg);
+                },
+                error: function (xhr) {
+                    console.log('ajax er');
+                    $.alert({
+                        title: '錯誤',
+                        content: 'Ajax 發生錯誤',
+                        type: 'red',
+                        typeAnimated: true
+                    });
+                }
+            });
+        }
+    }, 0);
 }
 
