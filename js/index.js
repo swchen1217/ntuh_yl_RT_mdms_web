@@ -922,55 +922,62 @@ function DM_Switch() {
         } else{
             $('#DM_PM').show();
 
-            $.ajax({
-                url: "../ntuh_yl_RT_mdms_api/db.php",
-                data: "mode=sync_position_item_tb_download" +
-                    "&acc=" + $.cookie("LoginInfoAcc")+
-                    "&pw="+$.cookie("LoginInfoPw"),
-                type: "POST",
-                success: function (msg) {
-                    console.log(msg);
-                    var jsonA=JSON.parse(msg);
-                    console.log(jsonA);
-                    $('#table_position').bootstrapTable({
-                        data: jsonA,
-                        dataType: "json",
-                        classes: "table table-bordered table-striped table-sm",
-                        striped: true,
-                        pagination: true,
-                        uniqueId: 'type',
-                        pageNumber: 1,
-                        pageSize: 10,
-                        pageList: [10, 25, 50, 100],
-                        search: true,
-                        sortName: 'type',
-                        showPaginationSwitch: true,
-                        columns: [{
-                            field: 'type',
-                            title: '分類'
-                        }, {
-                            field: 'item',
-                            title: '編號'
-                        }, {
-                            field: 'operating',
-                            title: '操作',
-                            width: 135,
-                            formatter: '<button id="position_table_del" class="btn btn-danger">刪除</button>',
-                            events: operateEvents
-                        }]
-                    });
-                },
-                error: function (xhr) {
-                    console.log('ajax er');
-                    $.alert({
-                        title: '錯誤',
-                        content: 'Ajax 發生錯誤',
-                        type: 'red',
-                        typeAnimated: true
-                    });
-                }
+            $('#table_position').bootstrapTable({
+                data: jsonA,
+                dataType: "json",
+                classes: "table table-bordered table-striped table-sm",
+                striped: true,
+                pagination: true,
+                uniqueId: 'type',
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [10, 25, 50, 100],
+                search: true,
+                sortName: 'type',
+                showPaginationSwitch: true,
+                columns: [{
+                    field: 'type',
+                    title: '分類'
+                }, {
+                    field: 'item',
+                    title: '編號'
+                }, {
+                    field: 'operating',
+                    title: '操作',
+                    width: 135,
+                    formatter: '<button id="position_table_del" class="btn btn-danger">刪除</button>',
+                    events: operateEvents
+                }]
             });
         }
     }, 0);
+}
+
+function getPositionData() {
+    var data;
+    $.ajax({
+        url: "../ntuh_yl_RT_mdms_api/db.php",
+        data: "mode=sync_position_item_tb_download" +
+            "&acc=" + $.cookie("LoginInfoAcc")+
+            "&pw="+$.cookie("LoginInfoPw"),
+        type: "POST",
+        asny:false,
+        success: function (msg) {
+            console.log(msg);
+            var jsonA=JSON.parse(msg);
+            console.log(jsonA);
+            data=jsonA;
+        },
+        error: function (xhr) {
+            console.log('ajax er');
+            $.alert({
+                title: '錯誤',
+                content: 'Ajax 發生錯誤',
+                type: 'red',
+                typeAnimated: true
+            });
+        }
+    });
+    return data;
 }
 
