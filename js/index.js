@@ -820,6 +820,7 @@ window.operateEvents = {
                             success: function (msg) {
                                 if(msg=='ok'){
                                     ShowAlart('alert-success', '刪除成功', false, true);
+                                    $('#table_position').bootstrapTable('refresh',{data:getPositionData()});
                                 }
                                 else
                                     ShowAlart('alert-danger', '錯誤!!', false, false);
@@ -944,7 +945,6 @@ function DM_Switch() {
                 }, {
                     field: 'operating',
                     title: '操作',
-                    width: 135,
                     formatter: '<button id="position_table_del" class="btn btn-danger">刪除</button>',
                     events: operateEvents
                 }]
@@ -954,14 +954,14 @@ function DM_Switch() {
 }
 
 function getPositionData() {
-    var data;
+    var data=0;
     $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
         data: "mode=sync_position_item_tb_download" +
             "&acc=" + $.cookie("LoginInfoAcc")+
             "&pw="+$.cookie("LoginInfoPw"),
         type: "POST",
-        asny:false,
+        async:false,
         success: function (msg) {
             console.log(msg);
             var jsonA=JSON.parse(msg);
@@ -978,6 +978,7 @@ function getPositionData() {
             });
         }
     });
+    console.log(data);
     return data;
 }
 
