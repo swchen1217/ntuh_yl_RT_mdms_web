@@ -820,7 +820,7 @@ window.operateEvents = {
                             success: function (msg) {
                                 if(msg=='ok'){
                                     ShowAlart('alert-success', '刪除成功', false, true);
-                                    $('#table_position').bootstrapTable('refresh',{data:getPositionData()});
+                                    $('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
                                 }
                                 else
                                     ShowAlart('alert-danger', '錯誤!!', false, false);
@@ -937,6 +937,9 @@ function DM_Switch() {
                 sortName: 'type',
                 showPaginationSwitch: true,
                 columns: [{
+                    field: 'checkbox',
+                    checkbox:true
+                },{
                     field: 'type',
                     title: '分類'
                 }, {
