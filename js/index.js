@@ -923,7 +923,7 @@ function DM_Switch() {
             $('#DM_PM').show();
 
             $('#table_position').bootstrapTable({
-                data: jsonA,
+                data: getPositionData(),
                 dataType: "json",
                 classes: "table table-bordered table-striped table-sm",
                 striped: true,
