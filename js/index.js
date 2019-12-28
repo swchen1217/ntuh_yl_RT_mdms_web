@@ -763,6 +763,10 @@ function ButtonOnClickListener() {
             });
         }
     });
+
+    function position_table_del() {
+
+    }
 }
 
 function PermissionCheck(NeedPermission, isAlert) {
