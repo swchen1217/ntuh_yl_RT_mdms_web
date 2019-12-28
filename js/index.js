@@ -788,7 +788,7 @@ function ButtonOnClickListener() {
                                 type: "POST",
                                 success: function (msg) {
                                     if(msg=='ok'){
-                                        //$('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
+                                        //$('#table_position').bootstrapTable(' refresh',{data:getPositionData(),silent: true});
                                         console.log("del_ok")
                                     }
                                 },
