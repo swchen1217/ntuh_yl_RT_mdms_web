@@ -44,3 +44,8 @@ body{
         z-index:5;
     }
 }
+@media screen and (min-width: 260px){
+    #btn_del_position{
+        top: -50px;
+    }
+}
