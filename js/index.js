@@ -788,11 +788,9 @@ function ButtonOnClickListener() {
                                 type: "POST",
                                 success: function (msg) {
                                     if(msg=='ok'){
-                                        ShowAlart('alert-success', '刪除成功', false, true);
                                         //$('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
+                                        console.log("del_ok")
                                     }
-                                    else
-                                        ShowAlart('alert-danger', '錯誤!!', false, false);
                                 },
                                 error: function (xhr) {
                                     console.log('ajax er');
@@ -805,6 +803,7 @@ function ButtonOnClickListener() {
                                 }
                             });
                         }
+                        ShowAlart('alert-success', '刪除成功', false, true);
                     }
                 },
                 cancel: {
