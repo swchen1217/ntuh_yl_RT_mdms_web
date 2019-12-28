@@ -766,7 +766,6 @@ function ButtonOnClickListener() {
 
     $('#btn_del_position').click(function () {
         console.log("del");
-        console.log(row);
         HideAlert();
         $.confirm({
             title: '確認刪除!!',
@@ -777,31 +776,35 @@ function ButtonOnClickListener() {
                     text: '刪除',
                     btnClass: 'btn-red',
                     action: function () {
-                        /*$.ajax({
-                            url: "../ntuh_yl_RT_mdms_api/db.php",
-                            data: "mode=del_position" +
-                                "&acc=" + $.cookie("LoginInfoAcc")+
-                                "&pw=" + $.cookie("LoginInfoPw")+
-                                "&position="+row['type']+"-"+row['item'],
-                            type: "POST",
-                            success: function (msg) {
-                                if(msg=='ok'){
-                                    ShowAlart('alert-success', '刪除成功', false, true);
-                                    //$('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
+                        console.log($('#table_position').bootstrapTable('getAllSelections'));
+                        var del_data=$('#table_position').bootstrapTable('getAllSelections');
+                        for(var i=0;i<del_data.length;i++){
+                            $.ajax({
+                                url: "../ntuh_yl_RT_mdms_api/db.php",
+                                data: "mode=del_position" +
+                                    "&acc=" + $.cookie("LoginInfoAcc")+
+                                    "&pw=" + $.cookie("LoginInfoPw")+
+                                    "&position="+del_data[i]['type']+"-"+del_data[i]['item'],
+                                type: "POST",
+                                success: function (msg) {
+                                    if(msg=='ok'){
+                                        ShowAlart('alert-success', '刪除成功', false, true);
+                                        //$('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
+                                    }
+                                    else
+                                        ShowAlart('alert-danger', '錯誤!!', false, false);
+                                },
+                                error: function (xhr) {
+                                    console.log('ajax er');
+                                    $.alert({
+                                        title: '錯誤',
+                                        content: 'Ajax 發生錯誤',
+                                        type: 'red',
+                                        typeAnimated: true
+                                    });
                                 }
-                                else
-                                    ShowAlart('alert-danger', '錯誤!!', false, false);
-                            },
-                            error: function (xhr) {
-                                console.log('ajax er');
-                                $.alert({
-                                    title: '錯誤',
-                                    content: 'Ajax 發生錯誤',
-                                    type: 'red',
-                                    typeAnimated: true
-                                });
-                            }
-                        });*/
+                            });
+                        }
                     }
                 },
                 cancel: {
