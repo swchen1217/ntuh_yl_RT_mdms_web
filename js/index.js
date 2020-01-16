@@ -891,7 +891,11 @@ window.operateEvents = {
     'click #device_table_mkqr': function (e, value, row, index) {
         var DID = row['DID'];
         console.log(DID);
-        // TODO
+        document.getElementById("QRModalTitle").innerText=DID;
+        document.getElementById("QRModalContext1").innerHTML="<img src='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID="+DID+"'/>";
+        document.getElementById("QRModalContext2").innerHTML="<a href='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID="+DID+"' download>下載QRCode<br>(87x87)</a>";
+
+        $('#QRModal').modal('show');
     },
     /*'click #position_table_del': function (e, value, row, index) {
         console.log("del");
