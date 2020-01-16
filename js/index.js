@@ -818,34 +818,38 @@ function ButtonOnClickListener() {
         for(var i=0;i<=maxNewPositionRow;i++){
             var type=$('#inputType_'+i).val();
             var item=$('#inputItem_'+i).val();
-            var tmp=type+"-"+item;
-            console.log(tmp);
-            $.ajax({
-                url: "../ntuh_yl_RT_mdms_api/db.php",
-                data: "mode=new_position" +
-                    "&acc=" + $.cookie("LoginInfoAcc") +
-                    "&pw=" + $.cookie("LoginInfoPw") +
-                    "&position=" + tmp,
-                type: "POST",
-                success: function (msg) {
-                    if (msg == 'ok') {
-                        ShowAlart('alert-success', '新增成功', false, true);
-                    }else{
-                        ShowAlart('alert-danger', '新增失敗', false, false);
+            if(type!="" && item!=""){
+                var tmp=type+"-"+item;
+                console.log(tmp);
+                $.ajax({
+                    url: "../ntuh_yl_RT_mdms_api/db.php",
+                    data: "mode=new_position" +
+                        "&acc=" + $.cookie("LoginInfoAcc") +
+                        "&pw=" + $.cookie("LoginInfoPw") +
+                        "&position=" + tmp,
+                    type: "POST",
+                    success: function (msg) {
+                        if (msg == 'ok') {
+                            ShowAlart('alert-success', '新增成功', false, true);
+                        }else{
+                            ShowAlart('alert-danger', '新增失敗', false, false);
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('ajax er');
+                        $.alert({
+                            title: '錯誤',
+                            content: 'Ajax 發生錯誤',
+                            type: 'red',
+                            typeAnimated: true
+                        });
                     }
-                },
-                error: function (xhr) {
-                    console.log('ajax er');
-                    $.alert({
-                        title: '錯誤',
-                        content: 'Ajax 發生錯誤',
-                        type: 'red',
-                        typeAnimated: true
-                    });
-                }
-            });
+                });
+            }
         }
-
+        setTimeout(function () {
+            location.reload();
+        }, 1500);
     });
 }
 
