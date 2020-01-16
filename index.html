@@ -183,6 +183,25 @@
         <div id="Content_Fix">5</div>
         <div id="Content_Maintenance_check">6</div>
         <div id="Content_Device_manage">
+            <div class="modal fade" id="QRModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="QRModalTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="display: flex">
+                            <div class="col" id="QRModalContext1" style="text-align: center"></div>
+                            <div class="col" id="QRModalContext2" style="text-align: center"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="btn-group btn-group-toggle" id="btn_DM" data-toggle="buttons" style="margin-top: 10px;">
                 <label class="btn btn-secondary active" id="lb_DM_DM">
                     <input type="radio" checked onchange="DM_Switch();"> 設備管理
