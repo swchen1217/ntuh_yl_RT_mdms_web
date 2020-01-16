@@ -813,7 +813,14 @@ function ButtonOnClickListener() {
         });
     });
 
-    $('#')
+    $('#btn_new_position').click(function () {
+        console.log(maxNewPositionRow);
+        for(var i=0;i<=maxNewPositionRow;i++){
+            var type=$('#inputType_'+i).val();
+            var item=$('#inputItem_'+i).val();
+            console.log(type+"-"+item);
+        }
+    });
 }
 
 function PermissionCheck(NeedPermission, isAlert) {
@@ -1038,10 +1045,10 @@ function getPositionData() {
     return data;
 }
 
-var countNewPositionRow = 0;
+var maxNewPositionRow = 0;
 
 function addNewPositionRow() {
-    countNewPositionRow++;
+    maxNewPositionRow++;
     var new_row = document.createElement("div");
     new_row.className = "form-row";
     new_row.style.marginTop="5px";
@@ -1052,12 +1059,12 @@ function addNewPositionRow() {
     var new_input_type = document.createElement("input");
     new_input_type.type = "text";
     new_input_type.className = "form-control";
-    new_input_type.id = "inputType_" + countNewPositionRow;
+    new_input_type.id = "inputType_" + maxNewPositionRow;
     new_input_type.placeholder = "type";
     var new_input_item = document.createElement("input");
     new_input_item.type = "text";
     new_input_item.className = "form-control";
-    new_input_item.id = "inputItem_" + countNewPositionRow;
+    new_input_item.id = "inputItem_" + maxNewPositionRow;
     new_input_item.placeholder = "item";
     new_col_1.appendChild(new_input_type);
     new_col_2.appendChild(new_input_item);
