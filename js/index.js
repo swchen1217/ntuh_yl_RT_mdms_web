@@ -804,6 +804,9 @@ function ButtonOnClickListener() {
                             });
                         }
                         ShowAlart('alert-success', '刪除成功', false, true);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
                     }
                 },
                 cancel: {
@@ -849,7 +852,7 @@ function ButtonOnClickListener() {
         }
         setTimeout(function () {
             location.reload();
-        }, 1500);
+        }, 1000);
     });
 }
 
