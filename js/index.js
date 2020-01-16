@@ -777,17 +777,17 @@ function ButtonOnClickListener() {
                     btnClass: 'btn-red',
                     action: function () {
                         console.log($('#table_position').bootstrapTable('getAllSelections'));
-                        var del_data=$('#table_position').bootstrapTable('getAllSelections');
-                        for(var i=0;i<del_data.length;i++){
+                        var del_data = $('#table_position').bootstrapTable('getAllSelections');
+                        for (var i = 0; i < del_data.length; i++) {
                             $.ajax({
                                 url: "../ntuh_yl_RT_mdms_api/db.php",
                                 data: "mode=del_position" +
-                                    "&acc=" + $.cookie("LoginInfoAcc")+
-                                    "&pw=" + $.cookie("LoginInfoPw")+
-                                    "&position="+del_data[i]['type']+"-"+del_data[i]['item'],
+                                    "&acc=" + $.cookie("LoginInfoAcc") +
+                                    "&pw=" + $.cookie("LoginInfoPw") +
+                                    "&position=" + del_data[i]['type'] + "-" + del_data[i]['item'],
                                 type: "POST",
                                 success: function (msg) {
-                                    if(msg=='ok'){
+                                    if (msg == 'ok') {
                                         //$('#table_position').bootstrapTable(' refresh',{data:getPositionData(),silent: true});
                                         console.log("del_ok")
                                     }
@@ -812,6 +812,8 @@ function ButtonOnClickListener() {
             }
         });
     });
+
+    $('#')
 }
 
 function PermissionCheck(NeedPermission, isAlert) {
@@ -970,7 +972,7 @@ function DM_Switch() {
                 var DID = getURl.searchParams.get('DID');
                 console.log(DID);
             }
-        } else{
+        } else {
             $('#DM_PM').show();
 
             $('#table_position').bootstrapTable({
@@ -988,9 +990,9 @@ function DM_Switch() {
                 showPaginationSwitch: true,
                 columns: [{
                     field: 'checkbox',
-                    checkbox:true,
+                    checkbox: true,
                     //formatter: '<input type="checkbox" style="width:25px;height:25px">'
-                },{
+                }, {
                     field: 'type',
                     title: '分類'
                 }, {
@@ -1008,19 +1010,19 @@ function DM_Switch() {
 }
 
 function getPositionData() {
-    var data=0;
+    var data = 0;
     $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
         data: "mode=sync_position_item_tb_download" +
-            "&acc=" + $.cookie("LoginInfoAcc")+
-            "&pw="+$.cookie("LoginInfoPw"),
+            "&acc=" + $.cookie("LoginInfoAcc") +
+            "&pw=" + $.cookie("LoginInfoPw"),
         type: "POST",
-        async:false,
+        async: false,
         success: function (msg) {
             console.log(msg);
-            var jsonA=JSON.parse(msg);
+            var jsonA = JSON.parse(msg);
             console.log(jsonA);
-            data=jsonA;
+            data = jsonA;
         },
         error: function (xhr) {
             console.log('ajax er');
@@ -1034,5 +1036,34 @@ function getPositionData() {
     });
     console.log(data);
     return data;
+}
+
+var countNewPositionRow = 0;
+
+function addNewPositionRow() {
+    countNewPositionRow++;
+    var new_row = document.createElement("div");
+    new_row.className = "form-row";
+    new_row.style.marginTop="5px";
+    var new_col_1 = document.createElement("div");
+    new_col_1.className = "col";
+    var new_col_2 = document.createElement("div");
+    new_col_2.className = "col";
+    var new_input_type = document.createElement("input");
+    new_input_type.type = "text";
+    new_input_type.className = "form-control";
+    new_input_type.id = "inputType_" + countNewPositionRow;
+    new_input_type.placeholder = "type";
+    var new_input_item = document.createElement("input");
+    new_input_item.type = "text";
+    new_input_item.className = "form-control";
+    new_input_item.id = "inputItem_" + countNewPositionRow;
+    new_input_item.placeholder = "item";
+    new_col_1.appendChild(new_input_type);
+    new_col_2.appendChild(new_input_item);
+    new_row.appendChild(new_col_1);
+    new_row.appendChild(new_col_2);
+    var div=document.getElementById("NewPositionRow");
+    div.appendChild(new_row);
 }
 
