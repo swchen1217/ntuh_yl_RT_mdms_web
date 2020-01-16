@@ -888,6 +888,11 @@ window.operateEvents = {
         console.log(DID);
         location.href = '?DID=' + DID + '#DeviceManage';
     },
+    'click #device_table_mkqr': function (e, value, row, index) {
+        var DID = row['DID'];
+        console.log(DID);
+        // TODO
+    },
     /*'click #position_table_del': function (e, value, row, index) {
         console.log("del");
         console.log(row);
@@ -1003,6 +1008,12 @@ function DM_Switch() {
                     }, {
                         field: 'LastModified',
                         title: '最後修改時間'
+                    }, {
+                        field: 'mkqr',
+                        title: 'QR Code',
+                        width: 75,
+                        formatter: '<button id="device_table_mkqr" class="btn btn-info">產生</button>',
+                        events: operateEvents
                     }]
                 });
             });
