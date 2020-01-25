@@ -1192,6 +1192,7 @@ function DM_Switch() {
                     $('#chgdevice-ShowPosition').val(deviceinfo['position']);
                     $('#chgdevice-ShowStatus').val(deviceinfo['status']);
                 }
+                chgDeviceInputAbleSwitch();
             }
         } else {
             $('#DM_PM').show();
@@ -1315,3 +1316,23 @@ function getDeviceData() {
     return data;
 }
 
+function chgDeviceInputAbleSwitch() {
+    var user=true;
+    var position=true;
+    var old_=$('#chgdevice-ShowStatus').val();
+    var new_=$('#chgdevice-InputStatus').val();
+
+    if((old_=='0' && new_=='-1') || (new_=='2' && (old_=='0' || old_=='1')) || (old_=='2' && new_=='-1'))
+        user=false;
+    if(old_=='0' && new_=='-1')
+        position=false;
+
+    if(user)
+        $('#chgdevice-InputUser').prop("disabled", false);
+    else
+        $('#chgdevice-InputUser').prop("disabled", true);
+    if(position)
+        $('#chgdevice-InputPosition').prop("disabled", false);
+    else
+        $('#chgdevice-InputPosition').prop("disabled", true);
+}
