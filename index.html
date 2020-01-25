@@ -223,7 +223,110 @@
                                 <h3 class="card-title">修改裝置</h3>
                             </div>
                             <div class="card-body">
-
+                                <form role="form" class="form-my" id="form-chgdevice">
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowId">設備ID</label>
+                                        <input type="text" class="form-control-plaintext" id="chgdevice-ShowId" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowCategory">分類</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-ShowCategory" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-InputCategory"
+                                                       placeholder="修改分類">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowModel">型號</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-ShowModel" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-InputModel"
+                                                       placeholder="修改型號">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowNumber">編號</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-ShowNumber" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-InputNumber"
+                                                       placeholder="修改編號">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowUser">使用者</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-ShowUser" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-InputUser"
+                                                       placeholder="修改使用者">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowPosition">位置</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-ShowPosition" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="chgdevice-InputPosition"
+                                                       placeholder="修改位置">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chgdevice-ShowStatus">狀態</label>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <select class="custom-select" id="chgdevice-ShowStatus" disabled>
+                                                    <option value="0">0(無狀態)</option>
+                                                    <option value="1">1(使用中)</option>
+                                                    <option value="2">2(倉庫)</option>
+                                                    <option value="3">3(維修中)</option>
+                                                    <option value="4">4(保養中)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select class="custom-select" id="chgdevice-InputStatus">
+                                                    <option value="-1" selected>修改狀態</option>
+                                                    <option value="0">0(無狀態)</option>
+                                                    <option value="1">1(使用中)</option>
+                                                    <option value="2">2(倉庫)</option>
+                                                    <option value="3">3(維修中)</option>
+                                                    <option value="4">4(保養中)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        <div class="col-4">
+                                            <button id="btn_chgdevice-del" type="button"
+                                                    class="btn btn-default btn-danger btn-block" style="margin-top: 8px">
+                                                刪除
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-default btn-primary btn-block"
+                                                    style="margin-top: 8px">
+                                                送出
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -233,45 +336,33 @@
                                 <h3 class="card-title">新增裝置</h3>
                             </div>
                             <div class="card-body">
-                                <!--<form role="form" class="form-my" id="form-newdevice">
+                                <form role="form" class="form-my" id="form-newdevice">
                                     <div class="form-group">
-                                        <label for="newuser-InputAcc">帳號(員工編號)</label>
-                                        <input type="text" class="form-control" id="newuser-InputAcc" placeholder="輸入帳號"
+                                        <label for="newdevice-InputCategory">分類</label>
+                                        <input type="text" class="form-control" id="newdevice-InputCategory" placeholder="輸入分類"
                                                required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="newuser-InputName">名稱</label>
-                                        <input type="text" class="form-control" id="newuser-InputName" placeholder="輸入名稱"
+                                        <label for="newdevice-InputModel">型號</label>
+                                        <input type="text" class="form-control" id="newdevice-InputModel" placeholder="輸入型號"
                                                required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="newuser-InputPermission">權限</label>
-                                        <select class="custom-select" id="newuser-InputPermission" required>
-                                            <option value="-1" selected disabled>設定權限</option>
-                                            <option value="0">0(未啟用)</option>
-                                            <option value="1">1(狀態查詢)</option>
-                                            <option value="2">2(狀態登錄)</option>
-                                            <option value="3">3(紀錄查看)</option>
-                                            <option value="4">4(裝置管理)</option>
-                                            <option value="5">5(使用者管理)</option>
-                                            <option value="6">6(*)</option>
-                                            <option value="7">7(*)</option>
-                                            <option value="8">8(*)</option>
-                                            <option value="9">9(管理員)</option>
+                                        <label for="newdevice-InputNumber">編號</label>
+                                        <input type="text" class="form-control" id="newdevice-InputNumber" placeholder="輸入編號"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newdevice-InputStatus">狀態</label>
+                                        <select class="custom-select" id="newdevice-InputStatus" required>
+                                            <option value="-1" selected disabled>設定狀態</option>
+                                            <option value="0">0(無狀態)</option>
+                                            <option value="1">1(使用中)</option>
+                                            <option value="2">2(倉庫)</option>
+                                            <option value="3">3(維修中)</option>
+                                            <option value="4">4(保養中)</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="newuser-InputEmail">E-mail</label>
-                                        <input type="email" class="form-control" id="newuser-InputEmail"
-                                               placeholder="輸入E-mail" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="newuser-InputPw">密碼</label>
-                                        <input type="password" class="form-control" id="newuser-InputPw" placeholder="設定密碼">
-                                        <input type="password" class="form-control" id="newuser-InputPwRe"
-                                               placeholder="確認新密碼">
-                                    </div>
-
                                     <div class="row justify-content-end">
                                         <div class="col-4">
                                             <button type="submit" class="btn btn-default btn-primary btn-block"
@@ -280,7 +371,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>-->
+                                </form>
                             </div>
                         </div>
                     </div>
