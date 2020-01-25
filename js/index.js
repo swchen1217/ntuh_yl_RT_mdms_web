@@ -719,6 +719,9 @@ function FormSubmitListener() {
         var n_category = $('#chgd').val();
         var n_model = $('#newdevice-InputModel').val();
         var n_number = $('#newdevice-InputNumber').val();
+        var n_number = $('#newd').val();
+        var n_number = $('#newdevice-InputNumber').val();
+        var n_number = $('#newdevice-InputNumber').val();
 
 
         var n_name = $('#chguser-InputName').val();
