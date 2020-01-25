@@ -106,7 +106,6 @@ function OnHashchangeListener() {
         $("#title_bar").hide();
 
         DM_Switch();
-
     }
     if (hash == '#UserManage' && login_check() && PermissionCheck(5, true)) {
         $('#Content_User_manage').show();
@@ -714,6 +713,142 @@ function FormSubmitListener() {
         }
         return false;
     });
+    /*$('#form-chgdevice').submit(function () {
+        var getURl = new URL(location.href);
+        var DID = getURl.searchParams.get('DID');
+        var n_category = $('#chgd').val();
+        var n_model = $('#newdevice-InputModel').val();
+        var n_number = $('#newdevice-InputNumber').val();
+
+
+        var n_name = $('#chguser-InputName').val();
+        var n_permission = $('#chguser-InputPermission').val();
+        var n_email = $('#chguser-InputEmail').val();
+        var n_pw = $('#chguser-InputPw').val();
+        var n_pw_re = $('#chguser-InputPwRe').val();
+
+        if (acc == null) {
+            $.alert({
+                title: '錯誤',
+                content: '尚未選擇欲更改之帳號',
+                type: 'red',
+                typeAnimated: true
+            });
+        } else {
+            var users = JSON.parse($.cookie("AllUserData"));
+            var userinfo;
+            for (let i = 0; i < users.length; i++) {
+                if (users[i]['account'] == acc) {
+                    userinfo = users[i];
+                    break;
+                }
+            }
+            var old_name = userinfo['name'];
+            var old_permission = userinfo['permission'];
+            var old_email = userinfo['email'];
+            if (n_name == '' && n_permission == '-1' && n_email == '' && n_pw == '') {
+                $.alert({
+                    title: '錯誤',
+                    content: '無任何欲修改之資料',
+                    type: 'red',
+                    typeAnimated: true
+                });
+            } else {
+                var ConfrimContent = "";
+                var chguserParams = "";
+                ConfrimContent += "欲修改資訊如下 請確認:<br>帳號: " + acc + "<br>";
+                chguserParams += "&operate_acc=" + acc;
+                if (n_name != "") {
+                    chguserParams += "&new_name=" + n_name;
+                    ConfrimContent += "名稱: <var>" + old_name + "</var> 更改為 <var>" + n_name + "</var><br>";
+                }
+                if (n_permission != '-1') {
+                    chguserParams += "&new_permission=" + n_permission;
+                    ConfrimContent += "權限: <var>" + old_permission + "(" + PermissionStr[old_permission] + ")</var> 更改為 <var>" + n_permission + "(" + PermissionStr[n_permission] + ")</var><br>";
+                }
+                if (n_email != "") {
+                    chguserParams += "&new_email=" + n_email;
+                    ConfrimContent += "E-mail: <var>" + old_email + "</var><br>更改為 <var>" + n_email + "</var><br>";
+                }
+                if (n_pw != "") {
+                    if (n_pw != '' && n_pw_re != '') {
+                        if (n_pw == n_pw_re) {
+                            var create_time = moment(userinfo['created']).format('YYYYMMDDHHmmss');
+                            var mMD5 = md5(create_time + n_pw);
+                            chguserParams += "&new_pw=" + mMD5;
+                            ConfrimContent += "<b>密碼更改</b><br>";
+                        } else {
+                            $.alert({
+                                title: '錯誤',
+                                content: '確認新密碼不符合!!請重新輸入',
+                                type: 'red',
+                                typeAnimated: true
+                            });
+                            return false;
+                        }
+                    } else {
+                        $.alert({
+                            title: '錯誤',
+                            content: '密碼未輸入完整!!請重新輸入',
+                            type: 'red',
+                            typeAnimated: true
+                        });
+                        return false;
+                    }
+                }
+                $.confirm({
+                    title: '更改確認!',
+                    content: ConfrimContent,
+                    buttons: {
+                        confirm: {
+                            text: '確認',
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                HideAlert();
+                                $.ajax({
+                                    url: "../ntuh_yl_RT_mdms_api/user.php",
+                                    data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw") + chguserParams,
+                                    type: "POST",
+                                    success: function (msg) {
+                                        $('#chguser-InputName').val('');
+                                        $('#chguser-InputPermission').val(-1);
+                                        $('#chguser-InputEmail').val('');
+                                        $('#chguser-InputPw').val('');
+                                        $('#chguser-InputPwRe').val('');
+                                        if (msg == "ok") {
+                                            ShowAlart('alert-success', '修改成功', false, true);
+                                            if (acc == $.cookie("LoginInfoAcc")) {
+                                                location.replace("./login.html")
+                                            } else {
+                                                setTimeout(function () {
+                                                    location.replace("./index.html#UserManage")
+                                                }, 1500);
+                                            }
+                                        } else {
+                                            ShowAlart('alert-danger', '權限錯誤!!', false, false);
+                                        }
+                                    },
+                                    error: function (xhr) {
+                                        console.log('ajax er');
+                                        $.alert({
+                                            title: '錯誤',
+                                            content: 'Ajax 發生錯誤',
+                                            type: 'red',
+                                            typeAnimated: true
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: '取消'
+                        }
+                    }
+                });
+            }
+        }
+        return false;
+    });*/
 }
 
 function ButtonOnClickListener() {
@@ -879,11 +1014,11 @@ function ButtonOnClickListener() {
 
     $('#btn_new_position').click(function () {
         console.log(maxNewPositionRow);
-        for(var i=0;i<=maxNewPositionRow;i++){
-            var type=$('#inputType_'+i).val();
-            var item=$('#inputItem_'+i).val();
-            if(type!="" && item!=""){
-                var tmp=type+"-"+item;
+        for (var i = 0; i <= maxNewPositionRow; i++) {
+            var type = $('#inputType_' + i).val();
+            var item = $('#inputItem_' + i).val();
+            if (type != "" && item != "") {
+                var tmp = type + "-" + item;
                 console.log(tmp);
                 $.ajax({
                     url: "../ntuh_yl_RT_mdms_api/db.php",
@@ -895,7 +1030,7 @@ function ButtonOnClickListener() {
                     success: function (msg) {
                         if (msg == 'ok') {
                             ShowAlart('alert-success', '新增成功', false, true);
-                        }else{
+                        } else {
                             ShowAlart('alert-danger', '新增失敗', false, false);
                         }
                     },
@@ -952,58 +1087,12 @@ window.operateEvents = {
     'click #device_table_mkqr': function (e, value, row, index) {
         var DID = row['DID'];
         console.log(DID);
-        document.getElementById("QRModalTitle").innerText=DID;
-        document.getElementById("QRModalContext1").innerHTML="<img src='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID="+DID+"'/>";
-        document.getElementById("QRModalContext2").innerHTML="<a href='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID="+DID+"' download>下載QRCode<br>(87x87)</a>";
+        document.getElementById("QRModalTitle").innerText = DID;
+        document.getElementById("QRModalContext1").innerHTML = "<img src='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID=" + DID + "'/>";
+        document.getElementById("QRModalContext2").innerHTML = "<a href='../ntuh_yl_RT_mdms_api/make_qrcode.php?DID=" + DID + "' download>下載QRCode<br>(87x87)</a>";
 
         $('#QRModal').modal('show');
     },
-    /*'click #position_table_del': function (e, value, row, index) {
-        console.log("del");
-        console.log(row);
-        HideAlert();
-        $.confirm({
-            title: '確認刪除!!',
-            content: '確認刪除??',
-            type: 'red',
-            buttons: {
-                confirm: {
-                    text: '刪除',
-                    btnClass: 'btn-red',
-                    action: function () {
-                        $.ajax({
-                            url: "../ntuh_yl_RT_mdms_api/db.php",
-                            data: "mode=del_position" +
-                                "&acc=" + $.cookie("LoginInfoAcc")+
-                                "&pw=" + $.cookie("LoginInfoPw")+
-                                "&position="+row['type']+"-"+row['item'],
-                            type: "POST",
-                            success: function (msg) {
-                                if(msg=='ok'){
-                                    ShowAlart('alert-success', '刪除成功', false, true);
-                                    //$('#table_position').bootstrapTable('refresh',{data:getPositionData(),silent: true});
-                                }
-                                else
-                                    ShowAlart('alert-danger', '錯誤!!', false, false);
-                            },
-                            error: function (xhr) {
-                                console.log('ajax er');
-                                $.alert({
-                                    title: '錯誤',
-                                    content: 'Ajax 發生錯誤',
-                                    type: 'red',
-                                    typeAnimated: true
-                                });
-                            }
-                        });
-                    }
-                },
-                cancel: {
-                    text: '取消'
-                },
-            }
-        });
-    }*/
 };
 
 function LinkFormatterUM(value, row, index) {
@@ -1086,7 +1175,23 @@ function DM_Switch() {
             var getURl = new URL(location.href);
             if (getURl.searchParams.has('DID')) {
                 var DID = getURl.searchParams.get('DID');
-                console.log(DID);
+                var devices=getDeviceData();
+                var deviceinfo;
+                for (let i = 0; i < devices.length; i++) {
+                    if (devices[i]['DID'] == DID) {
+                        deviceinfo = devices[i];
+                        break;
+                    }
+                }
+                if (deviceinfo != undefined) {
+                    $('#chgdevice-ShowId').val(deviceinfo['DID']);
+                    $('#chgdevice-ShowCategory').val(deviceinfo['category']);
+                    $('#chgdevice-ShowModel').val(deviceinfo['model']);
+                    $('#chgdevice-ShowNumber').val(deviceinfo['number']);
+                    $('#chgdevice-ShowUser').val(deviceinfo['user']);
+                    $('#chgdevice-ShowPosition').val(deviceinfo['position']);
+                    $('#chgdevice-ShowStatus').val(deviceinfo['status']);
+                }
             }
         } else {
             $('#DM_PM').show();
@@ -1160,7 +1265,7 @@ function addNewPositionRow() {
     maxNewPositionRow++;
     var new_row = document.createElement("div");
     new_row.className = "form-row";
-    new_row.style.marginTop="5px";
+    new_row.style.marginTop = "5px";
     var new_col_1 = document.createElement("div");
     new_col_1.className = "col";
     var new_col_2 = document.createElement("div");
@@ -1179,7 +1284,34 @@ function addNewPositionRow() {
     new_col_2.appendChild(new_input_item);
     new_row.appendChild(new_col_1);
     new_row.appendChild(new_col_2);
-    var div=document.getElementById("NewPositionRow");
+    var div = document.getElementById("NewPositionRow");
     div.appendChild(new_row);
+}
+
+function getDeviceData() {
+    var data = '';
+    $.ajax({
+        url: "../ntuh_yl_RT_mdms_api/db.php",
+        data: "mode=getDeviceData&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw"),
+        type: "POST",
+        async: false,
+        success: function (msg) {
+            console.log(msg);
+            if(msg!='no_data'){
+                var jsonA = JSON.parse(msg);
+                data = jsonA;
+            }
+        },
+        error: function (xhr) {
+            console.log('ajax er');
+            $.alert({
+                title: '錯誤',
+                content: 'Ajax 發生錯誤',
+                type: 'red',
+                typeAnimated: true
+            });
+        }
+    });
+    return data;
 }
 
