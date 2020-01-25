@@ -653,6 +653,67 @@ function FormSubmitListener() {
         }
         return false;
     });
+    $('#form-newdevice').submit(function () {
+        var n_category = $('#newdevice-InputCategory').val();
+        var n_model = $('#newdevice-InputModel').val();
+        var n_number = $('#newdevice-InputNumber').val();
+
+        if (n_category != '' && n_model != '' && n_number != '') {
+            $.confirm({
+                title: '新增裝置!!',
+                content: '確認新增此裝置??',
+                buttons: {
+                    confirm: {
+                        text: '確認',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            HideAlert();
+                            $.ajax({
+                                url: "../ntuh_yl_RT_mdms_api/db.php",
+                                data: "mode=newdevice" +
+                                    "&acc=" + $.cookie("LoginInfoAcc") +
+                                    "&pw=" + $.cookie("LoginInfoPw") +
+                                    "&new_category=" + n_category +
+                                    "&new_model=" + n_model +
+                                    "&new_number=" + n_number
+                                ,
+                                type: "POST",
+                                success: function (msg) {
+                                    $('#newdevice-InputCategory').val('');
+                                    $('#newdevice-InputModel').val('');
+                                    $('#newdevice-InputNumber').val('');
+                                    if (msg == "ok")
+                                        ShowAlart('alert-success', '新增成功', false, true);
+                                    else
+                                        ShowAlart('alert-danger', '錯誤!!', false, false);
+                                },
+                                error: function (xhr) {
+                                    console.log('ajax er');
+                                    $.alert({
+                                        title: '錯誤',
+                                        content: 'Ajax 發生錯誤',
+                                        type: 'red',
+                                        typeAnimated: true
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: '取消'
+                    }
+                }
+            });
+        } else {
+            $.alert({
+                title: '錯誤',
+                content: '輸入未完整!!',
+                type: 'red',
+                typeAnimated: true
+            });
+        }
+        return false;
+    });
 }
 
 function ButtonOnClickListener() {
