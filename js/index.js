@@ -713,24 +713,17 @@ function FormSubmitListener() {
         }
         return false;
     });
-    /*$('#form-chgdevice').submit(function () {
+    $('#form-chgdevice').submit(function () {
         var getURl = new URL(location.href);
         var DID = getURl.searchParams.get('DID');
-        var n_category = $('#chgd').val();
-        var n_model = $('#newdevice-InputModel').val();
-        var n_number = $('#newdevice-InputNumber').val();
-        var n_number = $('#newd').val();
-        var n_number = $('#newdevice-InputNumber').val();
-        var n_number = $('#newdevice-InputNumber').val();
+        var n_category = $('#chgdevice-InputCategory').val();
+        var n_model = $('#chgdevice-InputModel').val();
+        var n_number = $('#chgdevice-InputNumber').val();
+        var n_user = $('#chgdevice-InputUser').val();
+        var n_position = $('#chgdevice-InputPosition').val();
+        var n_status = $('#chgdevice-InputStatus').val();
 
-
-        var n_name = $('#chguser-InputName').val();
-        var n_permission = $('#chguser-InputPermission').val();
-        var n_email = $('#chguser-InputEmail').val();
-        var n_pw = $('#chguser-InputPw').val();
-        var n_pw_re = $('#chguser-InputPwRe').val();
-
-        if (acc == null) {
+        if (DID == null) {
             $.alert({
                 title: '錯誤',
                 content: '尚未選擇欲更改之帳號',
@@ -738,18 +731,22 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         } else {
-            var users = JSON.parse($.cookie("AllUserData"));
-            var userinfo;
-            for (let i = 0; i < users.length; i++) {
-                if (users[i]['account'] == acc) {
-                    userinfo = users[i];
+            var devices=getDeviceData();
+            var deviceinfo;
+            for (let i = 0; i < devices.length; i++) {
+                if (devices[i]['DID'] == DID) {
+                    deviceinfo = devices[i];
                     break;
                 }
             }
-            var old_name = userinfo['name'];
+            /*var old_name = userinfo['name'];
             var old_permission = userinfo['permission'];
-            var old_email = userinfo['email'];
-            if (n_name == '' && n_permission == '-1' && n_email == '' && n_pw == '') {
+            var old_email = userinfo['email'];*/
+
+            var old_status=deviceinfo['status'];
+            if(n_status==old_status)
+                n_status='-1';
+            if (n_category == '' && n_model == '' && n_number == '' && n_user == '' && n_position == '' && n_status == '-1') {
                 $.alert({
                     title: '錯誤',
                     content: '無任何欲修改之資料',
@@ -757,7 +754,34 @@ function FormSubmitListener() {
                     typeAnimated: true
                 });
             } else {
-                var ConfrimContent = "";
+                var noUser=false;
+                var noPosition=false;
+                if(n_status != '-1'){
+                    if(old_status!='0'){
+                        if(n_position=='')
+                            noPosition=true;
+                    }
+                    if(n_status=='1'){
+                        if(n_user=='')
+                            noUser=true;
+                    }
+                    if(noUser || noPosition){
+                        var content='';
+                        if(noUser)
+                            content+='新使用者欄位為必填<br>';
+                        if(noPosition)
+                            content+='新位置欄位為必填<br>';
+                        $.alert({
+                            title: '錯誤',
+                            content: content,
+                            type: 'red',
+                            typeAnimated: true
+                        });
+                        return false;
+                    }
+                }
+                alert('ok');
+                /*var ConfrimContent = "";
                 var chguserParams = "";
                 ConfrimContent += "欲修改資訊如下 請確認:<br>帳號: " + acc + "<br>";
                 chguserParams += "&operate_acc=" + acc;
@@ -847,11 +871,11 @@ function FormSubmitListener() {
                             text: '取消'
                         }
                     }
-                });
+                });*/
             }
         }
         return false;
-    });*/
+    });
 }
 
 function ButtonOnClickListener() {
