@@ -1,6 +1,100 @@
 function init() {
     StatusStr = ["無狀態", "使用中", "倉庫", "維修中", "保養中"];
     PermissionStr = ["未啟用", "狀態查詢", "狀態登錄", "紀錄查看", "裝置管理", "使用者管理", "*", "*", "*", "管理員"];
+    $('#table_device_mng').bootstrapTable({
+        dataType: "json",
+        classes: "table table-bordered table-striped table-sm",
+        striped: true,
+        pagination: true,
+        uniqueId: 'DID',
+        sortName: 'DID',
+        pageNumber: 1,
+        pageSize: 5,
+        search: true,
+        showPaginationSwitch: true,
+        pageList: [5, 10, 15, 20],
+        columns: [{
+            field: 'DID',
+            title: '設備ID',
+            formatter: LinkFormatterDM
+        }, {
+            field: 'category',
+            title: '分類'
+        }, {
+            field: 'model',
+            title: '型號'
+        }, {
+            field: 'number',
+            title: '編號'
+        }, {
+            field: 'user',
+            title: '使用者',
+        }, {
+            field: 'position',
+            title: '位置'
+        }, {
+            field: 'status',
+            title: '狀態'
+        }, {
+            field: 'LastModified',
+            title: '最後修改時間'
+        }, {
+            field: 'mkqr',
+            title: 'QR Code',
+            width: 75,
+            formatter: '<button id="device_table_mkqr" class="btn btn-info">產生</button>',
+            events: operateEvents
+        }]
+    });
+    $('#table_device').bootstrapTable({
+        dataType: "json",
+        classes: "table table-bordered table-striped table-sm",
+        striped: true,
+        pagination: true,
+        uniqueId: 'DID',
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100],
+        search: true,
+        sortName: 'DID',
+        showColumns: true,
+        showToggle: true,
+        showPaginationSwitch: true,
+        showFullscreen: true,
+        columns: [{
+            field: 'DID',
+            title: '設備ID'
+        }, {
+            field: 'category',
+            title: '分類'
+        }, {
+            field: 'model',
+            title: '型號'
+        }, {
+            field: 'number',
+            title: '編號'
+        }, {
+            field: 'user',
+            title: '使用者',
+            //align:'center'
+        }, {
+            field: 'position',
+            title: '位置'
+        }, {
+            field: 'status',
+            title: '狀態'
+        }, {
+            field: 'LastModified',
+            title: '最後修改時間'
+        }, {
+            field: 'operating',
+            title: '操作',
+            width: 135,
+            formatter: '<button id="device_table_update" class="btn btn-info">登錄</button>' +
+                '&nbsp;<button id="device_table_manage" class="btn btn-success">管理</button>',
+            events: operateEvents
+        }]
+    });
 }
 
 function OnHashchangeListener() {
@@ -26,9 +120,11 @@ function OnHashchangeListener() {
         $('#Content_Inquire_status').show();
         $("#title_bar").hide();
 
-        SyncDeviceTable(false);
+        //SyncDeviceTable(false);
 
-        var sql = new WebSql();
+        $('#table_device').bootstrapTable('load', getDeviceData(true));
+
+        /*var sql = new WebSql();
         sql.select("device_tb", "*", "where 1", function (result) {
             var jsonA = [];
             for (let i = 0; i < result.length; i++) {
@@ -37,57 +133,8 @@ function OnHashchangeListener() {
                 jsonA.push(tmp);
             }
             console.log(jsonA);
-            $('#table_device').bootstrapTable({
-                data: jsonA,
-                dataType: "json",
-                classes: "table table-bordered table-striped table-sm",
-                striped: true,
-                pagination: true,
-                uniqueId: 'DID',
-                pageNumber: 1,
-                pageSize: 10,
-                pageList: [10, 25, 50, 100],
-                search: true,
-                sortName: 'DID',
-                showColumns: true,
-                showToggle: true,
-                showPaginationSwitch: true,
-                showFullscreen: true,
-                columns: [{
-                    field: 'DID',
-                    title: '設備ID'
-                }, {
-                    field: 'category',
-                    title: '分類'
-                }, {
-                    field: 'model',
-                    title: '型號'
-                }, {
-                    field: 'number',
-                    title: '編號'
-                }, {
-                    field: 'user',
-                    title: '使用者',
-                    //align:'center'
-                }, {
-                    field: 'position',
-                    title: '位置'
-                }, {
-                    field: 'status',
-                    title: '狀態'
-                }, {
-                    field: 'LastModified',
-                    title: '最後修改時間'
-                }, {
-                    field: 'operating',
-                    title: '操作',
-                    width: 135,
-                    formatter: '<button id="device_table_update" class="btn btn-info">登錄</button>' +
-                        '&nbsp;<button id="device_table_manage" class="btn btn-success">管理</button>',
-                    events: operateEvents
-                }]
-            });
-        });
+
+        });*/
     }
     if (hash == '#Log' && login_check() && PermissionCheck(3, true)) {
         $('#Content_Log').show();
@@ -731,7 +778,7 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         } else {
-            var devices = getDeviceData();
+            var devices = getDeviceData(false);
             var deviceinfo;
             for (let i = 0; i < devices.length; i++) {
                 if (devices[i]['DID'] == DID) {
@@ -1127,9 +1174,11 @@ function DM_Switch() {
         if ($('#lb_DM_DM').is('.active')) {
             $('#DM_DM').show();
 
-            SyncDeviceTable(false);
+            $('#table_device_mng').bootstrapTable('load', getDeviceData(true));
 
-            var sql = new WebSql();
+            //SyncDeviceTable(false);
+
+            /*var sql = new WebSql();
             sql.select("device_tb", "*", "where 1", function (result) {
                 var jsonA = [];
                 for (let i = 0; i < result.length; i++) {
@@ -1138,59 +1187,13 @@ function DM_Switch() {
                     jsonA.push(tmp);
                 }
                 console.log(jsonA);
-                $('#table_device_mng').bootstrapTable({
-                    data: jsonA,
-                    dataType: "json",
-                    classes: "table table-bordered table-striped table-sm",
-                    striped: true,
-                    pagination: true,
-                    uniqueId: 'DID',
-                    sortName: 'DID',
-                    pageNumber: 1,
-                    pageSize: 5,
-                    search: true,
-                    showPaginationSwitch: true,
-                    pageList: [5, 10, 15, 20],
-                    //toolbar : "#toolbar_del_position",
-                    columns: [{
-                        field: 'DID',
-                        title: '設備ID',
-                        formatter: LinkFormatterDM
-                    }, {
-                        field: 'category',
-                        title: '分類'
-                    }, {
-                        field: 'model',
-                        title: '型號'
-                    }, {
-                        field: 'number',
-                        title: '編號'
-                    }, {
-                        field: 'user',
-                        title: '使用者',
-                    }, {
-                        field: 'position',
-                        title: '位置'
-                    }, {
-                        field: 'status',
-                        title: '狀態'
-                    }, {
-                        field: 'LastModified',
-                        title: '最後修改時間'
-                    }, {
-                        field: 'mkqr',
-                        title: 'QR Code',
-                        width: 75,
-                        formatter: '<button id="device_table_mkqr" class="btn btn-info">產生</button>',
-                        events: operateEvents
-                    }]
-                });
-            });
+
+            });*/
 
             var getURl = new URL(location.href);
             if (getURl.searchParams.has('DID')) {
                 var DID = getURl.searchParams.get('DID');
-                var devices = getDeviceData();
+                var devices = getDeviceData(false);
                 var deviceinfo;
                 for (let i = 0; i < devices.length; i++) {
                     if (devices[i]['DID'] == DID) {
@@ -1304,7 +1307,7 @@ function addNewPositionRow() {
     div.appendChild(new_row);
 }
 
-function getDeviceData() {
+function getDeviceData(format) {
     var data = '';
     $.ajax({
         url: "../ntuh_yl_RT_mdms_api/db.php",
@@ -1314,6 +1317,11 @@ function getDeviceData() {
         success: function (msg) {
             if (msg != 'no_data') {
                 var jsonA = JSON.parse(msg);
+                if(format){
+                    for (let i = 0; i < jsonA.length; i++) {
+                        jsonA[i]['status'] = StatusStr[jsonA[i]['status']];
+                    }
+                }
                 data = jsonA;
             }
         },
