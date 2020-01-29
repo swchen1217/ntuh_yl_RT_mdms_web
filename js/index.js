@@ -731,7 +731,7 @@ function FormSubmitListener() {
                 typeAnimated: true
             });
         } else {
-            var devices=getDeviceData();
+            var devices = getDeviceData();
             var deviceinfo;
             for (let i = 0; i < devices.length; i++) {
                 if (devices[i]['DID'] == DID) {
@@ -739,13 +739,16 @@ function FormSubmitListener() {
                     break;
                 }
             }
-            /*var old_name = userinfo['name'];
-            var old_permission = userinfo['permission'];
-            var old_email = userinfo['email'];*/
 
-            var old_status=deviceinfo['status'];
-            if(n_status==old_status)
-                n_status='-1';
+            var old_category = deviceinfo['category'];
+            var old_model = deviceinfo['model'];
+            var old_number = deviceinfo['number'];
+            var old_user = deviceinfo['user'];
+            var old_position = deviceinfo['position'];
+
+            var old_status = deviceinfo['status'];
+            if (n_status == old_status)
+                n_status = '-1';
             if (n_category == '' && n_model == '' && n_number == '' && n_user == '' && n_position == '' && n_status == '-1') {
                 $.alert({
                     title: '錯誤',
@@ -754,23 +757,23 @@ function FormSubmitListener() {
                     typeAnimated: true
                 });
             } else {
-                var noUser=false;
-                var noPosition=false;
-                if(n_status != '-1'){
-                    if(old_status!='0'){
-                        if(n_position=='')
-                            noPosition=true;
+                var noUser = false;
+                var noPosition = false;
+                if (n_status != '-1') {
+                    if (old_status != '0') {
+                        if (n_position == '')
+                            noPosition = true;
                     }
-                    if(n_status=='1'){
-                        if(n_user=='')
-                            noUser=true;
+                    if (n_status == '1') {
+                        if (n_user == '')
+                            noUser = true;
                     }
-                    if(noUser || noPosition){
-                        var content='';
-                        if(noUser)
-                            content+='新使用者欄位為必填<br>';
-                        if(noPosition)
-                            content+='新位置欄位為必填<br>';
+                    if (noUser || noPosition) {
+                        var content = '';
+                        if (noUser)
+                            content += '新使用者欄位為必填<br>';
+                        if (noPosition)
+                            content += '新位置欄位為必填<br>';
                         $.alert({
                             title: '錯誤',
                             content: content,
@@ -780,49 +783,36 @@ function FormSubmitListener() {
                         return false;
                     }
                 }
-                alert('ok');
-                /*var ConfrimContent = "";
-                var chguserParams = "";
-                ConfrimContent += "欲修改資訊如下 請確認:<br>帳號: " + acc + "<br>";
-                chguserParams += "&operate_acc=" + acc;
-                if (n_name != "") {
-                    chguserParams += "&new_name=" + n_name;
-                    ConfrimContent += "名稱: <var>" + old_name + "</var> 更改為 <var>" + n_name + "</var><br>";
+
+                var ConfrimContent = "";
+                var chgdeviceParams = "";
+                ConfrimContent += "欲修改資訊如下 請確認:<br>裝置ID: " + DID + "<br>";
+                chgdeviceParams += "&operate_id=" + DID;
+                if (n_category != "") {
+                    chgdeviceParams += "&new_category=" + n_category;
+                    ConfrimContent += "分類: <var>" + old_category + "</var> 更改為 <var>" + n_category + "</var><br>";
                 }
-                if (n_permission != '-1') {
-                    chguserParams += "&new_permission=" + n_permission;
-                    ConfrimContent += "權限: <var>" + old_permission + "(" + PermissionStr[old_permission] + ")</var> 更改為 <var>" + n_permission + "(" + PermissionStr[n_permission] + ")</var><br>";
+                if (n_model != "") {
+                    chgdeviceParams += "&new_model=" + n_model;
+                    ConfrimContent += "型號: <var>" + old_model + "</var> 更改為 <var>" + n_model + "</var><br>";
                 }
-                if (n_email != "") {
-                    chguserParams += "&new_email=" + n_email;
-                    ConfrimContent += "E-mail: <var>" + old_email + "</var><br>更改為 <var>" + n_email + "</var><br>";
+                if (n_number != "") {
+                    chgdeviceParams += "&new_number=" + n_number;
+                    ConfrimContent += "編號: <var>" + old_number + "</var> 更改為 <var>" + n_number + "</var><br>";
                 }
-                if (n_pw != "") {
-                    if (n_pw != '' && n_pw_re != '') {
-                        if (n_pw == n_pw_re) {
-                            var create_time = moment(userinfo['created']).format('YYYYMMDDHHmmss');
-                            var mMD5 = md5(create_time + n_pw);
-                            chguserParams += "&new_pw=" + mMD5;
-                            ConfrimContent += "<b>密碼更改</b><br>";
-                        } else {
-                            $.alert({
-                                title: '錯誤',
-                                content: '確認新密碼不符合!!請重新輸入',
-                                type: 'red',
-                                typeAnimated: true
-                            });
-                            return false;
-                        }
-                    } else {
-                        $.alert({
-                            title: '錯誤',
-                            content: '密碼未輸入完整!!請重新輸入',
-                            type: 'red',
-                            typeAnimated: true
-                        });
-                        return false;
-                    }
+                if (n_user != "") {
+                    chgdeviceParams += "&new_user=" + n_user;
+                    ConfrimContent += "使用者: <var>" + old_user + "</var> 更改為 <var>" + n_user + "</var><br>";
                 }
+                if (n_position != "") {
+                    chgdeviceParams += "&new_position=" + n_position;
+                    ConfrimContent += "位置: <var>" + old_position + "</var> 更改為 <var>" + n_position + "</var><br>";
+                }
+                if (n_status != '-1') {
+                    chgdeviceParams += "&new_status=" + n_status;
+                    ConfrimContent += "狀態: <var>" + old_status + "(" + StatusStr[old_status] + ")</var> 更改為 <var>" + n_status + "(" + StatusStr[n_status] + ")</var><br>";
+                }
+                console.log(chgdeviceParams);
                 $.confirm({
                     title: '更改確認!',
                     content: ConfrimContent,
@@ -833,24 +823,15 @@ function FormSubmitListener() {
                             action: function () {
                                 HideAlert();
                                 $.ajax({
-                                    url: "../ntuh_yl_RT_mdms_api/user.php",
-                                    data: "mode=chguser&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw") + chguserParams,
+                                    url: "../ntuh_yl_RT_mdms_api/db.php",
+                                    data: "mode=chgdevice&acc=" + $.cookie("LoginInfoAcc") + "&pw=" + $.cookie("LoginInfoPw") + chgdeviceParams,
                                     type: "POST",
                                     success: function (msg) {
-                                        $('#chguser-InputName').val('');
-                                        $('#chguser-InputPermission').val(-1);
-                                        $('#chguser-InputEmail').val('');
-                                        $('#chguser-InputPw').val('');
-                                        $('#chguser-InputPwRe').val('');
                                         if (msg == "ok") {
                                             ShowAlart('alert-success', '修改成功', false, true);
-                                            if (acc == $.cookie("LoginInfoAcc")) {
-                                                location.replace("./login.html")
-                                            } else {
-                                                setTimeout(function () {
-                                                    location.replace("./index.html#UserManage")
-                                                }, 1500);
-                                            }
+                                            setTimeout(function () {
+                                                location.replace("./index.html#DeviceManage")
+                                            }, 1500);
                                         } else {
                                             ShowAlart('alert-danger', '權限錯誤!!', false, false);
                                         }
@@ -871,7 +852,7 @@ function FormSubmitListener() {
                             text: '取消'
                         }
                     }
-                });*/
+                });
             }
         }
         return false;
@@ -1202,7 +1183,7 @@ function DM_Switch() {
             var getURl = new URL(location.href);
             if (getURl.searchParams.has('DID')) {
                 var DID = getURl.searchParams.get('DID');
-                var devices=getDeviceData();
+                var devices = getDeviceData();
                 var deviceinfo;
                 for (let i = 0; i < devices.length; i++) {
                     if (devices[i]['DID'] == DID) {
@@ -1324,8 +1305,7 @@ function getDeviceData() {
         type: "POST",
         async: false,
         success: function (msg) {
-            console.log(msg);
-            if(msg!='no_data'){
+            if (msg != 'no_data') {
                 var jsonA = JSON.parse(msg);
                 data = jsonA;
             }
@@ -1344,21 +1324,21 @@ function getDeviceData() {
 }
 
 function chgDeviceInputAbleSwitch() {
-    var user=true;
-    var position=true;
-    var old_=$('#chgdevice-ShowStatus').val();
-    var new_=$('#chgdevice-InputStatus').val();
+    var user = true;
+    var position = true;
+    var old_ = $('#chgdevice-ShowStatus').val();
+    var new_ = $('#chgdevice-InputStatus').val();
 
-    if((old_=='0' && new_=='-1') || (new_=='2' && (old_=='0' || old_=='1')) || (old_=='2' && new_=='-1'))
-        user=false;
-    if(old_=='0' && new_=='-1')
-        position=false;
+    if ((old_ == '0' && new_ == '-1') || (new_ == '2' && (old_ == '0' || old_ == '1')) || (old_ == '2' && new_ == '-1'))
+        user = false;
+    if (old_ == '0' && new_ == '-1')
+        position = false;
 
-    if(user)
+    if (user)
         $('#chgdevice-InputUser').prop("disabled", false);
     else
         $('#chgdevice-InputUser').prop("disabled", true);
-    if(position)
+    if (position)
         $('#chgdevice-InputPosition').prop("disabled", false);
     else
         $('#chgdevice-InputPosition').prop("disabled", true);
