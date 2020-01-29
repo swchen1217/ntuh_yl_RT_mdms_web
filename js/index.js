@@ -787,7 +787,7 @@ function FormSubmitListener() {
                 var ConfrimContent = "";
                 var chgdeviceParams = "";
                 ConfrimContent += "欲修改資訊如下 請確認:<br>裝置ID: " + DID + "<br>";
-                chgdeviceParams += "&operate_id=" + DID;
+                chgdeviceParams += "&operate_DID=" + DID;
                 if (n_category != "") {
                     chgdeviceParams += "&new_category=" + n_category;
                     ConfrimContent += "分類: <var>" + old_category + "</var> 更改為 <var>" + n_category + "</var><br>";
@@ -832,6 +832,13 @@ function FormSubmitListener() {
                                             setTimeout(function () {
                                                 location.replace("./index.html#DeviceManage")
                                             }, 1500);
+                                        } else if(msg=='number_error'){
+                                            $.alert({
+                                                title: '錯誤',
+                                                content: '裝置編號重複',
+                                                type: 'red',
+                                                typeAnimated: true
+                                            });
                                         } else {
                                             ShowAlart('alert-danger', '權限錯誤!!', false, false);
                                         }
